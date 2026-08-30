@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>First principles map</title>
+<style>
+  :root { --bg:#0e1014; --ink:#e8e6e1; --mute:#8b8a86; --line:#3a3d44; --axiom:#c9b37a; --model:#7aa2c4; --gap:#c47a7a; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; background:var(--bg); color:var(--ink); font: 15px/1.4 system-ui, sans-serif; }
+  header { padding: 20px 24px 8px; }
+  h1 { font-size: 18px; font-weight: 600; margin: 0 0 6px; }
+  .legend { display:flex; gap:16px; padding: 8px 24px 0; font-size: 12px; color: var(--mute); }
+  .sw { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:middle; }
+  .sw.axiom { background: var(--axiom); }
+  .sw.model { background: var(--model); }
+  .sw.gap { background: var(--gap); }
+  svg { display:block; width:100%; max-width: 980px; height: auto; margin: 8px 12px 24px; }
+  .n { rx: 8; }
+  .n.axiom { fill: #1c1a14; stroke: var(--axiom); }
+  .n.model { fill: #121820; stroke: var(--model); }
+  .n.gap { fill: #1c1414; stroke: var(--gap); stroke-dasharray: 5 3; }
+  text { fill: var(--ink); font-size: 13px; }
+  text.kind { fill: var(--mute); font-size: 10px; letter-spacing: .04em; }
+  text.unk { fill: var(--gap); font-size: 10px; }
+  .e { fill: none; stroke-width: 1.4; }
+  .e.derives { stroke: #6b8a6b; }
+  .e.constrains { stroke: var(--model); }
+  .e.unexplained-by { stroke: var(--gap); }
+  .elab { font-size: 10px; fill: var(--mute); }
+  footer { padding: 0 24px 28px; color: var(--mute); font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>First principles map</h1>
+</header>
+<div class="legend">
+  <span><i class="sw axiom"></i>axiom</span>
+  <span><i class="sw model"></i>model</span>
+  <span><i class="sw gap"></i>gap (UNKNOWN)</span>
+  <span>derives · constrains · unexplained-by</span>
+</div>
+<svg viewBox="0 0 980 620" role="img" aria-label="Typed graph of axioms, models, and two gaps">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b8a86"/>
+    </marker>
+  </defs>
+  <path class="e derives" d="M 170 118 C 170 170 200 200 230 230" marker-end="url(#arr)"/>
+  <path class="e derives" d="M 490 118 L 320 230" marker-end="url(#arr)"/>
+  <path class="e derives" d="M 810 118 C 810 170 500 200 390 230" marker-end="url(#arr)"/>
+  <path class="e derives" d="M 170 118 C 170 180 620 200 660 310" marker-end="url(#arr)"/>
+  <path class="e derives" d="M 490 118 C 520 200 640 250 660 310" marker-end="url(#arr)"/>
+  <path class="e derives" d="M 810 118 C 810 200 740 260 740 310" marker-end="url(#arr)"/>
+  <path class="e derives" d="M 310 292 L 310 370" marker-end="url(#arr)"/>
+  <path class="e unexplained-by" d="M 180 510 C 180 430 250 360 250 292" marker-end="url(#arr)"/>
+  <path class="e constrains" d="M 250 510 L 280 430" marker-end="url(#arr)"/>
+  <path class="e unexplained-by" d="M 800 510 C 800 430 720 380 720 370" marker-end="url(#arr)"/>
+  <text class="elab" x="430" y="175">derives</text>
+  <text class="elab" x="560" y="220">derives</text>
+  <text class="elab" x="250" y="340">derives</text>
+  <text class="elab" x="70" y="400">unexplained-by</text>
+  <text class="elab" x="300" y="470">constrains</text>
+  <text class="elab" x="820" y="430">unexplained-by</text>
+  <g>
+    <rect class="n axiom" x="70" y="40" width="200" height="78"/>
+    <text class="kind" x="86" y="62">AXIOM</text>
+    <text x="86" y="88">Conservation</text>
+  </g>
+  <g>
+    <rect class="n axiom" x="390" y="40" width="200" height="78"/>
+    <text class="kind" x="406" y="62">AXIOM</text>
+    <text x="406" y="88">Causality</text>
+  </g>
+  <g>
+    <rect class="n axiom" x="710" y="40" width="200" height="78"/>
+    <text class="kind" x="726" y="62">AXIOM</text>
+    <text x="726" y="88">Test against nature</text>
+  </g>
+  <g>
+    <rect class="n model" x="210" y="230" width="220" height="62"/>
+    <text class="kind" x="226" y="252">MODEL</text>
+    <text x="226" y="274">Baryons plus current gravity</text>
+  </g>
+  <g>
+    <rect class="n model" x="210" y="370" width="200" height="62"/>
+    <text class="kind" x="226" y="392">MODEL</text>
+    <text x="226" y="414">Cosmology</text>
+  </g>
+  <g>
+    <rect class="n model" x="620" y="310" width="240" height="62"/>
+    <text class="kind" x="636" y="332">MODEL</text>
+    <text x="636" y="354">Physics we can currently write</text>
+  </g>
+  <g>
+    <rect class="n gap" x="80" y="510" width="220" height="78"/>
+    <text class="kind" x="96" y="532">GAP</text>
+    <text class="unk" x="140" y="532">axiom slot UNKNOWN</text>
+    <text x="96" y="558">Dark matter</text>
+    <text class="kind" x="96" y="576">does not derive a particle</text>
+  </g>
+  <g>
+    <rect class="n gap" x="680" y="510" width="220" height="78"/>
+    <text class="kind" x="696" y="532">GAP</text>
+    <text class="unk" x="740" y="532">axiom slot UNKNOWN</text>
+    <text x="696" y="558">Consciousness</text>
+    <text class="kind" x="696" y="576">naming is not an axiom</text>
+  </g>
+</svg>
+<footer>graph.json</footer>
+</body>
+</html>
