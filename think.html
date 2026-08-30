@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>think</title>
+<style>
+  :root { --bg:#0e1014; --ink:#e8e6e1; --mute:#8b8a86; --line:#3a3d44; --axiom:#c9b37a; --gap:#c47a7a; --ok:#6b8a6b; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; background:var(--bg); color:var(--ink); font: 15px/1.45 system-ui, sans-serif; }
+  main { max-width: 42rem; padding: 20px 24px 48px; }
+  h1 { font-size: 18px; font-weight: 600; margin: 0 0 8px; }
+  .def { color: var(--mute); font-size: 13px; margin: 0 0 18px; }
+  a { color: var(--axiom); }
+  h2 { font-size: 13px; font-weight: 600; color: var(--mute); letter-spacing: .04em; margin: 22px 0 8px; }
+  textarea, input[type=text] { width: 100%; background: #16181d; color: var(--ink); border: 1px solid var(--line); padding: 8px 10px; font: inherit; }
+  textarea { min-height: 72px; resize: vertical; }
+  button { background: #1c1a14; color: var(--ink); border: 1px solid var(--axiom); padding: 6px 10px; font: inherit; cursor: pointer; }
+  button.quiet { border-color: var(--line); color: var(--mute); }
+  .recipe { border: 1px solid var(--line); padding: 10px; margin: 0 0 10px; }
+  .row { display: flex; gap: 8px; margin: 6px 0; align-items: center; flex-wrap: wrap; }
+  .row label { color: var(--mute); font-size: 13px; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 0; }
+  .chip { font-size: 12px; color: var(--axiom); border: 1px solid var(--axiom); padding: 2px 8px; cursor: pointer; background: transparent; }
+  ul { margin: 0; padding-left: 1.2em; }
+  .hole { color: var(--gap); }
+  .surv { color: var(--ok); }
+  .warn { border: 1px solid var(--gap); color: var(--gap); padding: 8px 10px; margin-top: 8px; font-size: 13px; display: none; }
+  .warn.on { display: block; }
+  .hint { color: var(--mute); font-size: 12px; margin: 4px 0 8px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>think</h1>
+  <p class="def">A first principle is a constraint that still applies if every usual method for this problem is wrong, and that you cannot derive from anything tighter.</p>
+  <p class="hint"><a href="viz.html">map</a></p>
+
+  <h2>1 Function</h2>
+  <p class="hint">What must actually happen.</p>
+  <textarea id="fn" placeholder="the job, not the method"></textarea>
+
+  <h2>2 Inherited recipes</h2>
+  <p class="hint">How people usually do this (form, price, process).</p>
+  <div id="recipes"></div>
+  <button type="button" id="add">add recipe</button>
+
+  <h2>3 Test each</h2>
+  <p class="hint">If that method dies, what still has to be true? Can you derive that from something tighter?</p>
+  <p class="hint">Trunk examples of tighter nodes (not the answer to your problem): conservation, causality, test against nature.</p>
+  <div id="tests"></div>
+
+  <h2>4 Survivors and holes</h2>
+  <p class="hint">Survivors are constraints. Holes stay UNKNOWN. Do not fill them.</p>
+  <p>Survivors</p>
+  <ul id="surv" class="surv"></ul>
+  <p>Holes</p>
+  <ul id="holes" class="hole"></ul>
+
+  <h2>5 Plan</h2>
+  <p class="hint">Build only from survivors.</p>
+  <textarea id="plan" placeholder="one plan"></textarea>
+  <div class="row">
+    <label><input type="checkbox" id="needsHole"> this plan needs a hole</label>
+  </div>
+  <div id="warn" class="warn">This plan needs UNKNOWN. Do not mint an axiom to close it.</div>
+</main>
+<script>
+const TRUNK = ["conservation", "causality", "test against nature"];
+let recipes = [{ id: 1, name: "", remain: "", tighter: "" }];
+let nextId = 2;
+
+function el(id) { return document.getElementById(id); }
+
+function renderRecipes() {
+  el("recipes").innerHTML = recipes.map((r, i) =>
+    `<div class="recipe">
+      <input type="text" data-i="${i}" data-k="name" placeholder="usual method" value="${esc(r.name)}">
+      <button type="button" class="quiet" data-del="${i}">remove</button>
+    </div>`
+  ).join("");
+}
+
+function renderTests() {
+  el("tests").innerHTML = recipes.map((r, i) =>
+    `<div class="recipe">
+      <div class="hint">${esc(r.name) || "recipe " + (i + 1)}</div>
+      <label>If this method dies, what still has to be true?</label>
+      <input type="text" data-i="${i}" data-k="remain" placeholder="remainder" value="${esc(r.remain)}">
+      <div class="row">
+        <label>Derived from something tighter?</label>
+        <label><input type="radio" name="t${r.id}" data-i="${i}" data-k="tighter" value="no" ${r.tighter==="no"?"checked":""}> no (survivor)</label>
+        <label><input type="radio" name="t${r.id}" data-i="${i}" data-k="tighter" value="yes" ${r.tighter==="yes"?"checked":""}> yes (derived)</label>
+        <label><input type="radio" name="t${r.id}" data-i="${i}" data-k="tighter" value="unknown" ${r.tighter==="unknown"?"checked":""}> UNKNOWN (hole)</label>
+      </div>
+      ${r.tighter==="yes" ? `<input type="text" data-i="${i}" data-k="from" placeholder="tighter node" value="${esc(r.from||"")}">
+        <div class="chips">${TRUNK.map(t => `<button type="button" class="chip" data-i="${i}" data-trunk="${t}">${t}</button>`).join("")}</div>` : ""}
+    </div>`
+  ).join("");
+}
+
+function lists() {
+  const surv = [];
+  const holes = [];
+  recipes.forEach(r => {
+    const text = (r.remain || "").trim();
+    if (!text) return;
+    if (r.tighter === "no") surv.push(text);
+    else if (r.tighter === "unknown") holes.push(text);
+  });
+  el("surv").innerHTML = surv.length ? surv.map(s => `<li>${esc(s)}</li>`).join("") : "<li class='hint'>none yet</li>";
+  el("holes").innerHTML = holes.length ? holes.map(s => `<li>${esc(s)}</li>`).join("") : "<li class='hint'>none yet</li>";
+  const warn = el("warn");
+  warn.className = "warn" + (el("needsHole").checked ? " on" : "");
+  warn.textContent = el("needsHole").checked
+    ? (holes.length
+      ? "This plan needs UNKNOWN: " + holes.join("; ") + ". Do not mint an axiom to close it."
+      : "This plan is marked as needing a hole. Name the UNKNOWN. Do not fill it.")
+    : warn.textContent;
+}
+
+function esc(s) {
+  return String(s || "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c]));
+}
+
+function paint() {
+  renderRecipes();
+  renderTests();
+  lists();
+}
+
+document.addEventListener("input", e => {
+  const i = e.target.getAttribute("data-i");
+  const k = e.target.getAttribute("data-k");
+  if (i == null || !k) return;
+  recipes[+i][k] = e.target.value;
+  if (k === "tighter") paint();
+  else if (k === "remain" || k === "from") lists();
+});
+document.addEventListener("change", e => {
+  if (e.target.id === "needsHole") { lists(); return; }
+  if (e.target.type !== "radio") return;
+  const i = e.target.getAttribute("data-i");
+  const k = e.target.getAttribute("data-k");
+  if (i == null || !k) return;
+  recipes[+i][k] = e.target.value;
+  paint();
+});
+document.addEventListener("click", e => {
+  if (e.target.id === "add") {
+    recipes.push({ id: nextId++, name: "", remain: "", tighter: "" });
+    paint();
+  }
+  const del = e.target.getAttribute("data-del");
+  if (del != null) {
+    recipes.splice(+del, 1);
+    if (!recipes.length) recipes.push({ id: nextId++, name: "", remain: "", tighter: "" });
+    paint();
+  }
+  const trunk = e.target.getAttribute("data-trunk");
+  if (trunk != null) {
+    recipes[+e.target.getAttribute("data-i")].from = trunk;
+    paint();
+  }
+});
+paint();
+</script>
+</body>
+</html>
