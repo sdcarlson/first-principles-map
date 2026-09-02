@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>First principles map</title>
+<title>What still has to be true</title>
 <style>
   :root { --bg:#0e1014; --ink:#e8e6e1; --mute:#8b8a86; --line:#3a3d44; --axiom:#c9b37a; --model:#7aa2c4; --gap:#c47a7a; }
   * { box-sizing: border-box; }
@@ -27,7 +27,6 @@
   .n.gap { fill: #1c1414; stroke: var(--gap); stroke-dasharray: 5 3; }
   text { fill: var(--ink); font-size: 13px; }
   text.kind { fill: var(--mute); font-size: 10px; letter-spacing: .04em; }
-  text.unk { fill: var(--gap); font-size: 10px; }
   text.sub { fill: var(--mute); font-size: 10px; }
   .e { fill: none; stroke-width: 1.4; }
   .e.derives { stroke: #6b8a6b; stroke-opacity: .55; }
@@ -39,24 +38,28 @@
 </head>
 <body>
 <header>
-  <h1>First principles map</h1>
-  <p class="rule">Place constraints, replaceable models, and leftovers. Not subjects. A leftover attaches to the model that leaks — that attachment is the hint. Thermodynamics is Conservation applied to energy, not a new axiom. Machine learning is a method, not a box.</p>
-  <ul class="rule">
-    <li>Axiom: still binds if the model below is wrong. Cannot derive from anything tighter.</li>
-    <li>Model: compression with named assumptions. Can be replaced.</li>
-    <li>Gap: leftover of that model. Naming it does not mint an axiom.</li>
-  </ul>
-  <p class="rule"><a href="think.html">think</a> — apply this to one problem. Do not write the map from a workout.</p>
+  <h1>What still has to be true</h1>
+  <p class="rule">Gold boxes still hold even if a blue story below is wrong. Blue boxes are today's explanations, with the guesses written on them — you can replace a blue box. Red boxes are what that story still cannot explain. Naming a red box does not invent a new gold rule.</p>
+  <p class="rule">Don't put school subjects on the map. Heat is “stuff is conserved” applied to energy. Learning programs are a method, not a box. The line from a red box to a blue box is the hint: it shows which story leaked.</p>
+  <p class="rule">Some people say seeing and feeling are more basic than space and time — more like a computer desktop than a window. That is another blue story to test. It is not a new gold rule.</p>
+  <ul class="rule" id="kind-defs"></ul>
+  <p class="rule"><a href="think.html">think</a> — try this on one real problem. Do not add boxes to the map from that page.</p>
 </header>
-<div class="legend" id="legend">
-  <span><i class="sw axiom"></i>axiom</span>
-  <span><i class="sw model"></i>model</span>
-  <span><i class="sw gap"></i>gap (UNKNOWN)</span>
-</div>
-<p class="err" id="err">Serve this folder (or GitHub Pages) so graph.json can load.</p>
-<svg id="map" viewBox="0 0 980 560" role="img" aria-label="Typed graph of axioms, models, and gaps"></svg>
-<footer>graph.json — add a leftover by editing that file. Do not mint an axiom to close a hole.</footer>
+<div class="legend" id="legend"></div>
+<p class="err" id="err">Open this page on the web so the map data can load.</p>
+<svg id="map" viewBox="0 0 980 560" role="img" aria-label="Starting rules, current stories, and what they still cannot explain"></svg>
+<footer>To add something unexplained, edit graph.json. Don't invent a starting rule to close a hole.</footer>
 <script>
+const KIND_LABEL = {
+  axiom: "Starting rule",
+  model: "Current story",
+  gap: "Still unexplained"
+};
+const EDGE_LABEL = {
+  derives: "built from",
+  constrains: "puts a limit on",
+  "unexplained-by": "not explained by"
+};
 const W = 980, H = 560;
 const ROW_Y = { axiom: 36, model: 214, gap: 418 };
 const BOX = {
@@ -124,11 +127,8 @@ function drawNode(svg, node) {
     class: "n " + node.kind,
     x: node._x, y: node._y, width: node._w, height: node._h
   }));
-  addText(g, node._x + 16, node._y + 22, node.kind.toUpperCase(), "kind");
-  if (node.kind === "gap") {
-    addText(g, node._x + 70, node._y + 22, "axiom slot UNKNOWN", "unk");
-  }
-  wrap(node.label, 26).forEach((line, i) => {
+  addText(g, node._x + 16, node._y + 22, KIND_LABEL[node.kind] || node.kind, "kind");
+  wrap(node.label, 28).forEach((line, i) => {
     addText(g, node._x + 16, node._y + 44 + i * 16, line);
   });
   if (node.kind === "gap" && node.note) {
@@ -173,24 +173,37 @@ function draw(graph) {
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
 
   graph.edges.forEach(e => {
-    const label = e.type === "derives" ? "" : e.type;
+    const label = e.type === "derives" ? "" : (EDGE_LABEL[e.type] || e.type);
     drawEdge(svg, byId[e.src], byId[e.dst], e.type, label);
   });
   const derives = graph.edges.filter(e => e.type === "derives");
   if (derives.length) {
-    addText(svg, W / 2 - 16, (ROW_Y.axiom + BOX.axiom.h + ROW_Y.model) / 2, "derives", "elab");
+    addText(svg, W / 2 - 28, (ROW_Y.axiom + BOX.axiom.h + ROW_Y.model) / 2, EDGE_LABEL.derives, "elab");
   }
   graph.nodes.forEach(n => drawNode(svg, n));
 
-  const legend = document.getElementById("legend");
-  const types = (graph.edge_types || []).join(" · ");
-  let extra = legend.querySelector(".edges");
-  if (!extra) {
-    extra = document.createElement("span");
-    extra.className = "edges";
-    legend.appendChild(extra);
+  const kindDefs = document.getElementById("kind-defs");
+  if (kindDefs && graph.legend) {
+    kindDefs.innerHTML = "";
+    ["axiom", "model", "gap"].forEach(k => {
+      if (!graph.legend[k]) return;
+      const li = document.createElement("li");
+      li.textContent = graph.legend[k];
+      kindDefs.appendChild(li);
+    });
   }
-  extra.textContent = types;
+
+  const legend = document.getElementById("legend");
+  legend.innerHTML = "";
+  ["axiom", "model", "gap"].forEach(k => {
+    const span = document.createElement("span");
+    span.innerHTML = `<i class="sw ${k}"></i>${KIND_LABEL[k]}`;
+    legend.appendChild(span);
+  });
+  const extra = document.createElement("span");
+  extra.className = "edges";
+  extra.textContent = (graph.edge_types || []).map(t => EDGE_LABEL[t] || t).join(" · ");
+  legend.appendChild(extra);
 }
 
 fetch("graph.json")

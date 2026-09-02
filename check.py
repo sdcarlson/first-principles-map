@@ -73,4 +73,13 @@ obs_assump = {a.lower() for a in nodes["observers-as-described"]["assumptions"]}
 if obs_assump <= {"conservation", "causality", "test against nature", "test-against-nature"}:
     fail("observers model is a junk drawer")
 
+jargon = ("baryon", "born rule", "unitary", "axiom slot", "collapse postulate")
+for n in g["nodes"]:
+    blob = " ".join(
+        [n["label"], n.get("note", ""), *n.get("assumptions", [])]
+    ).lower()
+    for w in jargon:
+        if w in blob:
+            fail(f"jargon in {n['id']}: {w}")
+
 print("ok", len(nodes), "nodes", len(g["edges"]), "edges")

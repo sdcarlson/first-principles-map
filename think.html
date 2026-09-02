@@ -33,37 +33,37 @@
 <body>
 <main>
   <h1>think</h1>
-  <p class="def">A first principle is a constraint that still applies if every usual method for this problem is wrong, and that you cannot derive from anything tighter.</p>
-  <p class="hint"><a href="index.html">map</a> — leftovers of named models. Do not add fields as boxes. Do not write the map from this workout.</p>
+  <p class="def">A first principle is something that still has to be true even if every usual method for this problem is wrong, and that you cannot get from anything simpler.</p>
+  <p class="hint"><a href="index.html">map</a> — don't add school subjects as boxes. Don't add to the map from this page.</p>
 
-  <h2>1 Function</h2>
+  <h2>1 The job</h2>
   <p class="hint">What must actually happen.</p>
   <textarea id="fn" placeholder="the job, not the method"></textarea>
 
-  <h2>2 Inherited recipes</h2>
-  <p class="hint">How people usually do this (form, price, process).</p>
+  <h2>2 Usual methods</h2>
+  <p class="hint">How people usually do this.</p>
   <div id="recipes"></div>
-  <button type="button" id="add">add recipe</button>
+  <button type="button" id="add">add method</button>
 
   <h2>3 Test each</h2>
-  <p class="hint">If that method dies, what still has to be true? Can you derive that from something tighter?</p>
-  <p class="hint">Trunk examples of tighter nodes (not the answer to your problem): conservation, causality, test against nature.</p>
+  <p class="hint">If that method dies, what still has to be true? Can you get that from something simpler?</p>
+  <p class="hint">Starting-rule examples (not the answer to your problem): stuff is conserved, cause and effect, test it in the real world.</p>
   <div id="tests"></div>
 
-  <h2>4 Survivors and holes</h2>
-  <p class="hint">Survivors are constraints. Holes stay UNKNOWN. Do not fill them.</p>
-  <p>Survivors</p>
+  <h2>4 What remains</h2>
+  <p class="hint">Keep what still has to be true. If you don't know, leave it as a hole. Don't invent a starting rule to fill it.</p>
+  <p>Still has to be true</p>
   <ul id="surv" class="surv"></ul>
-  <p>Holes</p>
+  <p>Still don't know</p>
   <ul id="holes" class="hole"></ul>
 
   <h2>5 Plan</h2>
-  <p class="hint">Build only from survivors.</p>
+  <p class="hint">Build only from what still has to be true.</p>
   <textarea id="plan" placeholder="one plan"></textarea>
   <div class="row">
     <label><input type="checkbox" id="needsHole"> this plan needs a hole</label>
   </div>
-  <div id="warn" class="warn">This plan needs UNKNOWN. Do not mint an axiom to close it.</div>
+  <div id="warn" class="warn">This plan needs something we don't know yet. Don't invent a starting rule to close it.</div>
 </main>
 <script>
 let TRUNK = ["conservation", "causality", "test against nature"];
@@ -84,16 +84,16 @@ function renderRecipes() {
 function renderTests() {
   el("tests").innerHTML = recipes.map((r, i) =>
     `<div class="recipe">
-      <div class="hint">${esc(r.name) || "recipe " + (i + 1)}</div>
+      <div class="hint">${esc(r.name) || "method " + (i + 1)}</div>
       <label>If this method dies, what still has to be true?</label>
-      <input type="text" data-i="${i}" data-k="remain" placeholder="remainder" value="${esc(r.remain)}">
+      <input type="text" data-i="${i}" data-k="remain" placeholder="what remains" value="${esc(r.remain)}">
       <div class="row">
-        <label>Derived from something tighter?</label>
-        <label><input type="radio" name="t${r.id}" data-i="${i}" data-k="tighter" value="no" ${r.tighter==="no"?"checked":""}> no (survivor)</label>
-        <label><input type="radio" name="t${r.id}" data-i="${i}" data-k="tighter" value="yes" ${r.tighter==="yes"?"checked":""}> yes (derived)</label>
-        <label><input type="radio" name="t${r.id}" data-i="${i}" data-k="tighter" value="unknown" ${r.tighter==="unknown"?"checked":""}> UNKNOWN (hole)</label>
+        <label>Can you get that from something simpler?</label>
+        <label><input type="radio" name="t${r.id}" data-i="${i}" data-k="tighter" value="no" ${r.tighter==="no"?"checked":""}> no (keep it)</label>
+        <label><input type="radio" name="t${r.id}" data-i="${i}" data-k="tighter" value="yes" ${r.tighter==="yes"?"checked":""}> yes (it comes from something simpler)</label>
+        <label><input type="radio" name="t${r.id}" data-i="${i}" data-k="tighter" value="unknown" ${r.tighter==="unknown"?"checked":""}> we don't know yet</label>
       </div>
-      ${r.tighter==="yes" ? `<input type="text" data-i="${i}" data-k="from" placeholder="tighter node" value="${esc(r.from||"")}">
+      ${r.tighter==="yes" ? `<input type="text" data-i="${i}" data-k="from" placeholder="simpler starting point" value="${esc(r.from||"")}">
         <div class="chips">${TRUNK.map(t => `<button type="button" class="chip" data-i="${i}" data-trunk="${t}">${t}</button>`).join("")}</div>` : ""}
     </div>`
   ).join("");
@@ -114,8 +114,8 @@ function lists() {
   warn.className = "warn" + (el("needsHole").checked ? " on" : "");
   warn.textContent = el("needsHole").checked
     ? (holes.length
-      ? "This plan needs UNKNOWN: " + holes.join("; ") + ". Do not mint an axiom to close it."
-      : "This plan is marked as needing a hole. Name the UNKNOWN. Do not fill it.")
+      ? "This plan needs something we don't know yet: " + holes.join("; ") + ". Don't invent a starting rule to close it."
+      : "This plan is marked as needing a hole. Name what you don't know. Don't fill it with a new starting rule.")
     : warn.textContent;
 }
 

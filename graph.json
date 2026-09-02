@@ -1,9 +1,9 @@
 {
   "version": 2,
   "legend": {
-    "axiom": "Cannot derive from a tighter node. Holds if the model below it is wrong.",
-    "model": "Compression with named assumptions. Can be replaced.",
-    "gap": "Named residual of a model. axiom slot is UNKNOWN. Naming it is not an axiom."
+    "axiom": "Starting rule — still true if the story below is wrong.",
+    "model": "Current story — today's explanation, with guesses written on it. You can replace it.",
+    "gap": "Still unexplained — what that story cannot explain. A name is not a new starting rule."
   },
   "edge_types": [
     "derives",
@@ -14,43 +14,43 @@
     {
       "id": "conservation",
       "kind": "axiom",
-      "label": "Conservation"
+      "label": "Stuff is conserved"
     },
     {
       "id": "causality",
       "kind": "axiom",
-      "label": "Causality"
+      "label": "Cause and effect"
     },
     {
       "id": "test-against-nature",
       "kind": "axiom",
-      "label": "Test against nature"
+      "label": "Test it in the real world"
     },
     {
       "id": "baryons-plus-gravity",
       "kind": "model",
-      "label": "Baryons plus current gravity",
+      "label": "Ordinary matter plus gravity",
       "assumptions": [
-        "ordinary matter",
-        "gravity as currently written"
+        "only the matter we can see",
+        "gravity as we write it today"
       ]
     },
     {
       "id": "quantum-mechanics",
       "kind": "model",
-      "label": "Quantum mechanics",
+      "label": "How the very small works",
       "assumptions": [
-        "unitary evolution",
-        "Born rule as currently written"
+        "a blur of possibilities until we look",
+        "then a chance rule picks one outcome"
       ]
     },
     {
       "id": "observers-as-described",
       "kind": "model",
-      "label": "Physical account of observers",
+      "label": "Brains fully explain experience",
       "assumptions": [
-        "description exhausts the observer",
-        "experience identical to physical state"
+        "a person is only what physics lists",
+        "feeling is the same as a brain state"
       ]
     },
     {
@@ -58,21 +58,21 @@
       "kind": "gap",
       "label": "Dark matter",
       "axiom_slot": "UNKNOWN",
-      "note": "Does not derive a particle."
+      "note": "Not a new particle."
     },
     {
       "id": "measurement",
       "kind": "gap",
-      "label": "Measurement",
+      "label": "The blur becoming a fact",
       "axiom_slot": "UNKNOWN",
-      "note": "Does not derive a collapse postulate."
+      "note": "Not a new jump rule."
     },
     {
       "id": "consciousness",
       "kind": "gap",
-      "label": "Consciousness",
+      "label": "What it feels like to be you",
       "axiom_slot": "UNKNOWN",
-      "note": "Naming it is not an axiom."
+      "note": "A name is not a starting rule."
     }
   ],
   "edges": [
