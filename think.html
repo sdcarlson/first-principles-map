@@ -34,7 +34,7 @@
 <main>
   <h1>think</h1>
   <p class="def">A first principle is a constraint that still applies if every usual method for this problem is wrong, and that you cannot derive from anything tighter.</p>
-  <p class="hint"><a href="index.html">map</a> — one chain, not a catalog. Do not add fields as boxes.</p>
+  <p class="hint"><a href="index.html">map</a> — leftovers of named models. Do not add fields as boxes. Do not write the map from this workout.</p>
 
   <h2>1 Function</h2>
   <p class="hint">What must actually happen.</p>
@@ -66,7 +66,7 @@
   <div id="warn" class="warn">This plan needs UNKNOWN. Do not mint an axiom to close it.</div>
 </main>
 <script>
-const TRUNK = ["conservation", "causality", "test against nature"];
+let TRUNK = ["conservation", "causality", "test against nature"];
 let recipes = [{ id: 1, name: "", remain: "", tighter: "" }];
 let nextId = 2;
 
@@ -164,6 +164,11 @@ document.addEventListener("click", e => {
   }
 });
 paint();
+fetch("graph.json").then(r => r.json()).then(g => {
+  const axioms = g.nodes.filter(n => n.kind === "axiom").map(n => n.label);
+  if (axioms.length) TRUNK = axioms;
+  paint();
+});
 </script>
 </body>
 </html>

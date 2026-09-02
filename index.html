@@ -13,11 +13,13 @@
   .rule { color: var(--mute); font-size: 13px; margin: 0 0 10px; max-width: 42rem; }
   ul.rule { margin: 6px 0 10px; padding-left: 1.2em; }
   a { color: var(--axiom); }
-  .legend { display:flex; gap:16px; padding: 8px 24px 0; font-size: 12px; color: var(--mute); }
+  .legend { display:flex; gap:16px; flex-wrap: wrap; padding: 8px 24px 0; font-size: 12px; color: var(--mute); }
   .sw { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:middle; }
   .sw.axiom { background: var(--axiom); }
   .sw.model { background: var(--model); }
   .sw.gap { background: var(--gap); }
+  .err { color: var(--gap); padding: 12px 24px; display: none; }
+  .err.on { display: block; }
   svg { display:block; width:100%; max-width: 980px; height: auto; margin: 8px 12px 24px; }
   .n { rx: 8; }
   .n.axiom { fill: #1c1a14; stroke: var(--axiom); }
@@ -26,8 +28,10 @@
   text { fill: var(--ink); font-size: 13px; }
   text.kind { fill: var(--mute); font-size: 10px; letter-spacing: .04em; }
   text.unk { fill: var(--gap); font-size: 10px; }
+  text.sub { fill: var(--mute); font-size: 10px; }
   .e { fill: none; stroke-width: 1.4; }
-  .e.derives { stroke: #6b8a6b; }
+  .e.derives { stroke: #6b8a6b; stroke-opacity: .55; }
+  .e.constrains { stroke: var(--model); }
   .e.unexplained-by { stroke: var(--gap); }
   .elab { font-size: 10px; fill: var(--mute); }
   footer { padding: 0 24px 28px; color: var(--mute); font-size: 12px; }
@@ -36,62 +40,163 @@
 <body>
 <header>
   <h1>First principles map</h1>
-  <p class="rule">Place constraints, replaceable models, and leftovers. Not subjects. Thermodynamics is Conservation applied to energy, not a new axiom. Machine learning is a method, not a box.</p>
+  <p class="rule">Place constraints, replaceable models, and leftovers. Not subjects. A leftover attaches to the model that leaks — that attachment is the hint. Thermodynamics is Conservation applied to energy, not a new axiom. Machine learning is a method, not a box.</p>
   <ul class="rule">
     <li>Axiom: still binds if the model below is wrong. Cannot derive from anything tighter.</li>
     <li>Model: compression with named assumptions. Can be replaced.</li>
     <li>Gap: leftover of that model. Naming it does not mint an axiom.</li>
   </ul>
-  <p class="rule"><a href="think.html">think</a></p>
+  <p class="rule"><a href="think.html">think</a> — apply this to one problem. Do not write the map from a workout.</p>
 </header>
-<div class="legend">
+<div class="legend" id="legend">
   <span><i class="sw axiom"></i>axiom</span>
   <span><i class="sw model"></i>model</span>
   <span><i class="sw gap"></i>gap (UNKNOWN)</span>
-  <span>derives · unexplained-by</span>
 </div>
-<svg viewBox="0 0 980 460" role="img" aria-label="One chain: three axioms, baryons plus current gravity, dark matter leftover">
-  <defs>
-    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b8a86"/>
-    </marker>
-  </defs>
-  <path class="e derives" d="M 170 118 C 170 170 430 190 490 210" marker-end="url(#arr)"/>
-  <path class="e derives" d="M 490 118 L 490 210" marker-end="url(#arr)"/>
-  <path class="e derives" d="M 810 118 C 810 170 550 190 490 210" marker-end="url(#arr)"/>
-  <path class="e unexplained-by" d="M 490 360 L 490 292" marker-end="url(#arr)"/>
-  <text class="elab" x="250" y="175">derives</text>
-  <text class="elab" x="500" y="170">derives</text>
-  <text class="elab" x="680" y="175">derives</text>
-  <text class="elab" x="510" y="330">unexplained-by</text>
-  <g>
-    <rect class="n axiom" x="70" y="40" width="200" height="78"/>
-    <text class="kind" x="86" y="62">AXIOM</text>
-    <text x="86" y="88">Conservation</text>
-  </g>
-  <g>
-    <rect class="n axiom" x="390" y="40" width="200" height="78"/>
-    <text class="kind" x="406" y="62">AXIOM</text>
-    <text x="406" y="88">Causality</text>
-  </g>
-  <g>
-    <rect class="n axiom" x="710" y="40" width="200" height="78"/>
-    <text class="kind" x="726" y="62">AXIOM</text>
-    <text x="726" y="88">Test against nature</text>
-  </g>
-  <g>
-    <rect class="n model" x="380" y="220" width="220" height="72"/>
-    <text class="kind" x="396" y="242">MODEL</text>
-    <text x="396" y="266">Baryons plus current gravity</text>
-  </g>
-  <g>
-    <rect class="n gap" x="370" y="360" width="240" height="78"/>
-    <text class="kind" x="386" y="382">GAP</text>
-    <text class="unk" x="430" y="382">axiom slot UNKNOWN</text>
-    <text x="386" y="408">Dark matter</text>
-    <text class="kind" x="386" y="426">does not derive a particle</text>
-  </g>
-</svg>
-<footer>graph.json</footer>
+<p class="err" id="err">Serve this folder (or GitHub Pages) so graph.json can load.</p>
+<svg id="map" viewBox="0 0 980 560" role="img" aria-label="Typed graph of axioms, models, and gaps"></svg>
+<footer>graph.json — add a leftover by editing that file. Do not mint an axiom to close a hole.</footer>
+<script>
+const W = 980, H = 560;
+const ROW_Y = { axiom: 36, model: 214, gap: 418 };
+const BOX = {
+  axiom: { w: 200, h: 78 },
+  model: { w: 250, h: 108 },
+  gap: { w: 230, h: 88 }
+};
+
+function svgEl(name, attrs) {
+  const el = document.createElementNS("http://www.w3.org/2000/svg", name);
+  Object.entries(attrs || {}).forEach(([k, v]) => el.setAttribute(k, v));
+  return el;
+}
+
+function wrap(text, max) {
+  const words = String(text).split(/\s+/);
+  const lines = [];
+  let cur = "";
+  words.forEach(w => {
+    const next = cur ? cur + " " + w : w;
+    if (next.length > max && cur) { lines.push(cur); cur = w; }
+    else cur = next;
+  });
+  if (cur) lines.push(cur);
+  return lines;
+}
+
+function rowLayout(list, kind) {
+  const { w, h } = BOX[kind];
+  const n = list.length;
+  const gutter = (W - n * w) / (n + 1);
+  list.forEach((node, i) => {
+    node._x = gutter + i * (w + gutter);
+    node._y = ROW_Y[kind];
+    node._w = w;
+    node._h = h;
+  });
+}
+
+function layout(nodes) {
+  const byKind = { axiom: [], model: [], gap: [] };
+  nodes.forEach(n => byKind[n.kind].push(n));
+  rowLayout(byKind.axiom, "axiom");
+  rowLayout(byKind.model, "model");
+  rowLayout(byKind.gap, "gap");
+}
+
+function boxPoint(node, where) {
+  const cx = node._x + node._w / 2;
+  if (where === "bottom") return { x: cx, y: node._y + node._h };
+  if (where === "top") return { x: cx, y: node._y };
+  return { x: cx, y: node._y + node._h / 2 };
+}
+
+function addText(parent, x, y, text, cls) {
+  const t = svgEl("text", { x, y, class: cls || "" });
+  t.textContent = text;
+  parent.appendChild(t);
+  return t;
+}
+
+function drawNode(svg, node) {
+  const g = svgEl("g");
+  g.appendChild(svgEl("rect", {
+    class: "n " + node.kind,
+    x: node._x, y: node._y, width: node._w, height: node._h
+  }));
+  addText(g, node._x + 16, node._y + 22, node.kind.toUpperCase(), "kind");
+  if (node.kind === "gap") {
+    addText(g, node._x + 70, node._y + 22, "axiom slot UNKNOWN", "unk");
+  }
+  wrap(node.label, 26).forEach((line, i) => {
+    addText(g, node._x + 16, node._y + 44 + i * 16, line);
+  });
+  if (node.kind === "gap" && node.note) {
+    addText(g, node._x + 16, node._y + node._h - 14, wrap(node.note, 38)[0], "kind");
+  }
+  if (node.kind === "model" && node.assumptions) {
+    node.assumptions.slice(0, 2).forEach((a, i) => {
+      addText(g, node._x + 16, node._y + node._h - 28 + i * 12, wrap(a, 40)[0], "sub");
+    });
+  }
+  svg.appendChild(g);
+}
+
+function drawEdge(svg, a, b, type, label) {
+  const from = boxPoint(a, a._y < b._y ? "bottom" : "top");
+  const to = boxPoint(b, a._y < b._y ? "top" : "bottom");
+  const midY = (from.y + to.y) / 2;
+  svg.appendChild(svgEl("path", {
+    class: "e " + type,
+    d: `M ${from.x} ${from.y} C ${from.x} ${midY} ${to.x} ${midY} ${to.x} ${to.y}`,
+    "marker-end": "url(#arr)"
+  }));
+  if (label) {
+    addText(svg, (from.x + to.x) / 2 + 8, midY, label, "elab");
+  }
+}
+
+function draw(graph) {
+  const svg = document.getElementById("map");
+  svg.innerHTML = "";
+  const defs = svgEl("defs");
+  const marker = svgEl("marker", {
+    id: "arr", viewBox: "0 0 10 10", refX: "9", refY: "5",
+    markerWidth: "7", markerHeight: "7", orient: "auto-start-reverse"
+  });
+  marker.appendChild(svgEl("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: "#8b8a86" }));
+  defs.appendChild(marker);
+  svg.appendChild(defs);
+
+  const byId = Object.fromEntries(graph.nodes.map(n => [n.id, n]));
+  layout(graph.nodes);
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+
+  graph.edges.forEach(e => {
+    const label = e.type === "derives" ? "" : e.type;
+    drawEdge(svg, byId[e.src], byId[e.dst], e.type, label);
+  });
+  const derives = graph.edges.filter(e => e.type === "derives");
+  if (derives.length) {
+    addText(svg, W / 2 - 16, (ROW_Y.axiom + BOX.axiom.h + ROW_Y.model) / 2, "derives", "elab");
+  }
+  graph.nodes.forEach(n => drawNode(svg, n));
+
+  const legend = document.getElementById("legend");
+  const types = (graph.edge_types || []).join(" · ");
+  let extra = legend.querySelector(".edges");
+  if (!extra) {
+    extra = document.createElement("span");
+    extra.className = "edges";
+    legend.appendChild(extra);
+  }
+  extra.textContent = types;
+}
+
+fetch("graph.json")
+  .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+  .then(draw)
+  .catch(() => document.getElementById("err").classList.add("on"));
+</script>
 </body>
 </html>

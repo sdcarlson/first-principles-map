@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "legend": {
     "axiom": "Cannot derive from a tighter node. Holds if the model below it is wrong.",
     "model": "Compression with named assumptions. Can be replaced.",
@@ -7,6 +7,7 @@
   },
   "edge_types": [
     "derives",
+    "constrains",
     "unexplained-by"
   ],
   "nodes": [
@@ -35,11 +36,43 @@
       ]
     },
     {
+      "id": "quantum-mechanics",
+      "kind": "model",
+      "label": "Quantum mechanics",
+      "assumptions": [
+        "unitary evolution",
+        "Born rule as currently written"
+      ]
+    },
+    {
+      "id": "observers-as-described",
+      "kind": "model",
+      "label": "Physical account of observers",
+      "assumptions": [
+        "description exhausts the observer",
+        "experience identical to physical state"
+      ]
+    },
+    {
       "id": "dark-matter",
       "kind": "gap",
       "label": "Dark matter",
       "axiom_slot": "UNKNOWN",
-      "note": "Does not derive a particle. Naming it is not an axiom."
+      "note": "Does not derive a particle."
+    },
+    {
+      "id": "measurement",
+      "kind": "gap",
+      "label": "Measurement",
+      "axiom_slot": "UNKNOWN",
+      "note": "Does not derive a collapse postulate."
+    },
+    {
+      "id": "consciousness",
+      "kind": "gap",
+      "label": "Consciousness",
+      "axiom_slot": "UNKNOWN",
+      "note": "Naming it is not an axiom."
     }
   ],
   "edges": [
@@ -59,9 +92,54 @@
       "dst": "baryons-plus-gravity"
     },
     {
+      "src": "conservation",
+      "type": "derives",
+      "dst": "quantum-mechanics"
+    },
+    {
+      "src": "causality",
+      "type": "derives",
+      "dst": "quantum-mechanics"
+    },
+    {
+      "src": "test-against-nature",
+      "type": "derives",
+      "dst": "quantum-mechanics"
+    },
+    {
+      "src": "conservation",
+      "type": "derives",
+      "dst": "observers-as-described"
+    },
+    {
+      "src": "causality",
+      "type": "derives",
+      "dst": "observers-as-described"
+    },
+    {
+      "src": "test-against-nature",
+      "type": "derives",
+      "dst": "observers-as-described"
+    },
+    {
       "src": "dark-matter",
       "type": "unexplained-by",
       "dst": "baryons-plus-gravity"
+    },
+    {
+      "src": "measurement",
+      "type": "unexplained-by",
+      "dst": "quantum-mechanics"
+    },
+    {
+      "src": "measurement",
+      "type": "constrains",
+      "dst": "baryons-plus-gravity"
+    },
+    {
+      "src": "consciousness",
+      "type": "unexplained-by",
+      "dst": "observers-as-described"
     }
   ]
 }
