@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>First principles map</title>
+<style>
+  :root { --bg:#0e1014; --ink:#e8e6e1; --mute:#8b8a86; --line:#3a3d44; --axiom:#c9b37a; --model:#7aa2c4; --gap:#c47a7a; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; background:var(--bg); color:var(--ink); font: 15px/1.4 system-ui, sans-serif; }
+  header { padding: 20px 24px 8px; max-width: 980px; }
+  h1 { font-size: 18px; font-weight: 600; margin: 0 0 6px; }
+  .rule { color: var(--mute); font-size: 13px; margin: 0 0 10px; max-width: 42rem; }
+  ul.rule { margin: 6px 0 10px; padding-left: 1.2em; }
+  a { color: var(--axiom); }
+  .legend { display:flex; gap:16px; padding: 8px 24px 0; font-size: 12px; color: var(--mute); }
+  .sw { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:middle; }
+  .sw.axiom { background: var(--axiom); }
+  .sw.model { background: var(--model); }
+  .sw.gap { background: var(--gap); }
+  svg { display:block; width:100%; max-width: 980px; height: auto; margin: 8px 12px 24px; }
+  .n { rx: 8; }
+  .n.axiom { fill: #1c1a14; stroke: var(--axiom); }
+  .n.model { fill: #121820; stroke: var(--model); }
+  .n.gap { fill: #1c1414; stroke: var(--gap); stroke-dasharray: 5 3; }
+  text { fill: var(--ink); font-size: 13px; }
+  text.kind { fill: var(--mute); font-size: 10px; letter-spacing: .04em; }
+  text.unk { fill: var(--gap); font-size: 10px; }
+  .e { fill: none; stroke-width: 1.4; }
+  .e.derives { stroke: #6b8a6b; }
+  .e.unexplained-by { stroke: var(--gap); }
+  .elab { font-size: 10px; fill: var(--mute); }
+  footer { padding: 0 24px 28px; color: var(--mute); font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>First principles map</h1>
+  <p class="rule">Place constraints, replaceable models, and leftovers. Not subjects. Thermodynamics is Conservation applied to energy, not a new axiom. Machine learning is a method, not a box.</p>
+  <ul class="rule">
+    <li>Axiom: still binds if the model below is wrong. Cannot derive from anything tighter.</li>
+    <li>Model: compression with named assumptions. Can be replaced.</li>
+    <li>Gap: leftover of that model. Naming it does not mint an axiom.</li>
+  </ul>
+  <p class="rule"><a href="think.html">think</a></p>
+</header>
+<div class="legend">
+  <span><i class="sw axiom"></i>axiom</span>
+  <span><i class="sw model"></i>model</span>
+  <span><i class="sw gap"></i>gap (UNKNOWN)</span>
+  <span>derives · unexplained-by</span>
+</div>
+<svg viewBox="0 0 980 460" role="img" aria-label="One chain: three axioms, baryons plus current gravity, dark matter leftover">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b8a86"/>
+    </marker>
+  </defs>
+  <path class="e derives" d="M 170 118 C 170 170 430 190 490 210" marker-end="url(#arr)"/>
+  <path class="e derives" d="M 490 118 L 490 210" marker-end="url(#arr)"/>
+  <path class="e derives" d="M 810 118 C 810 170 550 190 490 210" marker-end="url(#arr)"/>
+  <path class="e unexplained-by" d="M 490 360 L 490 292" marker-end="url(#arr)"/>
+  <text class="elab" x="250" y="175">derives</text>
+  <text class="elab" x="500" y="170">derives</text>
+  <text class="elab" x="680" y="175">derives</text>
+  <text class="elab" x="510" y="330">unexplained-by</text>
+  <g>
+    <rect class="n axiom" x="70" y="40" width="200" height="78"/>
+    <text class="kind" x="86" y="62">AXIOM</text>
+    <text x="86" y="88">Conservation</text>
+  </g>
+  <g>
+    <rect class="n axiom" x="390" y="40" width="200" height="78"/>
+    <text class="kind" x="406" y="62">AXIOM</text>
+    <text x="406" y="88">Causality</text>
+  </g>
+  <g>
+    <rect class="n axiom" x="710" y="40" width="200" height="78"/>
+    <text class="kind" x="726" y="62">AXIOM</text>
+    <text x="726" y="88">Test against nature</text>
+  </g>
+  <g>
+    <rect class="n model" x="380" y="220" width="220" height="72"/>
+    <text class="kind" x="396" y="242">MODEL</text>
+    <text x="396" y="266">Baryons plus current gravity</text>
+  </g>
+  <g>
+    <rect class="n gap" x="370" y="360" width="240" height="78"/>
+    <text class="kind" x="386" y="382">GAP</text>
+    <text class="unk" x="430" y="382">axiom slot UNKNOWN</text>
+    <text x="386" y="408">Dark matter</text>
+    <text class="kind" x="386" y="426">does not derive a particle</text>
+  </g>
+</svg>
+<footer>graph.json</footer>
+</body>
+</html>

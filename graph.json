@@ -1,13 +1,12 @@
 {
   "version": 1,
   "legend": {
-    "axiom": "Cannot derive from a tighter node. Holds if the model above it is wrong.",
+    "axiom": "Cannot derive from a tighter node. Holds if the model below it is wrong.",
     "model": "Compression with named assumptions. Can be replaced.",
-    "gap": "Named residual. unexplained-by a model. axiom slot is UNKNOWN. Not a third kind of truth."
+    "gap": "Named residual of a model. axiom slot is UNKNOWN. Naming it is not an axiom."
   },
   "edge_types": [
     "derives",
-    "constrains",
     "unexplained-by"
   ],
   "nodes": [
@@ -36,37 +35,11 @@
       ]
     },
     {
-      "id": "cosmology",
-      "kind": "model",
-      "label": "Cosmology",
-      "assumptions": [
-        "expanding universe",
-        "current gravity plus contents"
-      ]
-    },
-    {
-      "id": "physics-we-can-write",
-      "kind": "model",
-      "label": "Physics we can currently write",
-      "assumptions": [
-        "conservation",
-        "causality",
-        "test against nature"
-      ]
-    },
-    {
       "id": "dark-matter",
       "kind": "gap",
       "label": "Dark matter",
       "axiom_slot": "UNKNOWN",
       "note": "Does not derive a particle. Naming it is not an axiom."
-    },
-    {
-      "id": "consciousness",
-      "kind": "gap",
-      "label": "Consciousness",
-      "axiom_slot": "UNKNOWN",
-      "note": "Naming it is not an axiom."
     }
   ],
   "edges": [
@@ -86,39 +59,9 @@
       "dst": "baryons-plus-gravity"
     },
     {
-      "src": "conservation",
-      "type": "derives",
-      "dst": "physics-we-can-write"
-    },
-    {
-      "src": "causality",
-      "type": "derives",
-      "dst": "physics-we-can-write"
-    },
-    {
-      "src": "test-against-nature",
-      "type": "derives",
-      "dst": "physics-we-can-write"
-    },
-    {
-      "src": "baryons-plus-gravity",
-      "type": "derives",
-      "dst": "cosmology"
-    },
-    {
       "src": "dark-matter",
       "type": "unexplained-by",
       "dst": "baryons-plus-gravity"
-    },
-    {
-      "src": "dark-matter",
-      "type": "constrains",
-      "dst": "cosmology"
-    },
-    {
-      "src": "consciousness",
-      "type": "unexplained-by",
-      "dst": "physics-we-can-write"
     }
   ]
 }
