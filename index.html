@@ -11,7 +11,6 @@
   header { padding: 20px 24px 8px; max-width: 980px; }
   h1 { font-size: 18px; font-weight: 600; margin: 0 0 6px; }
   .rule { color: var(--mute); font-size: 13px; margin: 0 0 10px; max-width: 42rem; }
-  ul.rule { margin: 6px 0 10px; padding-left: 1.2em; }
   a { color: var(--axiom); }
   .legend { display:flex; gap:16px; flex-wrap: wrap; padding: 8px 24px 0; font-size: 12px; color: var(--mute); }
   .sw { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:middle; }
@@ -30,7 +29,6 @@
   text.sub { fill: var(--mute); font-size: 10px; }
   .e { fill: none; stroke-width: 1.4; }
   .e.derives { stroke: #6b8a6b; stroke-opacity: .55; }
-  .e.constrains { stroke: var(--model); }
   .e.unexplained-by { stroke: var(--gap); }
   .elab { font-size: 10px; fill: var(--mute); }
   footer { padding: 0 24px 28px; color: var(--mute); font-size: 12px; }
@@ -42,7 +40,6 @@
   <p class="rule">Gold boxes still hold even if a blue story below is wrong. Blue boxes are today's explanations, with the guesses written on them — you can replace a blue box. Red boxes are what that story still cannot explain. Naming a red box does not invent a new gold rule.</p>
   <p class="rule">Don't put school subjects on the map. Heat is “stuff is conserved” applied to energy. Learning programs are a method, not a box. The line from a red box to a blue box is the hint: it shows which story leaked.</p>
   <p class="rule">Some people say seeing and feeling are more basic than space and time — more like a computer desktop than a window. That is another blue story to test. It is not a new gold rule.</p>
-  <ul class="rule" id="kind-defs"></ul>
   <p class="rule"><a href="think.html">think</a> — try this on one real problem. Do not add boxes to the map from that page.</p>
 </header>
 <div class="legend" id="legend"></div>
@@ -182,27 +179,20 @@ function draw(graph) {
   }
   graph.nodes.forEach(n => drawNode(svg, n));
 
-  const kindDefs = document.getElementById("kind-defs");
-  if (kindDefs && graph.legend) {
-    kindDefs.innerHTML = "";
-    ["axiom", "model", "gap"].forEach(k => {
-      if (!graph.legend[k]) return;
-      const li = document.createElement("li");
-      li.textContent = graph.legend[k];
-      kindDefs.appendChild(li);
-    });
-  }
-
   const legend = document.getElementById("legend");
   legend.innerHTML = "";
   ["axiom", "model", "gap"].forEach(k => {
     const span = document.createElement("span");
-    span.innerHTML = `<i class="sw ${k}"></i>${KIND_LABEL[k]}`;
+    const sw = document.createElement("i");
+    sw.className = "sw " + k;
+    span.appendChild(sw);
+    span.appendChild(document.createTextNode(KIND_LABEL[k]));
     legend.appendChild(span);
   });
   const extra = document.createElement("span");
   extra.className = "edges";
-  extra.textContent = (graph.edge_types || []).map(t => EDGE_LABEL[t] || t).join(" · ");
+  const used = [...new Set(graph.edges.map(e => e.type))];
+  extra.textContent = used.map(t => EDGE_LABEL[t] || t).join(" · ");
   legend.appendChild(extra);
 }
 

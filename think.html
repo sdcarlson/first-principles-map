@@ -25,8 +25,8 @@
   ul { margin: 0; padding-left: 1.2em; }
   .hole { color: var(--gap); }
   .surv { color: var(--ok); }
-  .warn { border: 1px solid var(--gap); color: var(--gap); padding: 8px 10px; margin-top: 8px; font-size: 13px; display: none; }
-  .warn.on { display: block; }
+  .warn, .err { border: 1px solid var(--gap); color: var(--gap); padding: 8px 10px; margin-top: 8px; font-size: 13px; display: none; }
+  .warn.on, .err.on { display: block; }
   .hint { color: var(--mute); font-size: 12px; margin: 4px 0 8px; }
 </style>
 </head>
@@ -35,6 +35,8 @@
   <h1>think</h1>
   <p class="def">A first principle is something that still has to be true even if every usual method for this problem is wrong, and that you cannot get from anything simpler.</p>
   <p class="hint"><a href="index.html">map</a> — don't add school subjects as boxes. Don't add to the map from this page.</p>
+  <p class="hint">Example: keep a room from getting cold. Usual method: a thermostat. If that dies, the air still has energy that can leak — stuff is conserved. That is not a new starting rule.</p>
+  <p class="err" id="err">Open this page on the web so the starting-rule list can load. You can still type.</p>
 
   <h2>1 The job</h2>
   <p class="hint">What must actually happen.</p>
@@ -66,7 +68,7 @@
   <div id="warn" class="warn">This plan needs something we don't know yet. Don't invent a starting rule to close it.</div>
 </main>
 <script>
-let TRUNK = ["conservation", "causality", "test against nature"];
+let TRUNK = ["Stuff is conserved", "Cause and effect", "Test it in the real world"];
 let recipes = [{ id: 1, name: "", remain: "", tighter: "" }];
 let nextId = 2;
 
@@ -94,7 +96,7 @@ function renderTests() {
         <label><input type="radio" name="t${r.id}" data-i="${i}" data-k="tighter" value="unknown" ${r.tighter==="unknown"?"checked":""}> we don't know yet</label>
       </div>
       ${r.tighter==="yes" ? `<input type="text" data-i="${i}" data-k="from" placeholder="simpler starting point" value="${esc(r.from||"")}">
-        <div class="chips">${TRUNK.map(t => `<button type="button" class="chip" data-i="${i}" data-trunk="${t}">${t}</button>`).join("")}</div>` : ""}
+        <div class="chips">${TRUNK.map(t => `<button type="button" class="chip" data-i="${i}" data-trunk="${esc(t)}">${esc(t)}</button>`).join("")}</div>` : ""}
     </div>`
   ).join("");
 }
@@ -164,11 +166,14 @@ document.addEventListener("click", e => {
   }
 });
 paint();
-fetch("graph.json").then(r => r.json()).then(g => {
-  const axioms = g.nodes.filter(n => n.kind === "axiom").map(n => n.label);
-  if (axioms.length) TRUNK = axioms;
-  paint();
-});
+fetch("graph.json")
+  .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+  .then(g => {
+    const axioms = g.nodes.filter(n => n.kind === "axiom").map(n => n.label);
+    if (axioms.length) TRUNK = axioms;
+    paint();
+  })
+  .catch(() => document.getElementById("err").classList.add("on"));
 </script>
 </body>
 </html>

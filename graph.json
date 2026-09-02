@@ -7,7 +7,6 @@
   },
   "edge_types": [
     "derives",
-    "constrains",
     "unexplained-by"
   ],
   "nodes": [
@@ -130,11 +129,6 @@
       "src": "measurement",
       "type": "unexplained-by",
       "dst": "quantum-mechanics"
-    },
-    {
-      "src": "measurement",
-      "type": "constrains",
-      "dst": "baryons-plus-gravity"
     },
     {
       "src": "consciousness",
