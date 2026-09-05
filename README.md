@@ -18,6 +18,8 @@ Open `research/runs/my-start/index.html`, or read `START.md` in the same folder.
 
 [Verification](research/evidence/mvp-verification.json): 14 map tests and 37 research tests passed, including evidence integrity, safe links and copied-prompt equality. Rendered browser layout and the operating-system clipboard remain unverified because local-file navigation was blocked by the browser tool. This is a workflow prototype, not evidence of scientific value or demand.
 
+Current decision: keep the local handoff tool and hold product expansion until real use supports it. User acceptance is pending; structured records have not demonstrated an advantage over the readable Markdown handoff. The next check is to read the generated page, open an evidence link and try copying its prompt into an empty note. See the [canonical decision](research/DECISION.md) for the acceptance criteria and remaining validation dependencies.
+
 ## Development
 
 Plain HTML, CSS and JavaScript. No build step or dependencies.
