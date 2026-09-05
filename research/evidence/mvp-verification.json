@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-05",
+  "status": "functional checks passed; rendered visual review unverified",
+  "checks": [
+    {
+      "command": "python check.py",
+      "exit_code": 0,
+      "output": "OK: 20 ideas, 17 connections, 6 paths, 10 sources\nStructure and references checked. Scientific accuracy requires editorial review.\n"
+    },
+    {
+      "command": "python -m unittest test_check",
+      "exit_code": 0,
+      "output": "..............\n----------------------------------------------------------------------\nRan 14 tests in 0.006s\n\nOK\n"
+    },
+    {
+      "command": "python -m unittest discover -s research -p test_*.py",
+      "exit_code": 0,
+      "output": ".............................Cannot complete: custom store or target requires an explicit matching brief\n.Cannot complete: custom store or target requires an explicit matching brief\n.......\n----------------------------------------------------------------------\nRan 37 tests in 3.794s\n\nOK\n"
+    }
+  ],
+  "output_file_count": 51,
+  "local_links_checked": 20,
+  "package_manifest_entries_checked": 45,
+  "copy_prompt_html_equals_markdown": true,
+  "copied_submission_json_valid": true,
+  "clipboard_handler_cases": [
+    "success",
+    "rejected",
+    "unavailable"
+  ],
+  "original_map_physics_evidence_preserved": true,
+  "output_collision_refused_unchanged": true,
+  "fresh_review_replay_idempotent": true,
+  "physics_fixture_checker_refused": true,
+  "limitations": [
+    "Browser URL safety policy blocked file navigation; no rendered visual or OS-clipboard verification, no workaround used.",
+    "No scientific acceptance, domain certification, full response computation, or research-value experiment."
+  ]
+}

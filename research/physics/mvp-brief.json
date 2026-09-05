@@ -1,0 +1,5 @@
+{
+  "current_assessment": "Twelve original local normalization checks passed on the published detector-switching function. A separate fresh Astra review then returned an attempt and a withhold assessment; original report bytes are attached. Formal scientific acceptance remains withheld. That review is not domain certification or human-independent scientific acceptance.",
+  "proposed_next_check": "Inspect the returned Astra review and its retained limitations. Then decide whether to authorize a separately scoped flat-spacetime detector-response baseline. Do not repeat the already-completed review. Do not run a baseline now.",
+  "unresolved_checks": "Matching of the selected uniform grids does not establish generic quadrature convergence: cos^4 and cos^8 are finite Fourier polynomials. This still says nothing about the full quantum-field response near a horizon. The full calculation needs SciPy, absl-py, asymptotic coefficient data, and owner-assigned limits. No registered independent physics checker is in place."
+}
