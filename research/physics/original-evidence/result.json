@@ -1,0 +1,186 @@
+{
+  "kind": "published-code prerequisite reproduction, not a synthetic research history",
+  "source": "https://github.com/cshallue/hawking-radiation/blob/main/hawkrad/switching.py",
+  "source_sha256": "f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+  "paper": "https://arxiv.org/html/2501.06609v2#S2.SS2",
+  "criterion_frozen_in_code": "support=0 outside; peak=1 to 1e-12; integral errors <=1e-10 at both grids",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "rows": [
+    {
+      "tau_mid": 0.0,
+      "delta": 0.125,
+      "panels": 512,
+      "integral_chi": 0.09375,
+      "integral_chi_squared": 0.068359375,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    },
+    {
+      "tau_mid": 0.0,
+      "delta": 0.125,
+      "panels": 1024,
+      "integral_chi": 0.09375,
+      "integral_chi_squared": 0.068359375,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    },
+    {
+      "tau_mid": 0.0,
+      "delta": 1.0,
+      "panels": 512,
+      "integral_chi": 0.75,
+      "integral_chi_squared": 0.546875,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    },
+    {
+      "tau_mid": 0.0,
+      "delta": 1.0,
+      "panels": 1024,
+      "integral_chi": 0.75,
+      "integral_chi_squared": 0.546875,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    },
+    {
+      "tau_mid": 0.0,
+      "delta": 4.0,
+      "panels": 512,
+      "integral_chi": 3.0,
+      "integral_chi_squared": 2.1875,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    },
+    {
+      "tau_mid": 0.0,
+      "delta": 4.0,
+      "panels": 1024,
+      "integral_chi": 3.0,
+      "integral_chi_squared": 2.1875,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    },
+    {
+      "tau_mid": 1.25,
+      "delta": 0.125,
+      "panels": 512,
+      "integral_chi": 0.09375,
+      "integral_chi_squared": 0.068359375,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    },
+    {
+      "tau_mid": 1.25,
+      "delta": 0.125,
+      "panels": 1024,
+      "integral_chi": 0.09375,
+      "integral_chi_squared": 0.068359375,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    },
+    {
+      "tau_mid": 1.25,
+      "delta": 1.0,
+      "panels": 512,
+      "integral_chi": 0.75,
+      "integral_chi_squared": 0.546875,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    },
+    {
+      "tau_mid": 1.25,
+      "delta": 1.0,
+      "panels": 1024,
+      "integral_chi": 0.75,
+      "integral_chi_squared": 0.546875,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    },
+    {
+      "tau_mid": 1.25,
+      "delta": 4.0,
+      "panels": 512,
+      "integral_chi": 3.0,
+      "integral_chi_squared": 2.1875,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    },
+    {
+      "tau_mid": 1.25,
+      "delta": 4.0,
+      "panels": 1024,
+      "integral_chi": 3.0,
+      "integral_chi_squared": 2.1875,
+      "integral_errors": [
+        0.0,
+        0.0
+      ],
+      "support_pass": true,
+      "peak_error": 0.0,
+      "passed": true
+    }
+  ],
+  "all_passed": true,
+  "elapsed_seconds": 0.10544639997533523,
+  "scope_limit": "Only switching-function support, peak and two normalization integrals tested. No curved-spacetime response, temperature, experimental observation, demand, or FPM benefit established.",
+  "independence": "Analytic identities differ from numerical quadrature; same local author reviewed both. No external domain review."
+}

@@ -1,0 +1,37 @@
+{
+  "checks": [
+    {
+      "name": "existing-map",
+      "exit_code": 0,
+      "evidence": "existing-map.txt"
+    },
+    {
+      "name": "existing-tests",
+      "exit_code": 0,
+      "evidence": "existing-tests.txt"
+    },
+    {
+      "name": "handoff-tests",
+      "exit_code": 0,
+      "evidence": "handoff-tests.txt"
+    }
+  ],
+  "mechanics": {
+    "checked_episodes": 48,
+    "conditions": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "fixture": true,
+    "interpretation": "All condition mechanics ran; no hypothesis estimate or adoption evidence.",
+    "research_experiment_run": false
+  },
+  "physics": {
+    "passed": true,
+    "evidence": "physics-switching.json"
+  },
+  "research_value": "unmeasured",
+  "costs": "unknown human labor and local compute; no economics claim"
+}

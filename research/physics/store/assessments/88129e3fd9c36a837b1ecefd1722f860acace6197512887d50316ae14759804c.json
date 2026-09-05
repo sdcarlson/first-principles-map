@@ -1,0 +1,14 @@
+{
+  "attempt": "4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de",
+  "check": null,
+  "identity_limit": "Local actor label, not authenticated human identity.",
+  "limitations": "No registered independent physics checker or human domain review. Rerun numerical output exists in reviewer transcript only. No full response calculation, new physics or controlled FPM benefit. Uniform-grid agreement is not generic convergence evidence.",
+  "rationale": "Fresh reviewer report supports the two elementary normalization identities and identifies limits of the sampled numerical check. Report bytes are preserved as original evidence; mathematical derivation was inspected by the coordinator.",
+  "reviewed_at": "2026-09-05T22:25:10.580903+00:00",
+  "reviewer": "Astra coordinator",
+  "scope": "Published-code prerequisite only: compact cos^4 switching, not Hawking radiation or quantum gravity.",
+  "status": "withhold",
+  "supersedes": null,
+  "target": "4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a",
+  "useful": false
+}

@@ -1,0 +1,39 @@
+{
+  "base_snapshot": "175dd1628337a063dd067a808f71059c44222196fb718daca98fe0700844f981",
+  "budget": {
+    "compute_usd": null,
+    "human_minutes": null,
+    "model_tokens": null,
+    "reported_numerical_seconds": 0.1216681000078097
+  },
+  "depends_on": [],
+  "environment": "Separate Astra High review agent, fork_turns none; existing Python 3.12.14 and NumPy 2.3.5 reproduction. Launch configuration establishes requested model, not backend weights attestation.",
+  "evidence": [
+    {
+      "locator": "Entire file, including explicit limitations and original evidence locators",
+      "path": "astra-physics-review.md",
+      "role": "result",
+      "sha256": "bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48",
+      "source": "Original report from separately launched fresh Astra High reviewer"
+    }
+  ],
+  "inputs": {
+    "condition_package": "research/physics/C",
+    "manifest_files_checked": 11
+  },
+  "interpretation": "Supports the bounded mathematical prerequisite. Agreement between these Fourier-compatible uniform grids does not establish generic quadrature convergence. No independently authenticated remote commit, human domain certification, full physics response, or causal FPM advantage was established.",
+  "method": "Fresh Astra High context reviewed the exported C handoff, native evidence, analytic identities and existing numerical runner; one read-only primary-paper check followed.",
+  "observation": "Reviewer reports all 11 manifest hashes matched, both elementary identities were correct, and the existing reproduction produced the same 12 passing rows. Full reviewer report is attached; its rerun numerical output exists only in the review task transcript.",
+  "outcome": "completed",
+  "provenance": {
+    "configuration": "High reasoning; fresh context with no copied conversation; review assigned by coordinator",
+    "contributor": "fresh-astra-physics-review",
+    "model": "gpt-6-astra",
+    "shared_roots": "Same model family, same published source and existing numerical runner. Coordinator preserved reviewer report. Not a blinded, equal-budget or human-independent experiment; mistaken fixture budget metadata was separately overridden by the review assignment.",
+    "source_locator": "research/evidence/astra-physics-review.md; original input research/physics/C/handoff.md"
+  },
+  "request_id": "fresh-astra-switching-review-1",
+  "retry_reason": "Independent-context review was explicitly requested to test handoff recovery. Replication is useful checking, not a new scientific contribution. Future response computation requires a new scoped target and acceptance contract.",
+  "scope": "Published-code prerequisite only: compact cos^4 switching, not Hawking radiation or quantum gravity.",
+  "target": "4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a"
+}

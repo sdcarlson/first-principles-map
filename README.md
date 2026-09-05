@@ -6,6 +6,8 @@ Explore evidence, explanations and open questions across physics, evolution and 
 
 Use the notebook to work through your own question and download your notes.
 
+The local research-handoff experiment is documented in [research/DECISION.md](research/DECISION.md). It is research-only and separate from the educational map.
+
 ## Development
 
 Plain HTML, CSS and JavaScript. No build step or dependencies.

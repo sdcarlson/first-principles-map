@@ -1,0 +1,32 @@
+test_full_four_arm_fresh_process_chain (test_handoff.ExperimentTests.test_full_four_arm_fresh_process_chain) ... ok
+test_missing_costs_never_become_zero (test_handoff.ExperimentTests.test_missing_costs_never_become_zero) ... ok
+test_research_readiness_lists_exact_missing_dependencies (test_handoff.ExperimentTests.test_research_readiness_lists_exact_missing_dependencies) ... ok
+test_schedule_matches_orders_across_arms_and_balances_families (test_handoff.ExperimentTests.test_schedule_matches_orders_across_arms_and_balances_families) ... ok
+test_acceptance_requires_independent_actor_and_correct_receipt (test_handoff.HandoffTests.test_acceptance_requires_independent_actor_and_correct_receipt) ... ok
+test_all_assessments_survive_export (test_handoff.HandoffTests.test_all_assessments_survive_export) ... ok
+test_artifact_path_escape_and_absolute_path_rejected (test_handoff.HandoffTests.test_artifact_path_escape_and_absolute_path_rejected) ... ok
+test_changed_evidence_is_detected (test_handoff.HandoffTests.test_changed_evidence_is_detected) ... ok
+test_changed_record_is_detected (test_handoff.HandoffTests.test_changed_record_is_detected) ... ok
+test_checker_change_fails_closed (test_handoff.HandoffTests.test_checker_change_fails_closed) ... ok
+test_checker_rejects_duplicate_boolean_and_triangle_edges (test_handoff.HandoffTests.test_checker_rejects_duplicate_boolean_and_triangle_edges) ... ok
+test_complete_path_and_original_evidence (test_handoff.HandoffTests.test_complete_path_and_original_evidence) ... ok
+test_disputed_dependency_blocks_downstream_acceptance (test_handoff.HandoffTests.test_disputed_dependency_blocks_downstream_acceptance) ... ok
+test_duplicate_json_keys_and_nan_are_rejected (test_handoff.HandoffTests.test_duplicate_json_keys_and_nan_are_rejected) ... ok
+test_external_target_never_uses_fixture_checker (test_handoff.HandoffTests.test_external_target_never_uses_fixture_checker) ... ok
+test_four_arms_have_equal_targets_and_history_when_permitted (test_handoff.HandoffTests.test_four_arms_have_equal_targets_and_history_when_permitted) ... ok
+test_incomplete_execution_does_not_accept_even_valid_output (test_handoff.HandoffTests.test_incomplete_execution_does_not_accept_even_valid_output) ... ok
+test_incomplete_failure_remains_retryable (test_handoff.HandoffTests.test_incomplete_failure_remains_retryable) ... ok
+test_native_inputs_equal_even_for_fresh_arm (test_handoff.HandoffTests.test_native_inputs_equal_even_for_fresh_arm) ... ok
+test_no_checker_override_in_submission (test_handoff.HandoffTests.test_no_checker_override_in_submission) ... ok
+test_oversized_evidence_and_missing_scope_rejected (test_handoff.HandoffTests.test_oversized_evidence_and_missing_scope_rejected) ... ok
+test_post_acceptance_challenge_marks_dependents_for_rereview (test_handoff.HandoffTests.test_post_acceptance_challenge_marks_dependents_for_rereview) ... ok
+test_raw_retrieval_finds_original_failure_and_allows_full_inventory (test_handoff.HandoffTests.test_raw_retrieval_finds_original_failure_and_allows_full_inventory) ... ok
+test_result_cannot_override_acceptance (test_handoff.HandoffTests.test_result_cannot_override_acceptance) ... ok
+test_retry_idempotent_despite_changed_snapshot (test_handoff.HandoffTests.test_retry_idempotent_despite_changed_snapshot) ... ok
+test_selected_scope_cannot_include_unrelated_target (test_handoff.HandoffTests.test_selected_scope_cannot_include_unrelated_target) ... ok
+test_stale_submission_is_not_silently_rebased (test_handoff.HandoffTests.test_stale_submission_is_not_silently_rebased) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 3.266s
+
+OK

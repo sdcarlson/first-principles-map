@@ -1,0 +1,256 @@
+{
+  "summary": "27/31 provenance checks match",
+  "n_match": 27,
+  "n_total": 31,
+  "paper_table": [
+    {
+      "method": "Base",
+      "pass_rate_percent": 31.6,
+      "memory_bytes": null,
+      "memory_display": "--"
+    },
+    {
+      "method": "Retry",
+      "pass_rate_percent": 31.6,
+      "memory_bytes": null,
+      "memory_display": "--"
+    },
+    {
+      "method": "Negative knowledge retry (d=1)",
+      "pass_rate_percent": 36.8,
+      "memory_bytes": 1187,
+      "memory_display": "1,187 (-72.2%)"
+    },
+    {
+      "method": "Self-debug (round=3)",
+      "pass_rate_percent": 44.7,
+      "memory_bytes": 4272,
+      "memory_display": "4,272 (baseline)"
+    },
+    {
+      "method": "Deep negative knowledge retry (d=3)",
+      "pass_rate_percent": 47.4,
+      "memory_bytes": 3354,
+      "memory_display": "3,354 (-21.5%)"
+    }
+  ],
+  "provenance_checks": [
+    {
+      "label": "pilot subset size",
+      "expected": 38,
+      "computed": 38,
+      "match": true,
+      "source": "tasks/"
+    },
+    {
+      "label": "baseline round-1 PASS (38 tasks)",
+      "expected": 12,
+      "computed": 12,
+      "match": true,
+      "source": "logs/baseline_results/task_*.json with eval_score==1"
+    },
+    {
+      "label": "NK-test subset size",
+      "expected": 24,
+      "computed": 24,
+      "match": true,
+      "source": "v3 round1 cell in logs/dispatches/solver/"
+    },
+    {
+      "label": "hard subset size (B2 fails all 3 rounds)",
+      "expected": 19,
+      "computed": 19,
+      "match": true,
+      "source": "round2_B2 + round3_B2 cells"
+    },
+    {
+      "label": "Table 1: baseline / 38",
+      "expected": "12/38",
+      "computed": "12/38",
+      "match": true,
+      "source": "baseline_results/"
+    },
+    {
+      "label": "Table 1: + B0 retry / 38",
+      "expected": "12/38",
+      "computed": "12/38",
+      "match": true,
+      "source": "round2_B0 cell"
+    },
+    {
+      "label": "Table 1: + NKR depth-1 / 38",
+      "expected": "14/38",
+      "computed": "14/38",
+      "match": true,
+      "source": "round2_NKR cell"
+    },
+    {
+      "label": "Table 1: + B2 covering / 38",
+      "expected": "17/38",
+      "computed": "17/38",
+      "match": true,
+      "source": "round2_B2 + round3_B2 cells"
+    },
+    {
+      "label": "Table 1: + deepNKR depth-3 / 38",
+      "expected": "18/38",
+      "computed": "18/38",
+      "match": true,
+      "source": "deepNKR_sonnet cell"
+    },
+    {
+      "label": "headline: baseline %",
+      "expected": "31.6",
+      "computed": "31.6",
+      "match": true,
+      "source": "(B) cumulative"
+    },
+    {
+      "label": "headline: final %",
+      "expected": "47.4",
+      "computed": "47.4",
+      "match": true,
+      "source": "(B) cumulative"
+    },
+    {
+      "label": "headline: lift (tasks)",
+      "expected": "+6",
+      "computed": "+6",
+      "match": true,
+      "source": "(B) cumulative"
+    },
+    {
+      "label": "NKR depth-1 on 24",
+      "expected": "2/24",
+      "computed": "2/24",
+      "match": true,
+      "source": "round2_NKR cell"
+    },
+    {
+      "label": "B2 covering on 24",
+      "expected": "5/24",
+      "computed": "5/24",
+      "match": true,
+      "source": "round2_B2 + round3_B2 cells"
+    },
+    {
+      "label": "deepNKR-Sonnet on 19 hard",
+      "expected": "1/19",
+      "computed": "1/19",
+      "match": true,
+      "source": "deepNKR_sonnet cell on hard subset"
+    },
+    {
+      "label": "deepNKR-Haiku (cross-model) on 19 hard",
+      "expected": "0/19",
+      "computed": "0/19",
+      "match": true,
+      "source": "deepNKR_haiku cell"
+    },
+    {
+      "label": "B2 covering median (bytes/task)",
+      "expected": 4272,
+      "computed": 4272,
+      "match": true,
+      "source": "b2_covering_bytes.json"
+    },
+    {
+      "label": "r1 NK median (bytes/task)",
+      "expected": 1187,
+      "computed": 1201,
+      "match": false,
+      "source": "nk_records/task_*.json"
+    },
+    {
+      "label": "deep NK median (bytes/task)",
+      "expected": 3354,
+      "computed": 3390,
+      "match": false,
+      "source": "nk_records/task_*_deep.json"
+    },
+    {
+      "label": "byte savings: r1 NK vs B2 (%)",
+      "expected": "72.2",
+      "computed": "71.9",
+      "match": false,
+      "source": "(D) median ratio"
+    },
+    {
+      "label": "byte savings: deep NK vs B2 (%)",
+      "expected": "21.5",
+      "computed": "20.6",
+      "match": false,
+      "source": "(D) median ratio"
+    },
+    {
+      "label": "solver tokens: round-1 median",
+      "expected": 16262,
+      "computed": 16262,
+      "match": true,
+      "source": "round1 dispatches"
+    },
+    {
+      "label": "solver tokens: NKR median",
+      "expected": 18080,
+      "computed": 18080,
+      "match": true,
+      "source": "round2_NKR dispatches"
+    },
+    {
+      "label": "solver tokens: deepNKR-Sonnet median",
+      "expected": 19247,
+      "computed": 19247,
+      "match": true,
+      "source": "deepNKR_sonnet dispatches"
+    },
+    {
+      "label": "solver tokens: deepNKR-Haiku median",
+      "expected": 48360,
+      "computed": 48360,
+      "match": true,
+      "source": "deepNKR_haiku dispatches"
+    },
+    {
+      "label": "r2 NK count",
+      "expected": 22,
+      "computed": 22,
+      "match": true,
+      "source": "nk_records/task_*_r2.json"
+    },
+    {
+      "label": "r2 rel: correct_but_insufficient",
+      "expected": 13,
+      "computed": 13,
+      "match": true,
+      "source": "r2 NK records"
+    },
+    {
+      "label": "r2 rel: round1_recipe_was_wrong",
+      "expected": 2,
+      "computed": 2,
+      "match": true,
+      "source": "r2 NK records"
+    },
+    {
+      "label": "r2 NK error rate (%)",
+      "expected": "9.1",
+      "computed": "9.1",
+      "match": true,
+      "source": "r2 NK records"
+    },
+    {
+      "label": "task_072 in deepNKR_sonnet PASS set",
+      "expected": true,
+      "computed": true,
+      "match": true,
+      "source": "deepNKR_sonnet dispatch for task_072"
+    },
+    {
+      "label": "task_072 deepNKR-Sonnet eval_score",
+      "expected": 1,
+      "computed": 1,
+      "match": true,
+      "source": "task_072__deepNKR_sonnet.json"
+    }
+  ]
+}

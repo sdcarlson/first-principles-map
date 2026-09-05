@@ -1,0 +1,11 @@
+__pycache__/
+runs/
+local-store/
+evidence/*/committed-source/
+physics-handoff/
+
+# Private coordination and original local operational evidence.
+evidence/local/
+evidence/*.jsonl
+implementation-assignment.txt
+evidence/negative-knowledge-archive/results/claim_report.md

@@ -1,0 +1,24 @@
+{
+  "acceptance": {
+    "checker": "external-review-pending",
+    "checker_sha256": null,
+    "criterion": "Review original upstream bytes and reproduce support, peak, integral chi=3 delta/4 and integral chi^2=35 delta/64 at both grids. Confirm tolerances and meaning independently before acceptance."
+  },
+  "assumptions": "Positive half-duration delta; proper time; published switching function. Known analytic identities, not a frontier result.",
+  "id": "hawking-detector-switching",
+  "inputs": {
+    "files": {
+      "switching.py": "f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+      "upstream-license.txt": "ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1"
+    },
+    "paper": "https://arxiv.org/html/2501.06609v2#S2.SS2",
+    "public_code": "https://github.com/cshallue/hawking-radiation",
+    "source_commit": "7bf91b9517cfd4f136fb13a98f0a2aee7e903ca4",
+    "source_sha256": "f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68"
+  },
+  "owner": "Seth, exploratory learning; domain reviewer not appointed",
+  "provenance": "User selected quantum mechanics and relativity; assistant located public authors and code. No research partner recruited.",
+  "question": "Can we reproduce the detector switching normalization before studying near-horizon quantum response?",
+  "scope": "Published-code prerequisite only: compact cos^4 switching, not Hawking radiation or quantum gravity.",
+  "stop_condition": "Reproduce only this prerequisite. No full mode sum, external calls or inference of FPM advantage."
+}

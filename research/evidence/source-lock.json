@@ -1,0 +1,76 @@
+{
+  "checked_date": "2026-09-05",
+  "repositories": {
+    "first-principles-map": {
+      "commit": "a5d508cf2a1b062595cc2fb2bcff60d2abbfdb49"
+    },
+    "research-vendor/negative-knowledge": {
+      "commit": "015ac48da8a9ebd2420ffee0f4f84bd5d1d8bbb9",
+      "inspected_file_sha256": {
+        "negative_knowledge/curator.py": "6ea850898984d55376a7e6f4922adfd7265bd43cdc6fdf7758d840f6a290a972",
+        "negative_knowledge/runtime.py": "ae32c3e35fcdf0acf0830a69e32da7c995cbfc9a1ebc870842aa84c43efb7531",
+        "reproduction/section3/analyze_results.py": "94f58dae4beb6ca3f951820000293843cfb4faaae86b717342953fb09d444c66",
+        "reproduction/section3/scripts/reproduce_claims.py": "58d077a5ec0699d61388da667798d9e011f4fb03bf189ace82cac4174803286c",
+        "reproduction/section3/count_tokens.py": "a53db8a0fbc38a276a18dfe5273891ecaa4d8ff4d1f4e0bbcdead4fb3573ed92",
+        "LICENSE": "e388c5fabaab3f97b4c86eafc778785ac179f4393dba25c77d6727923a30ed2d"
+      }
+    },
+    "research-vendor/ara": {
+      "commit": "e52a925e9d03b4ada3008653e72f99b04116fca2",
+      "inspected_file_sha256": {
+        "README.md": "7c70bba95e54f1c1f80a4e2f20693a0ac54083d0a543346d77c80587dada9579",
+        "examples/the-ara-of-ara/src/seal/seal.py": "7b58cdb054e47f4f08e6bc2ab81714b08f770bbd6b2687711cbf2c40952cd9cb",
+        "skills/context-drop/scripts/drop.py": "882d013b92f9f23c9ecef1cf9254ccf413b5baabb9fd83b4395ecdcc973f00e8",
+        "skills/compiler/references/validation-checklist.md": "763e97c330c58711d5a32153f9da532b6462dc9a6b650cff4441cec2ac2afaff",
+        "LICENSE": "ba6d5142cb531b4de9709f17530c6331df94836ee737fbd0599b4c6eec01df13"
+      }
+    },
+    "research-vendor/asta-bench": {
+      "commit": "a9e338070ffff195cb4cc5ddcbcf9ca8805f141d",
+      "inspected_file_sha256": {
+        "pyproject.toml": "b63b0b1dc143cf5e29276cf412eeaf9414cf31f973dc2d72fd59ac5c6dd19626",
+        "solvers/scorer/pyproject.toml": "dd66e4c17e57826b8657f61afd6440fbff2dcd70a2920097bdd7cb658f01af03",
+        "astabench/evals/code_diagnostics/task.py": "805dfcab91a3a6d54fd402fb3fb2dacd32a21e05de3debf2e84f1926a8465bde"
+      }
+    },
+    "research-vendor/hawking-radiation": {
+      "commit": "7bf91b9517cfd4f136fb13a98f0a2aee7e903ca4",
+      "inspected_file_sha256": {
+        "README.md": "5721ea24b907a2e13803afb6a6bd66c257338e33a4633c1aa73d9cd0ac65cc5b",
+        "hawkrad/switching.py": "f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+        "hawkrad/trajectory/radial_Rinf.py": "e84dfe92a68640c3821421b90ebe7a5fa140994385f745645c835fa0697962c0",
+        "hawkrad/schwarz_coords.py": "3fe8ebb308b858a95153d7bc6421c09050bce55e8f76c7162dac538da8b442fb",
+        "hawkrad.yml": "95f7fa3e1b1d83337dd389344f85b0253f06af6b5a7394557ce1d7cd9f24d75f",
+        "LICENSE": "ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1"
+      }
+    }
+  },
+  "review_inputs": {
+    "common-brief.txt": {
+      "path": "private-review-archive/common-brief.txt",
+      "sha256": "d3ff142cb02125a9910a7a36bc2ff12806bd0aeea92070c92795a2daa09ec37c"
+    },
+    "execution-audit.md": {
+      "path": "private-review-archive/execution-audit.md",
+      "sha256": "9e13712df26dfdf80b04e407025a23d181938a85c5fee705be48a0336d488a95"
+    },
+    "fpm-three-model-synthesis.md": {
+      "path": "private-review-archive/fpm-three-model-synthesis.md",
+      "sha256": "b34437be2a879e5bf2f0e28745199c81f7f7afdd781da9741e0b0855ab7d4165"
+    },
+    "gpt-6-astra-raw.md": {
+      "path": "private-review-archive/gpt-6-astra-raw.md",
+      "sha256": "7765f1aaafa2b272ec64287b3e967aa18f91fd0b06d3b09de8d4e0bfafd91b51"
+    },
+    "source-checks.md": {
+      "path": "private-review-archive/source-checks.md",
+      "sha256": "4de9fda25860447f3819dc129f714ca5a84a9ca657a7136db8d13dd7f7be2b58"
+    }
+  },
+  "limitations": [
+    "Local hashes reflect actual bytes; source commits also recorded.",
+    "Browser controls are not cryptographic model attestation.",
+    "No model performance experiment executed.",
+    "Original review conversations and local paths are privately retained; their hashes identify evidence but those archives are not published here."
+  ]
+}

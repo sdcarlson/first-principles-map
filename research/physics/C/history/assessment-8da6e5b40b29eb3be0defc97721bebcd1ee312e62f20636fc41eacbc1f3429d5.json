@@ -1,0 +1,14 @@
+{
+  "attempt": "3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478",
+  "check": null,
+  "identity_limit": "Local actor label, not authenticated human identity.",
+  "limitations": "No full Hawking calculation, scientific discovery, blinded usefulness review, or FPM experiment. Model identity here is a provenance label, not backend attestation.",
+  "rationale": "Numerical prerequisite passed the recorded local checks. Formal research acceptance awaits independent domain review.",
+  "reviewed_at": "2026-09-05T22:04:00.122188+00:00",
+  "reviewer": "GPT-6 Astra task analyst (requested configuration)",
+  "scope": "Published-code prerequisite only: compact cos^4 switching, not Hawking radiation or quantum gravity.",
+  "status": "withhold",
+  "supersedes": null,
+  "target": "4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a",
+  "useful": false
+}

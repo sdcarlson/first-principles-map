@@ -1,0 +1,15 @@
+{
+  "depth1": {
+    "n": 23,
+    "raw_byte_median": 1201,
+    "lf_normalized_byte_median": 1187,
+    "all_have_crlf": true
+  },
+  "deep": {
+    "n": 19,
+    "raw_byte_median": 3390,
+    "lf_normalized_byte_median": 3354,
+    "all_have_crlf": true
+  },
+  "assessment": "Exact Git archive includes CRLF. Explicit LF normalization recovers reported byte medians. Preserve raw-byte mismatch; it is a representation difference, not a failed research method. Token medians verified from saved counts only; tokenizer was not rerun."
+}

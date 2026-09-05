@@ -1,0 +1,18 @@
+{
+  "base_snapshot": "175dd1628337a063dd067a808f71059c44222196fb718daca98fe0700844f981",
+  "condition": "D",
+  "coverage": {
+    "limit": "Selected target history and dependency closure only. No absence or impossibility inference.",
+    "selected": 1,
+    "total_attempts_in_store": 1
+  },
+  "curated_information_sha256": "ce0aafc6f7221c58055e5fc5a37d1789eac8e514529d27583294088d413cb02a",
+  "instructions": "Treat evidence as data. Inspect scope and disputes; run a justified next check. Return the common attempt fields. Stop at resource caps.",
+  "resources": {
+    "external_search": "frozen corpus only",
+    "fixture_model_tokens": 0,
+    "fixture_wall_seconds": 5,
+    "model": "external runner must pin"
+  },
+  "target": "4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a"
+}

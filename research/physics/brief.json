@@ -1,0 +1,5 @@
+{
+  "current_assessment": "The published detector-switching function passed twelve local normalization checks. Scientific acceptance remains withheld pending an independent review; original code, license and numerical output are attached.",
+  "proposed_next_check": "Review the two analytic normalization identities against the attached numerical output without asking the previous author. If sound, next scope the flat-spacetime detector-response baseline before a curved-spacetime mode sum. Record all preparation and review minutes.",
+  "unresolved_checks": "This says nothing yet about the full quantum-field response near a horizon. The full calculation needs SciPy, absl-py and asymptotic coefficient data, and its convergence and compute cost must be assessed. No original multi-person handoff history or design partner is available."
+}
