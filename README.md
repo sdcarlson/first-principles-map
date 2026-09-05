@@ -1,6 +1,6 @@
 # First Principles Map
 
-**[Open the app](https://sdcarlson.github.io/first-principles-map/)** — no installation needed.
+**[Open the app](https://sdcarlson.github.io/first-principles-map/)** - no installation needed.
 
 Explore evidence, explanations and open questions across physics, evolution and consciousness. Each idea includes sources, assumptions or limitations, and a question to think through.
 
