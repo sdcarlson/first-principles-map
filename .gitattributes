@@ -1,3 +1,4 @@
 # Preserve published evidence bytes and sealed hashes across platforms.
 /research/physics/** -text
 /research/evidence/** -text
+/research/vacuum_baseline.py -text

@@ -1,0 +1,19 @@
+{
+  "allowed_changes": [
+    ".gitattributes",
+    ".gitignore",
+    "research/DECISION.md"
+  ],
+  "artifact_files": 88,
+  "formal_assessment": "withhold",
+  "frozen_contract_and_excerpt_verified": true,
+  "html_markdown_prompt_equal": true,
+  "local_links": 32,
+  "manifest_entries": 82,
+  "original_submissions_idempotent": true,
+  "os_clipboard_acceptance": "unverified; user observation required",
+  "preincrement_inventory_files": 97,
+  "rendered_visual_acceptance": "unverified; existing browser policy restriction respected",
+  "upstream_bytes_preserved": true,
+  "zip_verified": true
+}

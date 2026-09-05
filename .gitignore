@@ -1,1 +1,4 @@
 __pycache__/
+
+# Native local vacuum evidence includes machine paths.
+/research/vacuum/

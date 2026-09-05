@@ -1,0 +1,175 @@
+{
+  "reviewer": "Astra independent numerical review; local model label",
+  "source_sha256": "f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+  "frozen_decision_sha256": "c730771bdfd12f7ec2f48c6f5d20475b105c0b2927fb800a3cfc503ff7ceb3c9",
+  "checker_sha256": "f68d8b05e3f8d9ffefa6bf68b54a639c0320bd9f813fdd884d7ea1de67dcc507",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "method": "Original ChiFn at Gauss-Legendre time nodes; direct cosine Fourier integral; separate composite Gauss-Legendre frequency integral",
+  "conventions": "hbar=c=1; delta=1; center=0; a=E*delta; positive E excitation; dimensionless response, not probability",
+  "Q": 64,
+  "invocation_cap_seconds": 60,
+  "rows": [
+    {
+      "a": -4.0,
+      "outer16_inner256": 0.35174477952953614,
+      "outer16_inner512": 0.3517447795295338,
+      "outer32_inner512": 0.3517447795295338,
+      "inner_change": 2.3314683517128287e-15,
+      "outer_change": 0.0,
+      "tolerance": 3.617447795295338e-07,
+      "analytic_tail_bound": 2.914594592994958e-12,
+      "review_refinement_pass": true
+    },
+    {
+      "a": -1.0,
+      "outer16_inner256": 0.1337275982173179,
+      "outer16_inner512": 0.133727598217317,
+      "outer32_inner512": 0.13372759821731703,
+      "inner_change": 8.881784197001252e-16,
+      "outer_change": 2.7755575615628914e-17,
+      "tolerance": 1.4372759821731702e-07,
+      "analytic_tail_bound": 2.914594592994958e-12,
+      "review_refinement_pass": true
+    },
+    {
+      "a": 0.0,
+      "outer16_inner256": 0.08317814080961264,
+      "outer16_inner512": 0.08317814080961208,
+      "outer32_inner512": 0.08317814080961207,
+      "inner_change": 5.551115123125783e-16,
+      "outer_change": 1.3877787807814457e-17,
+      "tolerance": 9.317814080961206e-08,
+      "analytic_tail_bound": 2.914594592994958e-12,
+      "review_refinement_pass": true
+    },
+    {
+      "a": 1.0,
+      "outer16_inner256": 0.046689738713951906,
+      "outer16_inner512": 0.04668973871395159,
+      "outer32_inner512": 0.04668973871395159,
+      "inner_change": 3.191891195797325e-16,
+      "outer_change": 0.0,
+      "tolerance": 5.668973871395158e-08,
+      "analytic_tail_bound": 2.914594592994958e-12,
+      "review_refinement_pass": true
+    },
+    {
+      "a": 4.0,
+      "outer16_inner256": 0.0035933415160721073,
+      "outer16_inner512": 0.003593341516072084,
+      "outer32_inner512": 0.003593341516072083,
+      "inner_change": 2.3418766925686896e-17,
+      "outer_change": 8.673617379884035e-19,
+      "tolerance": 1.3593341516072082e-08,
+      "analytic_tail_bound": 2.914594592994958e-12,
+      "review_refinement_pass": true
+    }
+  ],
+  "transform_samples": [
+    {
+      "q": -6.283185317179586,
+      "direct_g": 0.12499999917106772
+    },
+    {
+      "q": -6.283185307179586,
+      "direct_g": 0.1249999999999997
+    },
+    {
+      "q": -6.283185297179586,
+      "direct_g": 0.1250000008289317
+    },
+    {
+      "q": -3.141592663589793,
+      "direct_g": 0.49999999867370754
+    },
+    {
+      "q": -3.141592653589793,
+      "direct_g": 0.4999999999999987
+    },
+    {
+      "q": -3.141592643589793,
+      "direct_g": 0.5000000013262897
+    },
+    {
+      "q": -1e-08,
+      "direct_g": 0.7499999999999979
+    },
+    {
+      "q": 0.0,
+      "direct_g": 0.7499999999999979
+    },
+    {
+      "q": 1e-08,
+      "direct_g": 0.7499999999999979
+    },
+    {
+      "q": 0.37,
+      "direct_g": 0.7459012500683282
+    },
+    {
+      "q": 1.73,
+      "direct_g": 0.6647320115914941
+    },
+    {
+      "q": 3.141592643589793,
+      "direct_g": 0.5000000013262897
+    },
+    {
+      "q": 3.141592653589793,
+      "direct_g": 0.4999999999999987
+    },
+    {
+      "q": 3.141592663589793,
+      "direct_g": 0.49999999867370754
+    },
+    {
+      "q": 6.283185297179586,
+      "direct_g": 0.1250000008289317
+    },
+    {
+      "q": 6.283185307179586,
+      "direct_g": 0.1249999999999997
+    },
+    {
+      "q": 6.283185317179586,
+      "direct_g": 0.12499999917106772
+    },
+    {
+      "q": 7.1,
+      "direct_g": 0.06770183901924488
+    },
+    {
+      "q": 13.2,
+      "direct_g": 0.0005917424781456328
+    }
+  ],
+  "special_point_max_error": 2.1094237467877974e-15,
+  "response_differences": [
+    {
+      "a": 1.0,
+      "measured": 0.08703785950336544,
+      "expected": 0.08703785950338026,
+      "discrepancy": 1.482147737874584e-14,
+      "tolerance": 2.004173369312686e-07,
+      "passed": true
+    },
+    {
+      "a": 4.0,
+      "measured": 0.3481514380134617,
+      "expected": 0.34815143801352105,
+      "discrepancy": 5.934142066621462e-14,
+      "tolerance": 3.753381210456059e-07,
+      "passed": true
+    }
+  ],
+  "numerical_elapsed_seconds": 0.2621070999884978,
+  "limits": [
+    "Empirical quadrature refinement, not a rigorous quadrature error certificate.",
+    "Analytic tail bound assumes the independently derived transform identity.",
+    "No candidate code/result imported. No domain certification or product-value claim."
+  ]
+}

@@ -1,0 +1,790 @@
+{
+  "reviewer": "Astra local independent review; not a registered physics checker",
+  "candidate_sha256": "e5c1bb12f2fd01363640598bba0db1ae81f0debfd6fad87cf83303bc6cbf0e82",
+  "candidate_result_sha256": "3d36b88f16c55fd430d7aebb40521ae165af6d23ddd09f291c0afb8a6a9a1195",
+  "reference_result_sha256": "8525d758f6ea5fa3fc87180cc41b0f941727c3eb15257974fe9a11f104160f15",
+  "audit_source_sha256": "a38227821746b5e6abffdd08f3cb33c78112b880f055d46dd08457e3a488ba40",
+  "frozen_decision_sha256": "c730771bdfd12f7ec2f48c6f5d20475b105c0b2927fb800a3cfc503ff7ceb3c9",
+  "response_comparisons": [
+    {
+      "a": -4.0,
+      "candidate": 0.3517447795284938,
+      "independent": 0.3517447795295338,
+      "discrepancy": 1.0400014183176154e-12,
+      "tolerance": 3.617447795284938e-07
+    },
+    {
+      "a": -1.0,
+      "candidate": 0.1337275982191029,
+      "independent": 0.13372759821731703,
+      "discrepancy": 1.7858770018364112e-12,
+      "tolerance": 1.437275982191029e-07
+    },
+    {
+      "a": 0.0,
+      "candidate": 0.08317814081187816,
+      "independent": 0.08317814080961207,
+      "discrepancy": 2.266090093350215e-12,
+      "tolerance": 9.317814081187815e-08
+    },
+    {
+      "a": 1.0,
+      "candidate": 0.04668973871573702,
+      "independent": 0.04668973871395159,
+      "discrepancy": 1.7854329126265611e-12,
+      "tolerance": 5.668973871573702e-08
+    },
+    {
+      "a": 4.0,
+      "candidate": 0.003593341515030186,
+      "independent": 0.003593341516072083,
+      "discrepancy": 1.041897037395989e-12,
+      "tolerance": 1.3593341515030185e-08
+    }
+  ],
+  "transform_comparisons": [
+    {
+      "q": -6.283185317179586,
+      "discrepancy": 3.0531133177191805e-16
+    },
+    {
+      "q": -6.283185307179586,
+      "discrepancy": 3.0531133177191805e-16
+    },
+    {
+      "q": -6.283185297179586,
+      "discrepancy": 3.3306690738754696e-16
+    },
+    {
+      "q": -3.141592663589793,
+      "discrepancy": 1.3877787807814457e-15
+    },
+    {
+      "q": -3.141592653589793,
+      "discrepancy": 1.27675647831893e-15
+    },
+    {
+      "q": -3.141592643589793,
+      "discrepancy": 1.4432899320127035e-15
+    },
+    {
+      "q": -1e-08,
+      "discrepancy": 2.1094237467877974e-15
+    },
+    {
+      "q": 0.0,
+      "discrepancy": 2.1094237467877974e-15
+    },
+    {
+      "q": 1e-08,
+      "discrepancy": 2.1094237467877974e-15
+    },
+    {
+      "q": 0.37,
+      "discrepancy": 2.220446049250313e-15
+    },
+    {
+      "q": 1.73,
+      "discrepancy": 1.887379141862766e-15
+    },
+    {
+      "q": 3.141592643589793,
+      "discrepancy": 1.4432899320127035e-15
+    },
+    {
+      "q": 3.141592653589793,
+      "discrepancy": 1.27675647831893e-15
+    },
+    {
+      "q": 3.141592663589793,
+      "discrepancy": 1.3877787807814457e-15
+    },
+    {
+      "q": 6.283185297179586,
+      "discrepancy": 3.3306690738754696e-16
+    },
+    {
+      "q": 6.283185307179586,
+      "discrepancy": 3.0531133177191805e-16
+    },
+    {
+      "q": 6.283185317179586,
+      "discrepancy": 3.0531133177191805e-16
+    },
+    {
+      "q": 7.1,
+      "discrepancy": 1.6653345369377348e-16
+    },
+    {
+      "q": 13.2,
+      "discrepancy": 8.738669510233166e-17
+    }
+  ],
+  "invalid_input_cases": [
+    {
+      "function": "g",
+      "parameter": 0,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "g",
+      "parameter": 0,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "g",
+      "parameter": 0,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "chi_hat",
+      "parameter": 0,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "chi_hat",
+      "parameter": 0,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "chi_hat",
+      "parameter": 0,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "chi_hat",
+      "parameter": 1,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "chi_hat",
+      "parameter": 1,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "chi_hat",
+      "parameter": 1,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "chi_hat",
+      "parameter": 2,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "chi_hat",
+      "parameter": 2,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "chi_hat",
+      "parameter": 2,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "response_q",
+      "parameter": 0,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "response_q",
+      "parameter": 0,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "response_q",
+      "parameter": 0,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "response_q",
+      "parameter": 1,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "response_q",
+      "parameter": 1,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "response_q",
+      "parameter": 1,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "response_q",
+      "parameter": 2,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "response_q",
+      "parameter": 2,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "response_q",
+      "parameter": 2,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 0,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 0,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 0,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 1,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 1,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 1,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 2,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 2,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 2,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 3,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 3,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 3,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 4,
+      "input": "nan",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 4,
+      "input": "inf",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 4,
+      "input": "-inf",
+      "rejected": true
+    },
+    {
+      "function": "chi_hat",
+      "parameter": 1,
+      "input": "0",
+      "rejected": true
+    },
+    {
+      "function": "chi_hat",
+      "parameter": 1,
+      "input": "-1",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 1,
+      "input": "0",
+      "rejected": true
+    },
+    {
+      "function": "response_omega",
+      "parameter": 1,
+      "input": "-1",
+      "rejected": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "candidate source pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original source pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "frozen decision pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "independent reviewer source pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "five gaps",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "finite nonnegative -4.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "finest and tolerance -4.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "refinements and cutoff -4.0",
+      "passed": true,
+      "detail": [
+        2.5017743432442785e-10,
+        1.5630163829882804e-11,
+        5.401235014801387e-13
+      ]
+    },
+    {
+      "name": "actual panel counts -4.0",
+      "passed": true,
+      "detail": {
+        "h_1_16": 1088,
+        "h_1_32": 2176,
+        "h_1_64": 4352,
+        "Q_128_h_1_64": 8448
+      }
+    },
+    {
+      "name": "analytic tail -4.0",
+      "passed": true,
+      "detail": 2.914594592994958e-12
+    },
+    {
+      "name": "independent response -4.0",
+      "passed": true,
+      "detail": 1.0400014183176154e-12
+    },
+    {
+      "name": "independent refinements -4.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scale and center coverage -4.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "dimensional response -4.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "finite nonnegative -1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "finest and tolerance -1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "refinements and cutoff -1.0",
+      "passed": true,
+      "detail": [
+        4.285703458783985e-10,
+        2.6779412021227245e-11,
+        5.186129303780262e-13
+      ]
+    },
+    {
+      "name": "actual panel counts -1.0",
+      "passed": true,
+      "detail": {
+        "h_1_16": 1040,
+        "h_1_32": 2080,
+        "h_1_64": 4160,
+        "Q_128_h_1_64": 8256
+      }
+    },
+    {
+      "name": "analytic tail -1.0",
+      "passed": true,
+      "detail": 2.914594592994958e-12
+    },
+    {
+      "name": "independent response -1.0",
+      "passed": true,
+      "detail": 1.7858770018364112e-12
+    },
+    {
+      "name": "independent refinements -1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scale and center coverage -1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "dimensional response -1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "finite nonnegative 0.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "finest and tolerance 0.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "refinements and cutoff 0.0",
+      "passed": true,
+      "detail": [
+        5.439345779345572e-10,
+        3.3986577441247334e-11,
+        5.114103585057705e-13
+      ]
+    },
+    {
+      "name": "actual panel counts 0.0",
+      "passed": true,
+      "detail": {
+        "h_1_16": 1024,
+        "h_1_32": 2048,
+        "h_1_64": 4096,
+        "Q_128_h_1_64": 8192
+      }
+    },
+    {
+      "name": "analytic tail 0.0",
+      "passed": true,
+      "detail": 2.914594592994958e-12
+    },
+    {
+      "name": "independent response 0.0",
+      "passed": true,
+      "detail": 2.266090093350215e-12
+    },
+    {
+      "name": "independent refinements 0.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scale and center coverage 0.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "dimensional response 0.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "finite nonnegative 1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "finest and tolerance 1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "refinements and cutoff 1.0",
+      "passed": true,
+      "detail": [
+        4.285703736339741e-10,
+        2.6779356510076013e-11,
+        5.042632977847461e-13
+      ]
+    },
+    {
+      "name": "actual panel counts 1.0",
+      "passed": true,
+      "detail": {
+        "h_1_16": 1008,
+        "h_1_32": 2016,
+        "h_1_64": 4032,
+        "Q_128_h_1_64": 8128
+      }
+    },
+    {
+      "name": "analytic tail 1.0",
+      "passed": true,
+      "detail": 2.914594592994958e-12
+    },
+    {
+      "name": "independent response 1.0",
+      "passed": true,
+      "detail": 1.7854329126265611e-12
+    },
+    {
+      "name": "independent refinements 1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scale and center coverage 1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "dimensional response 1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "finite nonnegative 4.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "finest and tolerance 4.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "refinements and cutoff 4.0",
+      "passed": true,
+      "detail": [
+        2.501773844511279e-10,
+        1.5630222810480987e-11,
+        4.827713749600004e-13
+      ]
+    },
+    {
+      "name": "actual panel counts 4.0",
+      "passed": true,
+      "detail": {
+        "h_1_16": 960,
+        "h_1_32": 1920,
+        "h_1_64": 3840,
+        "Q_128_h_1_64": 7936
+      }
+    },
+    {
+      "name": "analytic tail 4.0",
+      "passed": true,
+      "detail": 2.914594592994958e-12
+    },
+    {
+      "name": "independent response 4.0",
+      "passed": true,
+      "detail": 1.041897037395989e-12
+    },
+    {
+      "name": "independent refinements 4.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scale and center coverage 4.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "dimensional response 4.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "independent original-ChiFn transform -6.283185317179586",
+      "passed": true,
+      "detail": 3.0531133177191805e-16
+    },
+    {
+      "name": "independent original-ChiFn transform -6.283185307179586",
+      "passed": true,
+      "detail": 3.0531133177191805e-16
+    },
+    {
+      "name": "independent original-ChiFn transform -6.283185297179586",
+      "passed": true,
+      "detail": 3.3306690738754696e-16
+    },
+    {
+      "name": "independent original-ChiFn transform -3.141592663589793",
+      "passed": true,
+      "detail": 1.3877787807814457e-15
+    },
+    {
+      "name": "independent original-ChiFn transform -3.141592653589793",
+      "passed": true,
+      "detail": 1.27675647831893e-15
+    },
+    {
+      "name": "independent original-ChiFn transform -3.141592643589793",
+      "passed": true,
+      "detail": 1.4432899320127035e-15
+    },
+    {
+      "name": "independent original-ChiFn transform -1e-08",
+      "passed": true,
+      "detail": 2.1094237467877974e-15
+    },
+    {
+      "name": "independent original-ChiFn transform 0.0",
+      "passed": true,
+      "detail": 2.1094237467877974e-15
+    },
+    {
+      "name": "independent original-ChiFn transform 1e-08",
+      "passed": true,
+      "detail": 2.1094237467877974e-15
+    },
+    {
+      "name": "independent original-ChiFn transform 0.37",
+      "passed": true,
+      "detail": 2.220446049250313e-15
+    },
+    {
+      "name": "independent original-ChiFn transform 1.73",
+      "passed": true,
+      "detail": 1.887379141862766e-15
+    },
+    {
+      "name": "independent original-ChiFn transform 3.141592643589793",
+      "passed": true,
+      "detail": 1.4432899320127035e-15
+    },
+    {
+      "name": "independent original-ChiFn transform 3.141592653589793",
+      "passed": true,
+      "detail": 1.27675647831893e-15
+    },
+    {
+      "name": "independent original-ChiFn transform 3.141592663589793",
+      "passed": true,
+      "detail": 1.3877787807814457e-15
+    },
+    {
+      "name": "independent original-ChiFn transform 6.283185297179586",
+      "passed": true,
+      "detail": 3.3306690738754696e-16
+    },
+    {
+      "name": "independent original-ChiFn transform 6.283185307179586",
+      "passed": true,
+      "detail": 3.0531133177191805e-16
+    },
+    {
+      "name": "independent original-ChiFn transform 6.283185317179586",
+      "passed": true,
+      "detail": 3.0531133177191805e-16
+    },
+    {
+      "name": "independent original-ChiFn transform 7.1",
+      "passed": true,
+      "detail": 1.6653345369377348e-16
+    },
+    {
+      "name": "independent original-ChiFn transform 13.2",
+      "passed": true,
+      "detail": 8.738669510233166e-17
+    },
+    {
+      "name": "special values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "evenness",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate direct Fourier checks",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Parseval response difference 1",
+      "passed": true,
+      "detail": 1.4377388168895777e-14
+    },
+    {
+      "name": "Parseval response difference 4",
+      "passed": true,
+      "detail": 5.745404152435185e-14
+    },
+    {
+      "name": "all nonfinite inputs and nonpositive durations",
+      "passed": true,
+      "detail": 40
+    }
+  ],
+  "mathematical_checks_passed": true,
+  "formal_acceptance": "withheld; no registered independent physics checker",
+  "limitation": "Saved numerical evidence plus inspected formulas and invalid-input calls; no response integration repeated. Quadrature refinement is empirical. This does not establish domain certification or structured-state value."
+}

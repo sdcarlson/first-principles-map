@@ -1,0 +1,6 @@
+{
+  "timeout_seconds": 60,
+  "elapsed_seconds": 0.15691980000701733,
+  "exit_code": 0,
+  "scope": "Saved result comparison and invalid-input rejection only; no response integration"
+}

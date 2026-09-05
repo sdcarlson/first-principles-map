@@ -1,0 +1,59 @@
+{
+  "compute_usd": null,
+  "human_minutes": null,
+  "model_label": "cursor-grok-4.6-xhigh configured; not backend attestation",
+  "native_result_process": {
+    "elapsed_seconds": 0.20128750000731088,
+    "exit_code": 0,
+    "timeout_seconds": 60
+  },
+  "operations": [
+    {
+      "description": "Verify frozen hashes and Python runtime",
+      "exit_code": 0,
+      "observed_tool_seconds": 0.721
+    },
+    {
+      "description": "Run failing vacuum baseline tests (RED)",
+      "exit_code": 1,
+      "observed_tool_seconds": 0.77
+    },
+    {
+      "description": "Run vacuum baseline tests (GREEN)",
+      "exit_code": 1,
+      "observed_tool_seconds": 0.948
+    },
+    {
+      "description": "Re-run vacuum baseline tests after fix",
+      "exit_code": 1,
+      "observed_tool_seconds": 1.071
+    },
+    {
+      "description": "Re-run vacuum baseline tests after JSON fix",
+      "exit_code": 0,
+      "observed_tool_seconds": 1.239
+    },
+    {
+      "description": "Create store, export, run bounded numerical candidate",
+      "exit_code": 0,
+      "observed_tool_seconds": 1.016
+    },
+    {
+      "description": "Verify bytes, snapshot, and submit-ready draft",
+      "exit_code": 0,
+      "observed_tool_seconds": 0.72
+    },
+    {
+      "description": "Check git status and forbidden-file diffs",
+      "exit_code": 0,
+      "observed_tool_seconds": 0.773
+    },
+    {
+      "description": "Re-run vacuum, handoff, and start tests",
+      "exit_code": 0,
+      "observed_tool_seconds": 4.477
+    }
+  ],
+  "original_stream_sha256": "167cdf725960cd1caa068754b2f36923c0574fc923df210a817f5777f163b692",
+  "preparation_limit": "Initial numerical test invocations preceded export and lack documented whole-process 60-second caps; two failed numerical test batches were repaired before passing. Native retained result invocation complied. See review.md."
+}

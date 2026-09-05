@@ -1,0 +1,13 @@
+{
+  "reviewer": "Astra",
+  "frozen_decision_sha256": "c730771bdfd12f7ec2f48c6f5d20475b105c0b2927fb800a3cfc503ff7ceb3c9",
+  "method": "Independent original-ChiFn Fourier quadrature and composite Gauss-Legendre integration",
+  "process_timeout_seconds": 60,
+  "process_elapsed_seconds": 0.433766200003447,
+  "exit_code": 0,
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "human_minutes": null,
+  "model_cost_usd": null,
+  "scope": "Bounded five-point vacuum reproduction; no candidate imported; not scientific or product acceptance"
+}
