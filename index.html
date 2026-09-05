@@ -1,205 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What still has to be true</title>
-<style>
-  :root { --bg:#0e1014; --ink:#e8e6e1; --mute:#8b8a86; --line:#3a3d44; --axiom:#c9b37a; --model:#7aa2c4; --gap:#c47a7a; }
-  * { box-sizing: border-box; }
-  html, body { margin:0; background:var(--bg); color:var(--ink); font: 15px/1.4 system-ui, sans-serif; }
-  header { padding: 20px 24px 8px; max-width: 980px; }
-  h1 { font-size: 18px; font-weight: 600; margin: 0 0 6px; }
-  .rule { color: var(--mute); font-size: 13px; margin: 0 0 10px; max-width: 42rem; }
-  a { color: var(--axiom); }
-  .legend { display:flex; gap:16px; flex-wrap: wrap; padding: 8px 24px 0; font-size: 12px; color: var(--mute); }
-  .sw { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:middle; }
-  .sw.axiom { background: var(--axiom); }
-  .sw.model { background: var(--model); }
-  .sw.gap { background: var(--gap); }
-  .err { color: var(--gap); padding: 12px 24px; display: none; }
-  .err.on { display: block; }
-  svg { display:block; width:100%; max-width: 980px; height: auto; margin: 8px 12px 24px; }
-  .n { rx: 8; }
-  .n.axiom { fill: #1c1a14; stroke: var(--axiom); }
-  .n.model { fill: #121820; stroke: var(--model); }
-  .n.gap { fill: #1c1414; stroke: var(--gap); stroke-dasharray: 5 3; }
-  text { fill: var(--ink); font-size: 13px; }
-  text.kind { fill: var(--mute); font-size: 10px; letter-spacing: .04em; }
-  text.sub { fill: var(--mute); font-size: 10px; }
-  .e { fill: none; stroke-width: 1.4; }
-  .e.derives { stroke: #6b8a6b; stroke-opacity: .55; }
-  .e.unexplained-by { stroke: var(--gap); }
-  .elab { font-size: 10px; fill: var(--mute); }
-  footer { padding: 0 24px 28px; color: var(--mute); font-size: 12px; }
-</style>
+<meta name="description" content="Explore evidence, explanations and unanswered questions across physics, evolution and consciousness.">
+<title>First Principles Map · Follow the evidence</title>
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
 </head>
 <body>
-<header>
-  <h1>What still has to be true</h1>
-  <p class="rule">Gold boxes still hold even if a blue story below is wrong. Blue boxes are today's explanations, with the guesses written on them — you can replace a blue box. Red boxes are what that story still cannot explain. Naming a red box does not invent a new gold rule.</p>
-  <p class="rule">Don't put school subjects on the map. Heat is “stuff is conserved” applied to energy. Learning programs are a method, not a box. The line from a red box to a blue box is the hint: it shows which story leaked.</p>
-  <p class="rule">Some people say seeing and feeling are more basic than space and time — more like a computer desktop than a window. That is another blue story to test. It is not a new gold rule.</p>
-  <p class="rule"><a href="think.html">think</a> — try this on one real problem. Do not add boxes to the map from that page.</p>
-</header>
-<div class="legend" id="legend"></div>
-<p class="err" id="err">Open this page on the web so the map data can load.</p>
-<svg id="map" viewBox="0 0 980 560" role="img" aria-label="Starting rules, current stories, and what they still cannot explain"></svg>
-<footer>To add something unexplained, edit graph.json. Don't invent a starting rule to close a hole.</footer>
-<script>
-const KIND_LABEL = {
-  axiom: "Starting rule",
-  model: "Current story",
-  gap: "Still unexplained"
-};
-const EDGE_LABEL = {
-  derives: "built from",
-  constrains: "puts a limit on",
-  "unexplained-by": "not explained by"
-};
-const W = 980, H = 560;
-const ROW_Y = { axiom: 36, model: 214, gap: 418 };
-const BOX = {
-  axiom: { w: 200, h: 78 },
-  model: { w: 250, h: 108 },
-  gap: { w: 230, h: 88 }
-};
-
-function svgEl(name, attrs) {
-  const el = document.createElementNS("http://www.w3.org/2000/svg", name);
-  Object.entries(attrs || {}).forEach(([k, v]) => el.setAttribute(k, v));
-  return el;
-}
-
-function wrap(text, max) {
-  const words = String(text).split(/\s+/);
-  const lines = [];
-  let cur = "";
-  words.forEach(w => {
-    const next = cur ? cur + " " + w : w;
-    if (next.length > max && cur) { lines.push(cur); cur = w; }
-    else cur = next;
-  });
-  if (cur) lines.push(cur);
-  return lines;
-}
-
-function rowLayout(list, kind) {
-  const { w, h } = BOX[kind];
-  const n = list.length;
-  const gutter = (W - n * w) / (n + 1);
-  list.forEach((node, i) => {
-    node._x = gutter + i * (w + gutter);
-    node._y = ROW_Y[kind];
-    node._w = w;
-    node._h = h;
-  });
-}
-
-function layout(nodes) {
-  const byKind = { axiom: [], model: [], gap: [] };
-  nodes.forEach(n => byKind[n.kind].push(n));
-  rowLayout(byKind.axiom, "axiom");
-  rowLayout(byKind.model, "model");
-  rowLayout(byKind.gap, "gap");
-}
-
-function boxPoint(node, where) {
-  const cx = node._x + node._w / 2;
-  if (where === "bottom") return { x: cx, y: node._y + node._h };
-  if (where === "top") return { x: cx, y: node._y };
-  return { x: cx, y: node._y + node._h / 2 };
-}
-
-function addText(parent, x, y, text, cls) {
-  const t = svgEl("text", { x, y, class: cls || "" });
-  t.textContent = text;
-  parent.appendChild(t);
-  return t;
-}
-
-function drawNode(svg, node) {
-  const g = svgEl("g");
-  g.appendChild(svgEl("rect", {
-    class: "n " + node.kind,
-    x: node._x, y: node._y, width: node._w, height: node._h
-  }));
-  addText(g, node._x + 16, node._y + 22, KIND_LABEL[node.kind] || node.kind, "kind");
-  wrap(node.label, 28).forEach((line, i) => {
-    addText(g, node._x + 16, node._y + 44 + i * 16, line);
-  });
-  if (node.kind === "gap" && node.note) {
-    addText(g, node._x + 16, node._y + node._h - 14, wrap(node.note, 38)[0], "kind");
-  }
-  if (node.kind === "model" && node.assumptions) {
-    node.assumptions.slice(0, 2).forEach((a, i) => {
-      addText(g, node._x + 16, node._y + node._h - 28 + i * 12, wrap(a, 40)[0], "sub");
-    });
-  }
-  svg.appendChild(g);
-}
-
-function drawEdge(svg, a, b, type, label) {
-  const from = boxPoint(a, a._y < b._y ? "bottom" : "top");
-  const to = boxPoint(b, a._y < b._y ? "top" : "bottom");
-  const midY = (from.y + to.y) / 2;
-  svg.appendChild(svgEl("path", {
-    class: "e " + type,
-    d: `M ${from.x} ${from.y} C ${from.x} ${midY} ${to.x} ${midY} ${to.x} ${to.y}`,
-    "marker-end": "url(#arr)"
-  }));
-  if (label) {
-    addText(svg, (from.x + to.x) / 2 + 8, midY, label, "elab");
-  }
-}
-
-function draw(graph) {
-  const svg = document.getElementById("map");
-  svg.innerHTML = "";
-  const defs = svgEl("defs");
-  const marker = svgEl("marker", {
-    id: "arr", viewBox: "0 0 10 10", refX: "9", refY: "5",
-    markerWidth: "7", markerHeight: "7", orient: "auto-start-reverse"
-  });
-  marker.appendChild(svgEl("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: "#8b8a86" }));
-  defs.appendChild(marker);
-  svg.appendChild(defs);
-
-  const byId = Object.fromEntries(graph.nodes.map(n => [n.id, n]));
-  layout(graph.nodes);
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-
-  graph.edges.forEach(e => {
-    const label = e.type === "derives" ? "" : (EDGE_LABEL[e.type] || e.type);
-    drawEdge(svg, byId[e.src], byId[e.dst], e.type, label);
-  });
-  const derives = graph.edges.filter(e => e.type === "derives");
-  if (derives.length) {
-    addText(svg, W / 2 - 28, (ROW_Y.axiom + BOX.axiom.h + ROW_Y.model) / 2, EDGE_LABEL.derives, "elab");
-  }
-  graph.nodes.forEach(n => drawNode(svg, n));
-
-  const legend = document.getElementById("legend");
-  legend.innerHTML = "";
-  ["axiom", "model", "gap"].forEach(k => {
-    const span = document.createElement("span");
-    const sw = document.createElement("i");
-    sw.className = "sw " + k;
-    span.appendChild(sw);
-    span.appendChild(document.createTextNode(KIND_LABEL[k]));
-    legend.appendChild(span);
-  });
-  const extra = document.createElement("span");
-  extra.className = "edges";
-  const used = [...new Set(graph.edges.map(e => e.type))];
-  extra.textContent = used.map(t => EDGE_LABEL[t] || t).join(" · ");
-  legend.appendChild(extra);
-}
-
-fetch("graph.json")
-  .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-  .then(draw)
-  .catch(() => document.getElementById("err").classList.add("on"));
-</script>
+<a class="skip" href="#main">Skip to exploration</a>
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">✳</span> FIRST PRINCIPLES MAP</a><a href="think.html">Try your own question ↗</a></header>
+<div class="shell">
+<aside class="sidebar" aria-label="Questions to explore">
+<p class="eyebrow">START WITH A QUESTION</p>
+<nav id="paths" aria-label="Guided questions"></nav>
+<button id="browse" class="browse" type="button">Explore every idea →</button>
+<div class="method"><p class="eyebrow">HOW TO READ THIS MAP</p><p>Observation → explanation → next question.</p><p>Those are reading steps. The connections below say what the evidence actually supports.</p><a href="#methodology">About the evidence</a></div>
+</aside>
+<main id="main" tabindex="-1">
+<section class="intro"><p id="topic" class="eyebrow">A FIELD GUIDE TO WHAT WE KNOW</p><h1 id="title">Follow the evidence.</h1><p id="intro">Loading the questions…</p></section>
+<div id="error" role="alert" hidden>We couldn’t load the map. <button type="button" onclick="location.reload()">Try again</button><p>If you opened a downloaded copy, serve this folder over HTTP as described in the README.</p></div>
+<section id="explorer" hidden>
+<div class="toolbar"><label for="search">Find an idea<input type="search" id="search" placeholder="Search claims, limits, questions…"></label><label for="kind">Show<select id="kind"><option value="">Every kind</option></select></label></div>
+<p id="count" class="muted" role="status"></p>
+<div id="cards" class="cards" aria-label="Ideas in this view"></div>
+<p id="empty" hidden>No matching ideas. Try another phrase or choose “Every kind”.</p>
+<div id="takeaway" class="takeaway"></div>
+<section id="detail" class="detail" aria-label="Selected idea"></section>
+</section>
+<section id="methodology" class="methodology"><p class="eyebrow">A MAP IS AN ARGUMENT. CHECK ITS CONNECTIONS.</p><h2>Start with what can be established.</h2><p>Separate measurements from explanations. Name the assumptions. Ask where an explanation works, where it stops, and what could change your mind. A question is not evidence for its favorite answer.</p><div id="legend" class="legend"></div><p id="editorial" class="muted"></p><p class="muted">“Supports” does not mean “proves”. “Challenges” applies to the stated prediction, not necessarily an entire theory. Sources are attached to claims and connections. Prompts are invitations to reason, not settled scientific conclusions.</p></section>
+<footer>Curated starting points · <a href="graph.json">Read the map data</a> · <a href="https://github.com/sdcarlson/first-principles-map">Project on GitHub</a></footer>
+</main>
+</div>
 </body>
 </html>

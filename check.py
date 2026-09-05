@@ -1,229 +1,120 @@
 #!/usr/bin/env python3
+"""Validate map structure and citation integrity, not scientific truth."""
 import json
-import sys
+import re
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent
+KINDS = {'observation', 'model', 'mechanism', 'principle', 'open-question'}
+RELATIONS = {'supports', 'explains', 'leaves-open', 'challenges', 'alternative-to', 'informs'}
 
-
-class Fail(Exception):
+class Fail(ValueError):
     pass
 
+def require(condition, message):
+    if not condition:
+        raise Fail(message)
 
-def fail(msg):
-    raise Fail(msg)
+def text(value, context):
+    require(isinstance(value, str) and bool(value.strip()), f'{context}: needs nonempty text')
 
+def records(items, context):
+    require(isinstance(items, list) and bool(items), f'{context}: needs a nonempty list')
+    result = {}
+    for item in items:
+        require(isinstance(item, dict), f'{context}: expected an object')
+        id = item.get('id')
+        require(isinstance(id, str) and re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', id), f'{context}: invalid id')
+        require(id not in result, f'{context}: duplicate id {id}')
+        result[id] = item
+    return result
+
+def refs(values, sources, context):
+    require(isinstance(values, list) and bool(values), f'{context}: needs sources')
+    require(all(isinstance(v, str) and v in sources for v in values), f'{context}: unknown source')
+    require(len(values) == len(set(values)), f'{context}: duplicate source')
 
 def check(g):
-    nodes = {n["id"]: n for n in g["nodes"]}
-    kinds = {i: n["kind"] for i, n in nodes.items()}
-
-    for n in g["nodes"]:
-        if n["kind"] not in {"axiom", "model", "gap"}:
-            fail(f"bad kind {n['id']}")
-        if n["kind"] == "gap" and n.get("axiom_slot") != "UNKNOWN":
-            fail(f"gap {n['id']} must have axiom_slot UNKNOWN")
-        if n["kind"] == "model" and not n.get("assumptions"):
-            fail(f"model {n['id']} needs named assumptions")
-
-    for e in g["edges"]:
-        if e["src"] not in nodes or e["dst"] not in nodes:
-            fail(f"dangling {e}")
-        if e["type"] not in g["edge_types"]:
-            fail(f"bad type {e}")
-        if e["type"] == "unexplained-by":
-            if kinds[e["src"]] != "gap" or kinds[e["dst"]] != "model":
-                fail(f"unexplained-by must be gap -> model: {e}")
-        if e["type"] == "derives":
-            if kinds[e["src"]] not in {"axiom", "model"} or kinds[e["dst"]] != "model":
-                fail(f"derives must be axiom|model -> model: {e}")
-        if e["type"] == "constrains":
-            if kinds[e["src"]] != "gap" or kinds[e["dst"]] != "model":
-                fail(f"constrains must be gap -> model: {e}")
-
-    axiom_label = {
-        "conservation": "Stuff is conserved",
-        "causality": "Cause and effect",
-        "test-against-nature": "Test it in the real world",
-    }
-    for n in g["nodes"]:
-        if n["kind"] == "axiom":
-            if n["id"] not in axiom_label:
-                fail(f"new starting rule {n['id']}")
-            if n["label"] != axiom_label[n["id"]]:
-                fail(f"starting rule label drifted {n['id']}")
-
-    fields = {
-        "physics-we-can-write",
-        "cosmology",
-        "physics",
-        "chemistry",
-        "biology",
-        "thermodynamics",
-        "ai",
-        "artificial-intelligence",
-        "neuroscience",
-        "psychology",
-        "computer-science",
-    }
-    hit = fields & set(nodes)
-    if hit:
-        fail(f"field as box: {hit}")
-
-    need = {
-        "conservation": "axiom",
-        "causality": "axiom",
-        "test-against-nature": "axiom",
-        "baryons-plus-gravity": "model",
-        "quantum-mechanics": "model",
-        "observers-as-described": "model",
-        "dark-matter": "gap",
-        "measurement": "gap",
-        "consciousness": "gap",
-    }
-    for i, k in need.items():
-        if i not in nodes:
-            fail(f"missing {i}")
-        if nodes[i]["kind"] != k:
-            fail(f"{i} must be {k}")
-
-    attached = {e["src"] for e in g["edges"] if e["type"] == "unexplained-by"}
-    for n in g["nodes"]:
-        if n["kind"] == "gap" and n["id"] not in attached:
-            fail(f"gap {n['id']} must hang off a current story")
-
-    def has(src, typ, dst):
-        return any(e["src"] == src and e["type"] == typ and e["dst"] == dst for e in g["edges"])
-
-    if not has("dark-matter", "unexplained-by", "baryons-plus-gravity"):
-        fail("dark-matter must unexplained-by baryons-plus-gravity")
-    if not has("measurement", "unexplained-by", "quantum-mechanics"):
-        fail("measurement must unexplained-by quantum-mechanics")
-    if not has("consciousness", "unexplained-by", "observers-as-described"):
-        fail("consciousness must unexplained-by observers-as-described")
-    if has("consciousness", "unexplained-by", "baryons-plus-gravity"):
-        fail("consciousness must not hang off gravity")
-    if has("measurement", "constrains", "baryons-plus-gravity"):
-        fail("the blur leftover must not also hang off ordinary matter")
-
-    obs_assump = {a.lower() for a in nodes["observers-as-described"]["assumptions"]}
-    if obs_assump <= {"conservation", "causality", "test against nature", "test-against-nature"}:
-        fail("observers model is a junk drawer")
-
-    jargon = ("baryon", "born rule", "unitary", "axiom slot", "collapse postulate")
-    for n in g["nodes"]:
-        blob = " ".join(
-            [n["label"], n.get("note", ""), *n.get("assumptions", [])]
-        ).lower()
-        for w in jargon:
-            if w in blob:
-                fail(f"jargon in {n['id']}: {w}")
-        if "<" in blob:
-            fail(f"html in {n['id']}")
-
-
-def clone(g):
-    return json.loads(json.dumps(g))
-
-
-def must_fail(g, needle):
-    try:
-        check(g)
-    except Fail as e:
-        if needle.lower() not in str(e).lower():
-            fail(f"wrong fail ({e}), wanted {needle}")
-        return
-    fail(f"attack not caught: {needle}")
-
-
-def attacks(base):
-    g = clone(base)
-    g["nodes"].append(
-        {
-            "id": "hoffman",
-            "kind": "axiom",
-            "label": "Experience is more basic than space and time",
-        }
-    )
-    must_fail(g, "starting rule")
-
-    g = clone(base)
-    g["nodes"].append({"id": "thermodynamics", "kind": "axiom", "label": "Heat and energy flow"})
-    must_fail(g, "starting rule")
-
-    g = clone(base)
-    g["nodes"].append({"id": "physics", "kind": "axiom", "label": "Physics"})
-    must_fail(g, "starting rule")
-
-    g = clone(base)
-    g["nodes"].append(
-        {"id": "symmetry", "kind": "axiom", "label": "Nature looks the same from every angle"}
-    )
-    must_fail(g, "starting rule")
-
-    g = clone(base)
-    next(n for n in g["nodes"] if n["id"] == "conservation")["label"] = "Thermodynamics"
-    must_fail(g, "label")
-
-    g = clone(base)
-    g["nodes"].append(
-        {
-            "id": "entropy-arrow",
-            "kind": "gap",
-            "label": "Why time has an arrow",
-            "axiom_slot": "UNKNOWN",
-        }
-    )
-    must_fail(g, "hang off")
-
-    g = clone(base)
-    g["nodes"].append(
-        {"id": "chemistry", "kind": "model", "label": "Chemistry", "assumptions": ["atoms stick"]}
-    )
-    must_fail(g, "field")
-
-    g = clone(base)
-    g["nodes"].append(
-        {
-            "id": "ai",
-            "kind": "model",
-            "label": "Artificial intelligence",
-            "assumptions": ["computers can think"],
-        }
-    )
-    must_fail(g, "field")
-
-    g = clone(base)
-    next(n for n in g["nodes"] if n["id"] == "dark-matter")["label"] = "<img src=x>"
-    must_fail(g, "html")
-
-
-def pages():
-    think = (ROOT / "think.html").read_text()
-    if ".catch(" not in think:
-        fail("think fetch must fail out loud")
-    if "esc(t)" not in think:
-        fail("think chips must escape labels")
-    if "Example:" not in think:
-        fail("think needs one worked example")
-    index = (ROOT / "index.html").read_text()
-    if "t.textContent = text" not in index:
-        fail("map must put labels in textContent")
-    if "graph.edge_types" in index:
-        fail("legend must list edges that exist, not every type name")
-
+    require(isinstance(g, dict), 'map must be an object')
+    require(g.get('version') == 3, 'expected schema version 3')
+    require(set(g.get('kinds', {})) == KINDS, 'unknown or missing kinds')
+    require(set(g.get('edge_types', {})) == RELATIONS, 'unknown or missing relations')
+    for key in ('reviewed', 'editorial_note'):
+        text(g.get(key), key)
+    sources = records(g.get('sources'), 'sources')
+    nodes = records(g.get('nodes'), 'nodes')
+    paths = records(g.get('paths'), 'paths')
+    for id, s in sources.items():
+        for key in ('author', 'title', 'url', 'type', 'scope'):
+            text(s.get(key), f'source {id} {key}')
+        url = urlparse(s['url'])
+        require(url.scheme == 'https' and bool(url.netloc) and not url.username and not url.password, f'source {id}: unsafe URL')
+        require(s['type'] in {'research', 'review', 'institution'}, f'source {id}: unknown type')
+    for id, n in nodes.items():
+        require(n.get('kind') in KINDS, f'node {id}: unknown kind')
+        for key in ('domain', 'label', 'claim', 'scope', 'limits', 'question'):
+            text(n.get(key), f'node {id} {key}')
+        citations = n.get('sources')
+        require(isinstance(citations, list) and bool(citations), f'node {id}: needs sources')
+        for ref in citations:
+            require(isinstance(ref, dict), f'node {id}: citation must be an object')
+            text(ref.get('supports'), f'node {id} citation scope')
+        refs([ref.get('id') for ref in citations], sources, f'node {id}')
+        if n['kind'] == 'model':
+            assumptions = n.get('assumptions')
+            require(isinstance(assumptions, list) and bool(assumptions), f'model {id}: needs assumptions')
+            for a in assumptions:
+                text(a, f'model {id} assumption')
+    edges = g.get('edges')
+    require(isinstance(edges, list) and bool(edges), 'needs edges')
+    seen, connected = set(), set()
+    for e in edges:
+        require(isinstance(e, dict), 'edge must be an object')
+        a, b, kind = e.get('src'), e.get('dst'), e.get('type')
+        require(isinstance(a, str) and isinstance(b, str) and a in nodes and b in nodes, 'dangling edge')
+        require(a != b, 'self edge')
+        require(isinstance(kind, str) and kind in RELATIONS, 'unknown edge relation')
+        key = (a, kind, b)
+        require(key not in seen, 'duplicate edge')
+        seen.add(key); connected.update((a, b))
+        text(e.get('explanation'), f'edge {key} explanation')
+        refs(e.get('sources'), sources, f'edge {key}')
+        if kind == 'leaves-open':
+            require(nodes[b]['kind'] == 'open-question' and nodes[a]['kind'] != 'open-question', 'leaves-open must point from an explanation to an open question')
+        if kind in {'supports', 'challenges'}:
+            require(nodes[a]['kind'] == 'observation' and nodes[b]['kind'] in {'model','mechanism','principle'}, 'evidence relation needs an observation and an explanation')
+        if kind == 'alternative-to':
+            require(nodes[a]['kind'] == nodes[b]['kind'] == 'model', 'alternatives must be models')
+    require(connected == set(nodes), 'unconnected node')
+    covered = set()
+    for id, p in paths.items():
+        for key in ('title', 'subtitle', 'intro', 'takeaway'):
+            text(p.get(key), f'path {id} {key}')
+        ids = p.get('nodes')
+        require(isinstance(ids, list) and bool(ids), f'path {id}: empty path')
+        require(all(isinstance(i, str) and i in nodes for i in ids), f'path {id}: unknown node')
+        require(len(set(ids)) == len(ids), f'path {id}: duplicate node')
+        reached = {ids[0]}
+        while True:
+            expanded = reached | {e['dst'] for e in edges if e['src'] in reached and e['dst'] in ids} | {e['src'] for e in edges if e['dst'] in reached and e['src'] in ids}
+            if reached == expanded:
+                break
+            reached = expanded
+        require(reached == set(ids), f'path {id}: disconnected reading path')
+        covered.update(ids)
+    require(covered == set(nodes), 'nodes missing from reading paths')
 
 def main():
-    g = json.loads((ROOT / "graph.json").read_text())
     try:
+        g = json.loads((ROOT / 'graph.json').read_text(encoding='utf-8'))
         check(g)
-        attacks(g)
-        pages()
-    except Fail as e:
-        print("FAIL:", e)
-        sys.exit(1)
-    print("ok", len(g["nodes"]), "nodes", len(g["edges"]), "edges")
+    except (Fail, json.JSONDecodeError) as error:
+        print('FAIL:', error)
+        return 1
+    print(f"OK: {len(g['nodes'])} ideas, {len(g['edges'])} connections, {len(g['paths'])} paths, {len(g['sources'])} sources")
+    print('Structure and references checked. Scientific accuracy requires editorial review.')
+    return 0
 
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    raise SystemExit(main())

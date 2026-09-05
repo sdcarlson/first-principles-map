@@ -1,139 +1,686 @@
 {
-  "version": 2,
-  "legend": {
-    "axiom": "Starting rule — still true if the story below is wrong.",
-    "model": "Current story — today's explanation, with guesses written on it. You can replace it.",
-    "gap": "Still unexplained — what that story cannot explain. A name is not a new starting rule."
+  "version": 3,
+  "reviewed": "2026-09-05",
+  "editorial_note": "A curated learning map, not an exhaustive literature review. Questions and takeaways are editorial prompts; citations support the stated claims, not every possible interpretation.",
+  "kinds": {
+    "observation": "A measured result, interpreted with stated methods.",
+    "model": "An explanatory framework with assumptions and a scope.",
+    "mechanism": "A process that accounts for how something happens.",
+    "principle": "A constraint with explicit conditions of application.",
+    "open-question": "An unresolved question, not evidence for a preferred answer."
   },
-  "edge_types": [
-    "derives",
-    "unexplained-by"
+  "edge_types": {
+    "supports": "provides evidence for",
+    "explains": "describes a mechanism for",
+    "leaves-open": "does not settle",
+    "challenges": "puts a prediction under pressure",
+    "alternative-to": "offers a competing account to",
+    "informs": "provides part of the interpretation of"
+  },
+  "sources": [
+    {
+      "id": "bell",
+      "author": "Hensen et al. (2015)",
+      "title": "Loophole-free Bell test",
+      "url": "https://arxiv.org/abs/1508.05949",
+      "type": "research",
+      "scope": "Experimental correlations and the assumptions tested by a Bell inequality."
+    },
+    {
+      "id": "decoherence",
+      "author": "Schlosshauer (2004)",
+      "title": "Decoherence and the measurement problem",
+      "url": "https://arxiv.org/abs/quant-ph/0312059",
+      "type": "review",
+      "scope": "Environment-induced decoherence and its interpretive limits."
+    },
+    {
+      "id": "clocks",
+      "author": "NIST / Chou et al. (2010)",
+      "title": "Relativity measured with optical clocks",
+      "url": "https://www.nist.gov/news-events/news/2010/09/nist-pair-aluminum-atomic-clocks-reveal-einsteins-relativity-personal-scale",
+      "type": "institution",
+      "scope": "Clock-rate differences over 33 centimetres of height."
+    },
+    {
+      "id": "ligo",
+      "author": "LIGO and Virgo (2016)",
+      "title": "Observation of gravitational waves from a binary black hole merger",
+      "url": "https://dcc.ligo.org/P150914/public",
+      "type": "research",
+      "scope": "GW150914 and comparison with general-relativistic waveforms."
+    },
+    {
+      "id": "bullet",
+      "author": "Clowe et al. / Chandra (2006)",
+      "title": "The Bullet Cluster: gas and gravitational lensing",
+      "url": "https://chandra.harvard.edu/press/06_releases/press_082106.html",
+      "type": "institution",
+      "scope": "Separation of hot gas from the mass distribution inferred through lensing."
+    },
+    {
+      "id": "landauer",
+      "author": "Bérut et al. (2012)",
+      "title": "Experimental verification of Landauer’s principle",
+      "url": "https://www.nature.com/articles/nature10872",
+      "type": "research",
+      "scope": "A controlled physical bit reset and its heat cost."
+    },
+    {
+      "id": "lenski",
+      "author": "Blount, Borland & Lenski (2008)",
+      "title": "Historical contingency and an evolutionary innovation",
+      "url": "https://doi.org/10.1073/pnas.0803151105",
+      "type": "research",
+      "scope": "Citrate use and replay experiments in a bacterial population."
+    },
+    {
+      "id": "cogitate",
+      "author": "COGITATE Consortium et al. (2025)",
+      "title": "Adversarial testing of two theories of consciousness",
+      "url": "https://www.nature.com/articles/s41586-025-08888-1",
+      "type": "research",
+      "scope": "Preregistered tests of predictions from IIT and GNWT."
+    },
+    {
+      "id": "workspace",
+      "author": "Dehaene & Changeux (2011)",
+      "title": "Experimental and theoretical approaches to conscious processing",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21521609/",
+      "type": "review",
+      "scope": "Conscious access and the global neuronal workspace model."
+    },
+    {
+      "id": "integrated",
+      "author": "Oizumi, Albantakis & Tononi (2014)",
+      "title": "Integrated Information Theory 3.0",
+      "url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003588",
+      "type": "research",
+      "scope": "The theoretical proposal linking experience to intrinsic causal structure."
+    }
   ],
   "nodes": [
     {
-      "id": "conservation",
-      "kind": "axiom",
-      "label": "Stuff is conserved"
-    },
-    {
-      "id": "causality",
-      "kind": "axiom",
-      "label": "Cause and effect"
-    },
-    {
-      "id": "test-against-nature",
-      "kind": "axiom",
-      "label": "Test it in the real world"
-    },
-    {
-      "id": "baryons-plus-gravity",
-      "kind": "model",
-      "label": "Ordinary matter plus gravity",
-      "assumptions": [
-        "only the matter we can see",
-        "gravity as we write it today"
+      "id": "bell-correlations",
+      "kind": "observation",
+      "domain": "Quantum physics",
+      "label": "Entangled particles violate a Bell inequality",
+      "claim": "A 2015 experiment measured spin correlations incompatible with a Bell inequality, closing the major detection and locality loopholes.",
+      "scope": "Entangled electron spins separated by 1.3 km.",
+      "limits": "The inference still relies on assumptions, including independence of measurement settings.",
+      "question": "Which assumption would a competing explanation have to give up?",
+      "sources": [
+        {
+          "id": "bell",
+          "supports": "Experimental result and loophole controls."
+        }
       ]
     },
     {
       "id": "quantum-mechanics",
       "kind": "model",
-      "label": "How the very small works",
+      "domain": "Quantum physics",
+      "label": "Quantum states predict outcome probabilities",
+      "claim": "Quantum theory predicts correlations using states, measurement operators and a probability rule; entangled states need not factor into independent parts.",
+      "scope": "Specified preparations and measurements.",
+      "limits": "Successful probabilities do not uniquely select an interpretation of the quantum state.",
+      "question": "What does a successful prediction tell us about what exists?",
+      "sources": [
+        {
+          "id": "bell",
+          "supports": "Agreement of measured correlations with quantum predictions."
+        },
+        {
+          "id": "decoherence",
+          "supports": "Formalism and interpretation are distinct."
+        }
+      ],
       "assumptions": [
-        "a blur of possibilities until we look",
-        "then a chance rule picks one outcome"
+        "The preparation and measurement are adequately modelled."
       ]
     },
     {
-      "id": "observers-as-described",
+      "id": "decoherence",
+      "kind": "mechanism",
+      "domain": "Quantum physics",
+      "label": "The environment suppresses observable interference",
+      "claim": "Interactions entangle a system with its environment, reducing interference between alternatives in its reduced description.",
+      "scope": "A specified system–environment split.",
+      "limits": "Decoherence alone does not select one unique outcome in every interpretation.",
+      "question": "Is losing access to interference the same thing as selecting an outcome?",
+      "sources": [
+        {
+          "id": "decoherence",
+          "supports": "Mechanism and limits of decoherence."
+        }
+      ]
+    },
+    {
+      "id": "measurement",
+      "kind": "open-question",
+      "domain": "Quantum physics",
+      "label": "What accounts for a definite measurement outcome?",
+      "claim": "Interpretations disagree about how definite records relate to quantum dynamics.",
+      "scope": "Foundations of quantum measurement.",
+      "limits": "This is not evidence that a conscious mind causes collapse.",
+      "question": "What observation could distinguish interpretations that currently predict the same results?",
+      "sources": [
+        {
+          "id": "decoherence",
+          "supports": "The measurement problem and competing interpretations."
+        }
+      ]
+    },
+    {
+      "id": "clock-shift",
+      "kind": "observation",
+      "domain": "Relativity",
+      "label": "Higher clocks tick at a different rate",
+      "claim": "NIST measured a clock-rate difference with optical clocks at heights differing by 33 centimetres, consistent with gravitational time dilation.",
+      "scope": "Weak gravity near Earth.",
+      "limits": "This test probes a limited regime, not every prediction of relativity.",
+      "question": "What must a theory of time explain if two good clocks disagree?",
+      "sources": [
+        {
+          "id": "clocks",
+          "supports": "Measured height-dependent clock rates."
+        }
+      ]
+    },
+    {
+      "id": "general-relativity",
       "kind": "model",
-      "label": "Brains fully explain experience",
+      "domain": "Relativity",
+      "label": "Gravity is described by spacetime geometry",
+      "claim": "General relativity relates spacetime curvature to matter and energy and predicts clock shifts and gravitational waves.",
+      "scope": "A classical description of gravitation.",
+      "limits": "The tests here do not establish a quantum description of gravity.",
+      "question": "How far can a theory be trusted beyond the conditions tested?",
+      "sources": [
+        {
+          "id": "clocks",
+          "supports": "Gravitational time dilation."
+        },
+        {
+          "id": "ligo",
+          "supports": "Gravitational-wave predictions."
+        }
+      ],
       "assumptions": [
-        "a person is only what physics lists",
-        "feeling is the same as a brain state"
+        "Spacetime can be treated as a smooth classical geometry."
+      ]
+    },
+    {
+      "id": "gravitational-waves",
+      "kind": "observation",
+      "domain": "Relativity",
+      "label": "Two detectors measured a merging-black-hole signal",
+      "claim": "GW150914 was recorded in 2015; its waveform matched a binary black hole merger predicted by general relativity.",
+      "scope": "A transient strain signal at the two LIGO detectors.",
+      "limits": "The interpretation uses waveform models and detector-noise analysis.",
+      "question": "Why is agreement between independent detectors valuable?",
+      "sources": [
+        {
+          "id": "ligo",
+          "supports": "Detection and physical interpretation of GW150914."
+        }
+      ]
+    },
+    {
+      "id": "lensing-offset",
+      "kind": "observation",
+      "domain": "Cosmology",
+      "label": "Hot gas and inferred mass separate in a cluster collision",
+      "claim": "In the Bullet Cluster, X-ray-emitting gas is displaced from the main mass peaks inferred through gravitational lensing.",
+      "scope": "A merging galaxy-cluster system.",
+      "limits": "Lensing reconstructs mass using a gravitational model; it does not photograph a dark particle.",
+      "question": "How can two measurements of the same object test different explanations?",
+      "sources": [
+        {
+          "id": "bullet",
+          "supports": "X-ray and lensing comparison."
+        }
       ]
     },
     {
       "id": "dark-matter",
-      "kind": "gap",
-      "label": "Dark matter",
-      "axiom_slot": "UNKNOWN",
-      "note": "Not a new particle."
+      "kind": "model",
+      "domain": "Cosmology",
+      "label": "Additional weakly collisional matter explains the offset",
+      "claim": "A dark-matter component can pass through the collision while gas slows down, accounting for the separation.",
+      "scope": "Cluster dynamics interpreted with standard gravity.",
+      "limits": "Evidence for additional gravitating matter does not identify its microscopic nature.",
+      "question": "What would count as identifying the substance, beyond inferring its gravity?",
+      "sources": [
+        {
+          "id": "bullet",
+          "supports": "Dark-matter interpretation of the separation."
+        }
+      ],
+      "assumptions": [
+        "The gravitational model and mass reconstruction are adequate."
+      ]
     },
     {
-      "id": "measurement",
-      "kind": "gap",
-      "label": "The blur becoming a fact",
-      "axiom_slot": "UNKNOWN",
-      "note": "Not a new jump rule."
+      "id": "dark-identity",
+      "kind": "open-question",
+      "domain": "Cosmology",
+      "label": "What is the inferred dark component?",
+      "claim": "The cluster evidence does not specify a particle species or microscopic theory.",
+      "scope": "The inference made by this cluster study.",
+      "limits": "An alternative must also explain the measured lensing and gas distribution.",
+      "question": "What additional measurement would separate candidate explanations?",
+      "sources": [
+        {
+          "id": "bullet",
+          "supports": "The observation establishes no particle identity."
+        }
+      ]
+    },
+    {
+      "id": "bit-reset",
+      "kind": "observation",
+      "domain": "Information & heat",
+      "label": "Resetting a physical bit produces measurable heat",
+      "claim": "A colloidal-particle experiment tested the heat cost of erasing one bit and approached the Landauer limit in slow resets.",
+      "scope": "A controlled two-state memory in a thermal bath.",
+      "limits": "This is not a measurement of the energy used by a modern processor.",
+      "question": "Which details make a physical experiment a test of an abstract bit?",
+      "sources": [
+        {
+          "id": "landauer",
+          "supports": "Experimental reset protocol and heat measurement."
+        }
+      ]
+    },
+    {
+      "id": "landauer-bound",
+      "kind": "principle",
+      "domain": "Information & heat",
+      "label": "Erasing an unknown bit has a thermodynamic cost",
+      "claim": "Resetting an unbiased bit in an ideal cyclic memory dissipates at least k_B T ln(2) of heat on average in the reversible limit.",
+      "scope": "Isothermal reset with a thermal bath at temperature T.",
+      "limits": "Not a universal energy charge for every computation; correlations and biased memories change the accounting.",
+      "question": "Why does forgetting differ from moving or copying information?",
+      "sources": [
+        {
+          "id": "landauer",
+          "supports": "Reset bound and reversible limit."
+        }
+      ]
+    },
+    {
+      "id": "computing-cost",
+      "kind": "open-question",
+      "domain": "Information & heat",
+      "label": "How close can a real memory get to that bound?",
+      "claim": "The ideal reset limit leaves engineering questions about speed, reliability and the rest of the device.",
+      "scope": "Applying a bit-reset result to useful hardware.",
+      "limits": "This map offers no performance forecast for current chips.",
+      "question": "What system boundary would make an energy-per-operation comparison honest?",
+      "sources": [
+        {
+          "id": "landauer",
+          "supports": "Slow-reset result motivates, rather than resolves, the engineering question."
+        }
+      ]
+    },
+    {
+      "id": "citrate",
+      "kind": "observation",
+      "domain": "Evolution",
+      "label": "A bacterial population evolved a new way to use citrate",
+      "claim": "One long-term E. coli population evolved aerobic citrate use; replay experiments investigated the role of its earlier history.",
+      "scope": "A particular population and laboratory environment.",
+      "limits": "One innovation is not a replay of all evolutionary history.",
+      "question": "How can frozen ancestors turn a historical claim into an experiment?",
+      "sources": [
+        {
+          "id": "lenski",
+          "supports": "Observed innovation and replay experiments."
+        }
+      ]
+    },
+    {
+      "id": "contingency",
+      "kind": "mechanism",
+      "domain": "Evolution",
+      "label": "Earlier changes can alter what becomes accessible",
+      "claim": "Genetic history can affect the probability that a later innovation evolves.",
+      "scope": "The citrate-use lineage studied here.",
+      "limits": "Contingency does not mean every outcome is equally likely.",
+      "question": "What difference would you expect between replaying early and late ancestors?",
+      "sources": [
+        {
+          "id": "lenski",
+          "supports": "Evidence for historical contingency."
+        }
+      ]
+    },
+    {
+      "id": "evolution-replay",
+      "kind": "open-question",
+      "domain": "Evolution",
+      "label": "How repeatable is evolution?",
+      "claim": "The degree of repeatability depends on the trait, starting population and environment.",
+      "scope": "Generalizing from a specific laboratory result.",
+      "limits": "The experiment cannot establish that every major innovation was inevitable or impossible to repeat.",
+      "question": "What would you hold constant in a fair replay?",
+      "sources": [
+        {
+          "id": "lenski",
+          "supports": "The study provides a bounded example, not a universal answer."
+        }
+      ]
+    },
+    {
+      "id": "consciousness-test",
+      "kind": "observation",
+      "domain": "Consciousness",
+      "label": "Competing theories faced an agreed experimental test",
+      "claim": "A 2025 adversarial collaboration tested preregistered predictions from two consciousness theories and challenged key predictions of both.",
+      "scope": "Visual experience studied using several brain-measurement methods.",
+      "limits": "This was not a decisive explanation of subjective experience.",
+      "question": "Why agree on a prediction before seeing the measurements?",
+      "sources": [
+        {
+          "id": "cogitate",
+          "supports": "Study design and theory-specific challenges."
+        }
+      ]
+    },
+    {
+      "id": "gnwt",
+      "kind": "model",
+      "domain": "Consciousness",
+      "label": "Global neuronal workspace theory",
+      "claim": "GNWT connects conscious access with information becoming broadly available across brain systems.",
+      "scope": "A theory with experimentally testable neural predictions.",
+      "limits": "The tested predictions faced challenges; reportability is not the whole question of experience.",
+      "question": "Which result would challenge the proposed mechanism?",
+      "sources": [
+        {
+          "id": "workspace",
+          "supports": "The model of global availability and conscious access."
+        },
+        {
+          "id": "cogitate",
+          "supports": "GNWT predictions tested in the study."
+        }
+      ],
+      "assumptions": [
+        "The selected neural signatures adequately operationalize the theory."
+      ]
+    },
+    {
+      "id": "iit",
+      "kind": "model",
+      "domain": "Consciousness",
+      "label": "Integrated information theory",
+      "claim": "IIT links experience to intrinsic causal structure; the study tested selected neural predictions motivated by the theory.",
+      "scope": "An active theoretical proposal.",
+      "limits": "The experiment did not directly measure the full intrinsic causal structure of a brain.",
+      "question": "How much of a theory is tested when only a proxy is measurable?",
+      "sources": [
+        {
+          "id": "integrated",
+          "supports": "The theoretical account of intrinsic causal structure."
+        },
+        {
+          "id": "cogitate",
+          "supports": "IIT predictions and experimental operationalization."
+        }
+      ],
+      "assumptions": [
+        "The selected neural signatures adequately operationalize the theory."
+      ]
     },
     {
       "id": "consciousness",
-      "kind": "gap",
-      "label": "What it feels like to be you",
-      "axiom_slot": "UNKNOWN",
-      "note": "A name is not a starting rule."
+      "kind": "open-question",
+      "domain": "Consciousness",
+      "label": "What would distinguish an explanation of experience?",
+      "claim": "A useful next test needs predictions that separate competing accounts.",
+      "scope": "Comparing scientific theories of consciousness.",
+      "limits": "A neural correlation alone does not settle every philosophical question.",
+      "question": "What could each theory predict incorrectly?",
+      "sources": [
+        {
+          "id": "cogitate",
+          "supports": "Motivation for discriminating, preregistered tests."
+        }
+      ]
     }
   ],
   "edges": [
     {
-      "src": "conservation",
-      "type": "derives",
-      "dst": "baryons-plus-gravity"
+      "src": "bell-correlations",
+      "type": "supports",
+      "dst": "quantum-mechanics",
+      "explanation": "Measured correlations agree with quantum predictions.",
+      "sources": [
+        "bell"
+      ]
     },
     {
-      "src": "causality",
-      "type": "derives",
-      "dst": "baryons-plus-gravity"
+      "src": "quantum-mechanics",
+      "type": "explains",
+      "dst": "decoherence",
+      "explanation": "Quantum interactions describe entanglement with an environment.",
+      "sources": [
+        "decoherence"
+      ]
     },
     {
-      "src": "test-against-nature",
-      "type": "derives",
-      "dst": "baryons-plus-gravity"
+      "src": "decoherence",
+      "type": "leaves-open",
+      "dst": "measurement",
+      "explanation": "Suppression of interference alone does not pick a unique outcome.",
+      "sources": [
+        "decoherence"
+      ]
     },
     {
-      "src": "conservation",
-      "type": "derives",
-      "dst": "quantum-mechanics"
+      "src": "clock-shift",
+      "type": "supports",
+      "dst": "general-relativity",
+      "explanation": "The measured clock shift agrees with the gravitational prediction.",
+      "sources": [
+        "clocks"
+      ]
     },
     {
-      "src": "causality",
-      "type": "derives",
-      "dst": "quantum-mechanics"
+      "src": "gravitational-waves",
+      "type": "supports",
+      "dst": "general-relativity",
+      "explanation": "The observed waveform matches the merger prediction.",
+      "sources": [
+        "ligo"
+      ]
     },
     {
-      "src": "test-against-nature",
-      "type": "derives",
-      "dst": "quantum-mechanics"
+      "src": "general-relativity",
+      "type": "informs",
+      "dst": "lensing-offset",
+      "explanation": "Interpreting lensing as mass requires a theory of gravity.",
+      "sources": [
+        "bullet"
+      ]
     },
     {
-      "src": "conservation",
-      "type": "derives",
-      "dst": "observers-as-described"
-    },
-    {
-      "src": "causality",
-      "type": "derives",
-      "dst": "observers-as-described"
-    },
-    {
-      "src": "test-against-nature",
-      "type": "derives",
-      "dst": "observers-as-described"
+      "src": "lensing-offset",
+      "type": "supports",
+      "dst": "dark-matter",
+      "explanation": "The gas–mass separation favors an additional weakly collisional component under standard gravity.",
+      "sources": [
+        "bullet"
+      ]
     },
     {
       "src": "dark-matter",
-      "type": "unexplained-by",
-      "dst": "baryons-plus-gravity"
+      "type": "leaves-open",
+      "dst": "dark-identity",
+      "explanation": "A gravitational explanation does not determine a microscopic identity.",
+      "sources": [
+        "bullet"
+      ]
     },
     {
-      "src": "measurement",
-      "type": "unexplained-by",
-      "dst": "quantum-mechanics"
+      "src": "bit-reset",
+      "type": "supports",
+      "dst": "landauer-bound",
+      "explanation": "Controlled resets approach the theoretical heat bound.",
+      "sources": [
+        "landauer"
+      ]
     },
     {
-      "src": "consciousness",
-      "type": "unexplained-by",
-      "dst": "observers-as-described"
+      "src": "landauer-bound",
+      "type": "leaves-open",
+      "dst": "computing-cost",
+      "explanation": "A limiting reset cost is insufficient to specify a practical device.",
+      "sources": [
+        "landauer"
+      ]
+    },
+    {
+      "src": "citrate",
+      "type": "supports",
+      "dst": "contingency",
+      "explanation": "Replay experiments probe whether earlier changes affect innovation.",
+      "sources": [
+        "lenski"
+      ]
+    },
+    {
+      "src": "contingency",
+      "type": "leaves-open",
+      "dst": "evolution-replay",
+      "explanation": "A contingent laboratory outcome does not determine repeatability everywhere.",
+      "sources": [
+        "lenski"
+      ]
+    },
+    {
+      "src": "consciousness-test",
+      "type": "challenges",
+      "dst": "gnwt",
+      "explanation": "Some preregistered GNWT predictions were not met.",
+      "sources": [
+        "cogitate"
+      ]
+    },
+    {
+      "src": "consciousness-test",
+      "type": "challenges",
+      "dst": "iit",
+      "explanation": "Some preregistered IIT predictions were not met.",
+      "sources": [
+        "cogitate"
+      ]
+    },
+    {
+      "src": "gnwt",
+      "type": "alternative-to",
+      "dst": "iit",
+      "explanation": "These accounts motivate different experimental predictions.",
+      "sources": [
+        "cogitate"
+      ]
+    },
+    {
+      "src": "gnwt",
+      "type": "leaves-open",
+      "dst": "consciousness",
+      "explanation": "The study leaves further discriminating tests necessary.",
+      "sources": [
+        "cogitate"
+      ]
+    },
+    {
+      "src": "iit",
+      "type": "leaves-open",
+      "dst": "consciousness",
+      "explanation": "The study leaves further discriminating tests necessary.",
+      "sources": [
+        "cogitate"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "quantum",
+      "title": "Does measurement require a mind?",
+      "subtitle": "Quantum physics",
+      "intro": "Start with an experiment, then separate successful predictions from interpretations.",
+      "nodes": [
+        "bell-correlations",
+        "quantum-mechanics",
+        "decoherence",
+        "measurement"
+      ],
+      "takeaway": "Nothing in this path establishes that consciousness causes quantum collapse."
+    },
+    {
+      "id": "relativity",
+      "title": "Can two good clocks disagree?",
+      "subtitle": "Relativity",
+      "intro": "Test a theory of time on a laboratory bench, then follow it to a black hole merger.",
+      "nodes": [
+        "clock-shift",
+        "general-relativity",
+        "gravitational-waves"
+      ],
+      "takeaway": "Confidence grows through different tests; it remains tied to the regimes actually tested."
+    },
+    {
+      "id": "cosmos",
+      "title": "How do we infer matter we cannot see?",
+      "subtitle": "Cosmology",
+      "intro": "Separate the light we record, the mass we infer and the substance we have yet to identify.",
+      "nodes": [
+        "lensing-offset",
+        "dark-matter",
+        "dark-identity"
+      ],
+      "takeaway": "A strong inference about gravity can coexist with uncertainty about the underlying substance."
+    },
+    {
+      "id": "information",
+      "title": "Does forgetting have a physical cost?",
+      "subtitle": "Information & heat",
+      "intro": "Follow an abstract bit into a physical memory and ask where its heat goes.",
+      "nodes": [
+        "bit-reset",
+        "landauer-bound",
+        "computing-cost"
+      ],
+      "takeaway": "A fundamental limit needs a stated process and system boundary before it becomes useful."
+    },
+    {
+      "id": "life",
+      "title": "Could evolution have turned out differently?",
+      "subtitle": "Evolution",
+      "intro": "Use a replayable experiment to investigate a question about history.",
+      "nodes": [
+        "citrate",
+        "contingency",
+        "evolution-replay"
+      ],
+      "takeaway": "Known mechanisms can permit several histories. Explaining an outcome is not the same as predicting it."
+    },
+    {
+      "id": "mind",
+      "title": "What would test a theory of consciousness?",
+      "subtitle": "Consciousness",
+      "intro": "Look for a prediction that competing theories cannot both accommodate.",
+      "nodes": [
+        "consciousness-test",
+        "gnwt",
+        "iit",
+        "consciousness"
+      ],
+      "takeaway": "Distinguish a theory, the measurable prediction chosen to test it and the result of that test."
     }
   ]
 }
