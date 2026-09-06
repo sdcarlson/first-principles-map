@@ -111,9 +111,55 @@ class StartTests(unittest.TestCase):
         self.assertIn('assumptions', html.lower())
         self.assertIn('stop_condition', html.lower())
         self.assertIn('finite Fourier', html)
-        self.assertIn('Do not repeat the already-completed review', html)
+        self.assertIn('reference example', html.lower())
+        self.assertIn('already complete', html.lower())
+        self.assertIn('vacuum-independent/review.md', html)
+        self.assertNotIn('decide whether to authorize a separately scoped flat-spacetime', html.lower())
         self.assertNotIn('Review the two analytic normalization identities against the attached numerical output without asking the previous author', html)
         self.assertEqual((PHYSICS / 'brief.json').read_bytes(), brief_before)
+        historical = (PHYSICS / 'C' / 'handoff.md').read_text(encoding='utf-8')
+        self.assertIn('Review the two analytic normalization identities against the attached numerical output without asking the previous author', historical)
+        self.assertTrue((dest / 'USE.md').is_file())
+        self.assertTrue((dest / 'submission-template.json').is_file())
+        use = (dest / 'USE.md').read_text(encoding='utf-8')
+        self.assertIn('WHOLE folder', use)
+        self.assertIn('not just the copied prompt', use.lower())
+        self.assertIn('submission.json', use)
+        self.assertIn('python research/handoff.py --store PATH_TO_OWNER_STORE submit', use)
+        self.assertNotIn('python toolkit/handoff.py --store store submit', use)
+        self.assertIn('does not include toolkit', use)
+        self.assertNotIn('This generated package is a public-reference demonstration', use)
+        self.assertNotIn('This folder is the fixed public-reference demonstration', use)
+        self.assertIn('not a public-reference demonstration', use)
+        self.assertIn('stale', use.lower())
+        self.assertIn('fixture', use.lower())
+        self.assertIn('cannot choose', use.lower())
+        self.assertIn('Do not execute submitted code', use)
+        self.assertIn('SOFTWARE-MECHANICS', use)
+        self.assertIn('must refuse this physics target', use)
+        cmd = 'python research/handoff.py --store PATH_TO_OWNER_STORE submit RETURN_FOLDER/submission.json'
+        self.assertIn('\n\n' + cmd + '\n\n', use)
+        template = h.read_json(dest / 'submission-template.json')
+        self.assertEqual(template['base_snapshot'], c['base_snapshot'])
+        self.assertEqual(template['target'], h.read_json(PHYSICS / 'index.json')['target'])
+        self.assertEqual(template['scope'], h.read_json(dest / 'C' / 'target.json')['scope'])
+        self.assertEqual(sum(1 for item in template['evidence'] if item['role'] == 'result'), 1)
+        self.assertNotIn('sha256', template['evidence'][0])
+        self.assertIn('local-python-reproduction', html)
+        self.assertIn('fresh-astra-physics-review', html)
+        self.assertIn('<details>', html)
+        self.assertIn('Optional experiment conditions A and B', html)
+        ab_block = html.split('Optional experiment conditions A and B', 1)[1]
+        self.assertIn('A/assignment.json', ab_block)
+        self.assertIn('B/assignment.json', ab_block)
+        self.assertNotIn('Original evidence result.json', html)
+        self.assertIn('Numerical prerequisite passed the recorded local checks', html)
+        self.assertIn('Fresh reviewer report supports the two elementary normalization identities', html)
+        md_page = (dest / 'START.md').read_text(encoding='utf-8')
+        self.assertIn('Numerical prerequisite passed the recorded local checks', md_page)
+        self.assertIn('Fresh reviewer report supports the two elementary normalization identities', md_page)
+        self.assertIn('python research/handoff.py --store PATH_TO_OWNER_STORE submit', html)
+        self.assertNotIn('python toolkit/handoff.py --store store submit', html)
 
     def test_refuses_existing_output(self):
         dest = self.root / 'exists'
@@ -162,6 +208,14 @@ class StartTests(unittest.TestCase):
         self.assertNotIn('<b>bold</b>', prose)
         self.assertNotIn('![x](https://evil.example/x.png)', prose)
         self.assertNotIn('<iframe src="https://evil.example">', prose)
+        handoff_md = (dest / 'C' / 'handoff.md').read_text(encoding='utf-8')
+        self.assertNotIn('<script>alert(1)</script>', handoff_md)
+        self.assertNotIn('<img src=x onerror=alert(1)>', handoff_md)
+        self.assertNotIn('![x](https://evil.example/x.png)', handoff_md)
+        d_state = h.read_json(dest / 'D' / 'state.json')
+        self.assertIn('<script>alert(1)</script>', d_state['targets'][target_key]['question'])
+        self.assertEqual(h.read_json(dest / 'C' / 'assignment.json')['curated_information_sha256'],
+                         h.read_json(dest / 'D' / 'assignment.json')['curated_information_sha256'])
 
     def test_start_preserves_fixture_resource_defaults(self):
         store = self.root / 'store'
@@ -175,6 +229,9 @@ class StartTests(unittest.TestCase):
         self.assertEqual(resources[0], resources[1])
         self.assertEqual(resources[0], resources[2])
         self.assertEqual(resources[0], resources[3])
+        for name in ('USE.md', 'START.md', 'index.html'):
+            text = (dest / name).read_text(encoding='utf-8')
+            self.assertNotIn('must refuse this physics target', text)
 
     def _external_target(self, store, files, **updates):
         target = e.fixture_target()
@@ -278,6 +335,44 @@ class StartTests(unittest.TestCase):
         self.assertEqual(template['request_id'], 'replace-with-a-new-unique-id')
         self.assertEqual(sum(1 for item in template['evidence'] if item['role'] == 'result'), 1)
         self.assertNotIn('sha256', template['evidence'][0])
+        self.assertIn('WHOLE folder', fenced)
+        self.assertIn('python research/handoff.py --store PATH_TO_OWNER_STORE submit', fenced)
+        self.assertNotIn('python toolkit/handoff.py --store store submit', fenced)
+        self.assertEqual(template, h.read_json(dest / 'submission-template.json'))
+
+    def test_custom_export_is_not_called_a_public_reference_package(self):
+        store = self.root / 'store'
+        raw = b'bytes'
+        key = h.digest(raw)
+        h.create_file(store / 'artifacts' / key, raw)
+        target = e.fixture_target()
+        target['id'] = 'custom-export'
+        target['acceptance'] = {'checker': 'external-review-pending', 'checker_sha256': None,
+                                'criterion': 'Independent review of attached bytes.'}
+        target['inputs'] = {'files': {'note.txt': key}}
+        target_key = h.add_target(store, target)
+        brief = {'current_assessment': 'Withheld.', 'unresolved_checks': 'Needs review.',
+                 'proposed_next_check': 'Read the attached files.'}
+        dest = self.root / 'custom-out'
+        start.build(dest, store, target_key, brief)
+        use = (dest / 'USE.md').read_text(encoding='utf-8')
+        html = (dest / 'index.html').read_text(encoding='utf-8')
+        md = (dest / 'START.md').read_text(encoding='utf-8')
+        for text in (use, html, md):
+            self.assertIn('python research/handoff.py --store PATH_TO_OWNER_STORE submit', text)
+            self.assertNotIn('python toolkit/handoff.py --store store submit', text)
+            self.assertNotIn('public-reference demonstration package', text)
+            self.assertNotIn('This generated package is a public-reference demonstration', text)
+            self.assertIn('not a public-reference demonstration', text)
+            self.assertIn('must refuse this physics target', text)
+        self.assertFalse((dest / 'toolkit').exists())
+        self.assertFalse((dest / 'store').exists())
+
+    def test_use_md_separates_return_commands_into_paragraphs(self):
+        assignment = {'target': 'tgt', 'base_snapshot': 'snap'}
+        text = start.use_md(assignment)
+        cmd = 'python research/handoff.py --store PATH_TO_OWNER_STORE submit RETURN_FOLDER/submission.json'
+        self.assertIn('\n\n' + cmd + '\n\n', text)
 
 
 if __name__ == '__main__':

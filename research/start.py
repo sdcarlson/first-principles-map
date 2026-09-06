@@ -34,35 +34,133 @@ def href_path(path):
 
 
 def md_safe(text):
-    text = str(text).replace('\\', '\\\\')
-    text = html.escape(text, quote=True)
-    for ch in '[]()!`*_':
-        text = text.replace(ch, '\\' + ch)
-    return text
+    return h.md_data(text)
+
+
+def attempt_context(key, attempt):
+    return '%s; method: %s; attempt %s' % (
+        attempt['provenance']['contributor'], attempt['method'], key)
+
+
+def evidence_label(key, attempt, ref):
+    return '%s %s (%s)' % (ref['role'], ref['path'], attempt_context(key, attempt))
+
+
+def assessment_label(key, assessment, attempts):
+    contributor = attempts[assessment['attempt']]['provenance']['contributor']
+    return '%s assessment by %s of %s (attempt %s)' % (
+        assessment['status'], assessment['reviewer'], contributor, assessment['attempt'])
 
 
 def local_links(target, view):
     items = [('Readable Markdown handoff', 'C/handoff.md'),
              ('Structured JSON handoff', 'D/state.json'),
+             ('Use and return instructions', 'USE.md'),
+             ('Editable submission template', 'submission-template.json'),
              ('Optional condition A', 'A/assignment.json'),
              ('Optional condition B', 'B/assignment.json')]
     for name in target.get('inputs', {}).get('files', {}):
         items.append(('Source file ' + name, 'C/inputs/' + name))
-    for key, attempt in view['attempts'].items():
-        items.append(('Attempt record ' + key, 'C/history/attempt-' + key + '.json'))
+    attempts = view['attempts']
+    for key, attempt in attempts.items():
+        items.append(('Attempt record (%s)' % attempt_context(key, attempt),
+                      'C/history/attempt-' + key + '.json'))
         for ref in attempt['evidence']:
-            items.append(('Original evidence ' + ref['path'], 'C/history/' + ref['sha256']))
-    for key in view['assessments']:
-        items.append(('Assessment record ' + key, 'C/history/assessment-' + key + '.json'))
+            items.append((evidence_label(key, attempt, ref), 'C/history/' + ref['sha256']))
+    for key, assessment in view['assessments'].items():
+        items.append((assessment_label(key, assessment, attempts),
+                      'C/history/assessment-' + key + '.json'))
     return items
 
 
 def primary_links(target, view):
+    keep = {'C/handoff.md', 'D/state.json', 'USE.md', 'submission-template.json'}
     items = [('Markdown fallback START.md', 'START.md')]
     items.extend(item for item in local_links(target, view)
-                 if item[1] in {'C/handoff.md', 'D/state.json', 'A/assignment.json', 'B/assignment.json'}
-                 or item[1].startswith('C/inputs/'))
+                 if item[1] in keep or item[1].startswith('C/inputs/'))
+    attempts = view['attempts']
+    for key, assessment in view['assessments'].items():
+        items.append((assessment_label(key, assessment, attempts),
+                      'C/history/assessment-' + key + '.json'))
+    for key, attempt in attempts.items():
+        for ref in attempt['evidence']:
+            if ref['role'] == 'result':
+                items.append((evidence_label(key, attempt, ref), 'C/history/' + ref['sha256']))
     return items
+
+
+def ab_links():
+    return [('Optional condition A', 'A/assignment.json'),
+            ('Optional condition B', 'B/assignment.json')]
+
+
+def owner_tool(packaged):
+    if packaged:
+        return 'python toolkit/handoff.py --store store'
+    return 'python research/handoff.py --store PATH_TO_OWNER_STORE'
+
+
+def return_guide(assignment, packaged=False, target=None):
+    target_key = assignment['target']
+    snap = assignment['base_snapshot']
+    tool = owner_tool(packaged)
+    checker = None
+    if target is not None:
+        checker = target.get('acceptance', {}).get('checker')
+    if packaged:
+        where = ('Owner commands, from this package directory. This public-reference demonstration '
+                 'includes toolkit/ and store/ for the already-public default example only.')
+        provenance = ('This folder is the fixed public-reference demonstration package. It is not a '
+                      'privacy guarantee for arbitrary stores, not a security sandbox, and not '
+                      'independent human certification of science or identity.')
+    else:
+        where = ('Owner commands, from the source repository. This export does not include toolkit/ or store/. '
+                 'The owner keeps the original handoff.py, fixture_checker.py, and the matching owner store '
+                 'that produced this export. PATH_TO_OWNER_STORE is that store '
+                 '(for the default physics example: research/physics/store). '
+                 'Custom exports are not a public-reference demonstration.')
+        provenance = ('This folder is a starting export, not a self-contained public-reference package.')
+    if checker == 'external-review-pending':
+        fixture_line = ('Unavailable external physics checking is not fixture verification. '
+                        'fixture_checker.py only checks the software-mechanics graph fixture and '
+                        'must refuse this physics target. SOFTWARE-MECHANICS synthetic returns are '
+                        'import tests, not research evidence.')
+    else:
+        fixture_line = ('Unavailable external physics checking is not fixture verification. '
+                        'fixture_checker.py only checks the software-mechanics graph fixture. '
+                        'SOFTWARE-MECHANICS synthetic returns are import tests, not research evidence.')
+    return '\n'.join([
+        provenance,
+        'Give the recipient the WHOLE folder, not just the copied prompt. Copied text does not carry original evidence bytes.',
+        'Preserve target %s and base_snapshot %s, and keep the recorded scope.' % (target_key, snap),
+        'Create a new return folder with submission.json (copy submission-template.json) plus original result/source attachments named in evidence paths. Return that folder to the owner.',
+        where,
+        tool + ' submit RETURN_FOLDER/submission.json',
+        tool + ' inspect ' + target_key,
+        tool + ' check ATTEMPT',
+        tool + ' assess ATTEMPT --reviewer REVIEWER --status withhold --rationale TEXT --limitations TEXT',
+        'For external-review-pending physics targets, check must refuse with: external checker not registered. Then a distinct reviewer records withhold. Do not invent a physics checker or accept without a passing independent check.',
+        'A stale base_snapshot requires owner reconciliation and a new request_id; do not rebase silently.',
+        'A candidate cannot choose or weaken the checker. Submissions cannot set checker, commands, timeouts, or thresholds. Do not execute submitted code.',
+        fixture_line,
+    ])
+
+
+def use_md(assignment, packaged=False, target=None):
+    return '\n'.join([
+        '# Use and return this folder',
+        '',
+        '## Read',
+        '',
+        'Open `index.html` or `START.md`. Keep every file in this folder together.',
+        '',
+        '## Return original evidence',
+        '',
+        return_guide(assignment, packaged, target).replace('\n', '\n\n'),
+        '',
+        'Do not add a form, server, or accounts. Do not run unknown submitted code.',
+        '',
+    ]) + '\n'
 
 
 def resource_lines(resources):
@@ -108,7 +206,7 @@ def submission_template(target_key, target, assignment):
     }
 
 
-def recipient_prompt(target_key, target, brief, view, assignment):
+def recipient_prompt(target_key, target, brief, view, assignment, packaged=False):
     acc = target['acceptance']
     assessments = []
     for key, a in view['assessments'].items():
@@ -154,13 +252,11 @@ def recipient_prompt(target_key, target, brief, view, assignment):
         'Package-relative paths (real local paths, not URL-encoded hrefs):',
         paths,
         '',
-        'Return original evidence through the existing submission / check / assessment workflow.',
+        return_guide(assignment, packaged, target),
         'Do not paste a sealed attempt JSON from C/history. Remove each evidence sha256; submit rejects that extra field.',
         'Use local attached paths. Include exactly one result role. Provenance keys must be exactly contributor, model, configuration, source_locator, shared_roots.',
         'Use a new unique request_id and the exported base_snapshot below.',
-        'A stale base_snapshot requires owner reconciliation; do not rebase silently.',
         'Do not fabricate review results or assigned costs. Budget fields that were not measured stay null.',
-        'The owner records the attempt with the existing submit interface, then a separately pinned checker and a separate assessor.',
         'Do not run a full scientific evaluation unless the owner assigned execution limits.',
         '',
         'Valid submission template:',
@@ -186,20 +282,21 @@ def md_links(items):
     return '\n'.join('- [%s](%s)' % (md_safe(label), href_path(path)) for label, path in items)
 
 
-def render_html(target_key, target, brief, view, assignment):
+def render_html(target_key, target, brief, view, assignment, packaged=False):
     esc = html.escape
     attempts = []
     for key, a in view['attempts'].items():
         path = 'C/history/attempt-' + key + '.json'
         attempts.append('<li><a href="%s">%s</a> — %s. %s</li>'
-                        % (esc(href_path(path), quote=True), esc(key), esc(a['outcome']),
-                           esc(a['observation'])))
+                        % (esc(href_path(path), quote=True), esc(attempt_context(key, a)),
+                           esc(a['outcome']), esc(a['observation'])))
     assessments = []
     for key, a in view['assessments'].items():
         path = 'C/history/assessment-' + key + '.json'
-        assessments.append('<li><a href="%s"><code>%s</code></a> by %s: %s</li>'
-                           % (esc(href_path(path), quote=True), esc(a['status']),
-                              esc(a['reviewer']), esc(a['rationale'])))
+        assessments.append('<li><a href="%s">%s</a>: %s</li>'
+                           % (esc(href_path(path), quote=True),
+                              esc(assessment_label(key, a, view['attempts'])),
+                              esc(a['rationale'])))
     details = [
         ('Owner', target['owner']),
         ('Scope', target['scope']),
@@ -214,8 +311,9 @@ def render_html(target_key, target, brief, view, assignment):
     if assignment.get('curated_information_sha256'):
         details.append(('Curated information digest', assignment['curated_information_sha256']))
     detail_rows = '\n'.join('<li>%s: <code>%s</code></li>' % (esc(k), esc(v)) for k, v in details)
-    prompt = recipient_prompt(target_key, target, brief, view, assignment)
-    evidence = [item for item in local_links(target, view) if item not in primary_links(target, view)]
+    prompt = recipient_prompt(target_key, target, brief, view, assignment, packaged)
+    evidence = [item for item in local_links(target, view)
+                if item not in primary_links(target, view) and item[1] not in {p for _, p in ab_links()}]
     return '''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -241,6 +339,14 @@ code, textarea, a { overflow-wrap: anywhere; word-break: break-word; }
 <ul>
 %s
 </ul>
+<h2>Use and return this folder</h2>
+<p>Give the recipient the WHOLE folder, not just the copied prompt. Open <a href="USE.md">USE.md</a> and edit <a href="submission-template.json">submission-template.json</a> in a new return folder. Owner import: <code>%s</code>. A candidate cannot choose or weaken the checker. Do not execute submitted code.</p>
+<details>
+<summary>Optional experiment conditions A and B</summary>
+<ul>
+%s
+</ul>
+</details>
 <details>
 <summary>Digests, assessments, and original evidence paths</summary>
 <ul>
@@ -279,27 +385,30 @@ code, textarea, a { overflow-wrap: anywhere; word-break: break-word; }
 </html>
 ''' % (esc(target['question']), esc(brief['current_assessment']),
        esc(brief['proposed_next_check']), html_links(primary_links(target, view)),
+       esc(owner_tool(packaged) + ' submit RETURN_FOLDER/submission.json'),
+       html_links(ab_links()),
        detail_rows,
        '\n'.join(attempts) or '<li>No prior attempts are in this export.</li>',
        '\n'.join(assessments) or '<li>No assessments are in this export.</li>',
        html_links(evidence), esc(prompt))
 
 
-def render_md(target_key, target, brief, view, assignment):
+def render_md(target_key, target, brief, view, assignment, packaged=False):
     attempts = []
     for key, a in view['attempts'].items():
         path = 'C/history/attempt-' + key + '.json'
         attempts.append('- [%s](%s) (%s): %s'
-                        % (md_safe(key), href_path(path), md_safe(a['outcome']),
+                        % (md_safe(attempt_context(key, a)), href_path(path), md_safe(a['outcome']),
                            md_safe(a['observation'])))
     assessments = []
     for key, a in view['assessments'].items():
         path = 'C/history/assessment-' + key + '.json'
-        assessments.append('- `%s` by %s; [record](%s): %s'
-                           % (md_safe(a['status']), md_safe(a['reviewer']), href_path(path),
+        assessments.append('- [%s](%s): %s'
+                           % (md_safe(assessment_label(key, a, view['attempts'])), href_path(path),
                               md_safe(a['rationale'])))
-    evidence = [item for item in local_links(target, view) if item not in primary_links(target, view)]
-    prompt = recipient_prompt(target_key, target, brief, view, assignment)
+    evidence = [item for item in local_links(target, view)
+                if item not in primary_links(target, view) and item[1] not in {p for _, p in ab_links()}]
+    prompt = recipient_prompt(target_key, target, brief, view, assignment, packaged)
     return '\n'.join([
         '# Local research starting page',
         '',
@@ -320,6 +429,17 @@ def render_md(target_key, target, brief, view, assignment):
         '## Open the local files',
         '',
         md_links(primary_links(target, view)),
+        '',
+        '## Use and return this folder',
+        '',
+        return_guide(assignment, packaged, target).replace('\n', '\n\n'),
+        '',
+        '<details>',
+        '<summary>Optional experiment conditions A and B</summary>',
+        '',
+        md_links(ab_links()),
+        '',
+        '</details>',
         '',
         '## Digests, assessments, and original evidence paths',
         '',
@@ -343,7 +463,7 @@ def render_md(target_key, target, brief, view, assignment):
     ]) + '\n'
 
 
-def build(destination, store=None, target=None, brief=None):
+def build(destination, store=None, target=None, brief=None, packaged=False):
     destination = Path(destination)
     if brief is None and (not is_default_store(store) or not is_default_target(target)):
         raise ValueError('custom store or target requires an explicit matching brief')
@@ -359,9 +479,13 @@ def build(destination, store=None, target=None, brief=None):
     view = h.inspect_target(store, target_key)
     target_obj = view['targets'][target_key]
     h.create_file(destination / 'index.html',
-                  render_html(target_key, target_obj, brief, view, assignment).encode('utf-8'))
+                  render_html(target_key, target_obj, brief, view, assignment, packaged).encode('utf-8'))
     h.create_file(destination / 'START.md',
-                  render_md(target_key, target_obj, brief, view, assignment).encode('utf-8'))
+                  render_md(target_key, target_obj, brief, view, assignment, packaged).encode('utf-8'))
+    h.create_file(destination / 'submission-template.json',
+                  h.encoded(submission_template(target_key, target_obj, assignment)))
+    h.create_file(destination / 'USE.md',
+                  use_md(assignment, packaged, target_obj).encode('utf-8'))
     return destination
 
 

@@ -168,7 +168,10 @@ class HandoffTests(unittest.TestCase):
             self.assertEqual({p.name for p in (self.root / arm / 'history').iterdir()},
                              {p.name for p in (self.root / 'B' / 'history').iterdir()})
         note = (self.root / 'C' / 'handoff.md').read_text(encoding='utf-8')
-        for content in brief.values(): self.assertIn(content, note)
+        state = h.read_json(self.root / 'D' / 'state.json')
+        self.assertEqual(state['brief'], brief)
+        for content in brief.values():
+            self.assertIn(h.md_data(content), note)
         self.assertFalse((self.root / 'B' / 'handoff.md').exists())
         self.assertFalse((self.root / 'C' / 'state.json').exists())
 
@@ -250,6 +253,101 @@ class HandoffTests(unittest.TestCase):
             self.assertIn('not an authorized full scientific run', outputs[arm]['instructions'])
             self.assertIn("cannot change the checker's pinned acceptance", outputs[arm]['instructions'])
             self.assertNotIn('Stop at resource caps.', outputs[arm]['instructions'])
+
+    def test_markdown_export_escapes_active_content_and_preserves_bytes(self):
+        img = '<img src="https://audit.invalid/tracker" onerror="alert(1)">'
+        md_image = '![external image](https://audit.invalid/tracker)'
+        fence_key = '```html'
+        heading_key = '# injected-heading'
+        raw = b'original-artifact-bytes-must-remain-intact'
+        key = h.digest(raw)
+        h.create_file(self.store / 'artifacts' / key, raw)
+        before_targets = {p.read_bytes() for p in (self.store / 'targets').glob('*.json')}
+        target = e.fixture_target()
+        target['id'] = 'hostile-markdown'
+        target['owner'] = 'tester ' + img
+        target['question'] = 'Question with ' + img
+        target['scope'] = 'Scope with ' + md_image + ' and fences ```html'
+        target['acceptance'] = {'checker': 'external-review-pending', 'checker_sha256': None,
+                                'criterion': 'Independent review; ' + img}
+        target['inputs'] = {
+            'files': {'note.txt': key},
+            img: 'adversarial-html-key-value',
+            fence_key: 'adversarial-fence-key-value',
+            heading_key: 'adversarial-heading-key-value',
+        }
+        target_key = h.add_target(self.store, target)
+        brief = {
+            'current_assessment': 'Withheld. ' + md_image,
+            'unresolved_checks': 'Need review of ' + img,
+            'proposed_next_check': 'Read note.txt; do not execute ' + img + ' or ' + md_image,
+        }
+        dest_c = self.root / 'hostile-c'
+        dest_d = self.root / 'hostile-d'
+        out_c = h.export(self.store, target_key, dest_c, 'C', brief)
+        out_d = h.export(self.store, target_key, dest_d, 'D', brief)
+        note = (dest_c / 'handoff.md').read_bytes()
+        note_text = note.decode('utf-8')
+        state_bytes = (dest_d / 'state.json').read_bytes()
+        state = h.read_json(dest_d / 'state.json')
+        self.assertNotIn(img.encode('utf-8'), note)
+        self.assertNotIn(md_image.encode('utf-8'), note)
+        self.assertNotIn(b'<img ', note)
+        self.assertNotIn('![external image](https://audit.invalid/tracker)', note_text)
+        self.assertIn('&lt;img', note_text)
+        self.assertIn('\\!\\[external image\\]', note_text)
+        self.assertIn('\\`\\`\\`html', note_text)
+        self.assertNotIn('\n# injected-heading\n', note_text)
+        self.assertEqual((dest_c / 'inputs' / 'note.txt').read_bytes(), raw)
+        self.assertEqual((dest_d / 'inputs' / 'note.txt').read_bytes(), raw)
+        self.assertIn(img, state['targets'][target_key]['question'])
+        self.assertIn(md_image, state['brief']['current_assessment'])
+        self.assertIn(img, state['targets'][target_key]['inputs'])
+        self.assertIn(fence_key, state['targets'][target_key]['inputs'])
+        self.assertIn(heading_key, state['targets'][target_key]['inputs'])
+        self.assertEqual(state['targets'][target_key]['question'], 'Question with ' + img)
+        self.assertEqual(state['targets'][target_key]['owner'], 'tester ' + img)
+        self.assertIn(b'<img src=', state_bytes)
+        self.assertIn(b'onerror=', state_bytes)
+        self.assertIn(md_image.encode('utf-8'), state_bytes)
+        self.assertEqual(out_c['curated_information_sha256'], out_d['curated_information_sha256'])
+        self.assertEqual(out_c['curated_information_sha256'], h.sha({'brief': brief, **h.inspect_target(self.store, target_key)}))
+        after_targets = {p.read_bytes() for p in (self.store / 'targets').glob('*.json')}
+        self.assertTrue(before_targets.issubset(after_targets))
+        sealed = h.read_json(self.store / 'targets' / (target_key + '.json'))
+        self.assertEqual(sealed['question'], 'Question with ' + img)
+        self.assertEqual(sealed['inputs'][img], 'adversarial-html-key-value')
+
+    def test_md_data_escapes_tilde_setext_and_list_controls(self):
+        tilde = h.md_data('~~~\nnot a fence\n~~~')
+        self.assertNotIn('~~~', tilde)
+        self.assertIn('\\~\\~\\~', tilde)
+        setext_dash = h.md_data('Heading\n---')
+        self.assertNotIn('---', setext_dash)
+        self.assertIn('\\-\\-\\-', setext_dash)
+        setext_eq = h.md_data('Heading\n===')
+        self.assertNotIn('===', setext_eq)
+        self.assertIn('\\=\\=\\=', setext_eq)
+        listed = h.md_data('- list item')
+        self.assertNotEqual(listed.splitlines()[0].lstrip()[:2], '- ')
+        self.assertTrue(listed.startswith('\\-'))
+        self.assertIn('café λ', h.md_data('café λ'))
+        self.assertEqual(h.md_data('plain text').strip(), 'plain text')
+
+    def test_md_data_escapes_ordered_list_marker(self):
+        ordered = h.md_data('1. ordered item')
+        self.assertNotEqual(ordered.splitlines()[0][:3], '1. ')
+        self.assertIn('1\\.', ordered)
+
+    def test_md_data_keeps_apostrophes_and_quotes_visually_lossless(self):
+        apostrophe = h.md_data("don't")
+        self.assertNotIn('&#x27;', apostrophe)
+        self.assertNotIn('\\#x27', apostrophe)
+        self.assertIn("don't", apostrophe)
+        quoted = h.md_data('He said "hello"')
+        self.assertNotIn('&quot;', quoted)
+        self.assertNotIn('\\#x27', quoted)
+        self.assertIn('"hello"', quoted)
 
 
 class ExperimentTests(unittest.TestCase):

@@ -1,6 +1,7 @@
 """Local single-writer handoffs. No provider calls or submitted-code execution."""
 import argparse
 import hashlib
+import html
 import json
 import os
 from pathlib import Path
@@ -283,14 +284,30 @@ def inspect_target(store, target_key, selected=None):
                          'limit': 'Selected target history and dependency closure only. No absence or impossibility inference.'}}
 
 
+def md_data(value, *, heading=False):
+    """Render a record field as inert Markdown text. Does not mutate source records."""
+    text = str(value)
+    if heading:
+        text = ' '.join(text.split())
+    else:
+        text = text.replace('\r\n', '\n').replace('\r', '\n')
+    text = ''.join(ch if ch in '\t\n' or ord(ch) >= 32 else '' for ch in text)
+    text = text.replace('\\', '\\\\')
+    text = html.escape(text, quote=False)
+    for ch in '`*_{}[]()#+-!~=|.':
+        text = text.replace(ch, '\\' + ch)
+    return text
+
+
 def markdown(value, level=2):
     """Lossless readable field appendix; the curated narrative precedes it."""
     if isinstance(value, dict):
-        return '\n'.join('#' * min(level, 6) + ' ' + k.replace('_', ' ') + '\n\n' + markdown(v, level + 1)
+        return '\n'.join('#' * min(level, 6) + ' ' + md_data(k.replace('_', ' '), heading=True)
+                         + '\n\n' + markdown(v, level + 1)
                          for k, v in value.items())
     if isinstance(value, list):
         return '\n\n'.join(markdown(x, level + 1) for x in value) if value else '(none)\n'
-    return str(value) + '\n'
+    return md_data(value) + '\n'
 
 
 def export(store, target_key, destination, arm, brief, selected=None):

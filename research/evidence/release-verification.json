@@ -1,0 +1,1374 @@
+{
+  "date": "2026-09-05",
+  "status": "Local release packaging independently verified; not deployed; user visual acceptance pending",
+  "scope": "Fixed already-public historical switching-normalization reference. No new physics or research-value experiment.",
+  "implementer": "Cursor Grok 4.6 Extra High (configured session model verified; not cryptographic backend attestation)",
+  "reviewer": "Astra; separate bounded read-only source audit and independently executed package checks",
+  "public_store_snapshot": "d8941ef06f00c8e927a9aeba33d372770f251c668235a5eb5f146ca89791a954",
+  "public_store_files": 10,
+  "owner_store_records": {
+    "targets": 1,
+    "attempts": 2,
+    "withheld_assessments": 2,
+    "artifacts": 5
+  },
+  "release": {
+    "file_count": 66,
+    "manifest_entries": 65,
+    "zip_sha256": "80060336db7d388bdb7035cb8337477659f81f8ba8f506469c617bfdc6e321a6",
+    "zip_bytes": 101609,
+    "manifest_sha256": "2fb3b737edaefce005a005dc1036a6c8f0f99c930938b8c7c26d4c1d72692641",
+    "final_output_equals_independently_audited_bytes": true
+  },
+  "required_suites": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "external_timeout_seconds": 60,
+    "results": [
+      {
+        "command": [
+          "check.py"
+        ],
+        "exit": 0,
+        "elapsed_seconds": 0.030999999988125637
+      },
+      {
+        "command": [
+          "-m",
+          "unittest",
+          "test_check",
+          "-v"
+        ],
+        "exit": 0,
+        "elapsed_seconds": 0.062000000005355105
+      },
+      {
+        "command": [
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "research",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "exit": 0,
+        "elapsed_seconds": 5.39100000000326
+      }
+    ],
+    "source_sha256": {
+      "research/handoff.py": "18590914dc38c0e6a41ba803c64bc372ca83a8a2520be21bfea38a4df6b05586",
+      "research/start.py": "f6e86a1a200b3795d0fdf3aef20aedce3b661d9784bba196c613af386d3b66de",
+      "research/release.py": "b9d390210ea9447a7a00ecf4ec4c19b969df484f5fd8ca18c71a837d88ec5d67",
+      "research/fixture_checker.py": "efe36580e759f92479b4b32b0770eb1aa52ad4373c86b68ca123f12404d05241",
+      "research/test_handoff.py": "9e39ff62eac9437b6581760c4a8e644aaeb73c0bfb8df85fe9758ed72a756bac",
+      "research/test_start.py": "d8186108eb7cde1bf6d556ed56477b1015d0ee92b463f767e75b0f710be043cd",
+      "research/test_release.py": "6f153f3dc5f1f33dcb8f332a4984e765add535a8cf47f181088b8b452aea2eee",
+      "research/test_vacuum_baseline.py": "cef0b5b03d9c9e9d115994b97227d0f8c8fd869c565def134b51b6623ccdd30d",
+      "research/vacuum_baseline.py": "e5c1bb12f2fd01363640598bba0db1ae81f0debfd6fad87cf83303bc6cbf0e82",
+      "research/physics/mvp-brief.json": "a6aa0c6871a0918757cd4ced6378721afc0cfcc3bc6adce18043f6199044395b"
+    },
+    "success": true,
+    "map_tests": 14,
+    "research_tests": 63,
+    "whole_research_process_seconds": 5.39100000000326
+  },
+  "independent_package_audit": {
+    "scope": "Independent SOFTWARE-MECHANICS release audit; no physics run or rendered browser verification.",
+    "checks": [
+      {
+        "name": "CLI exit: REPOSITORY\\research\\release.py AUDIT_ROOT\\first",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: REPOSITORY\\research\\release.py AUDIT_ROOT\\second",
+        "pass": true
+      },
+      {
+        "name": "distinct builds have identical bytes",
+        "pass": true
+      },
+      {
+        "name": "distinct ZIP bytes identical",
+        "pass": true
+      },
+      {
+        "name": "ZIP sorted exact members",
+        "pass": true
+      },
+      {
+        "name": "ZIP fixed timestamps",
+        "pass": true
+      },
+      {
+        "name": "extracted bytes equal folder",
+        "pass": true
+      },
+      {
+        "name": "manifest sorted complete and exact",
+        "pass": true
+      },
+      {
+        "name": "exact public owner-store membership",
+        "pass": true
+      },
+      {
+        "name": "public store exact original bytes",
+        "pass": true
+      },
+      {
+        "name": "original toolkit handoff.py",
+        "pass": true
+      },
+      {
+        "name": "original toolkit fixture_checker.py",
+        "pass": true
+      },
+      {
+        "name": "independently computed frozen snapshot",
+        "pass": true
+      },
+      {
+        "name": "all assignments same target and frozen snapshot",
+        "pass": true
+      },
+      {
+        "name": "equal resource contract",
+        "pass": true
+      },
+      {
+        "name": "C/D same curated digest",
+        "pass": true
+      },
+      {
+        "name": "A original input switching.py",
+        "pass": true
+      },
+      {
+        "name": "A original input upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "A exact manifest",
+        "pass": true
+      },
+      {
+        "name": "B original input switching.py",
+        "pass": true
+      },
+      {
+        "name": "B original input upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "B exact manifest",
+        "pass": true
+      },
+      {
+        "name": "C original input switching.py",
+        "pass": true
+      },
+      {
+        "name": "C original input upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "C exact manifest",
+        "pass": true
+      },
+      {
+        "name": "D original input switching.py",
+        "pass": true
+      },
+      {
+        "name": "D original input upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "D exact manifest",
+        "pass": true
+      },
+      {
+        "name": "B original history switching.py",
+        "pass": true
+      },
+      {
+        "name": "B original history upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "B original history reproduction.py",
+        "pass": true
+      },
+      {
+        "name": "B original history result.json",
+        "pass": true
+      },
+      {
+        "name": "B original history astra-physics-review.md",
+        "pass": true
+      },
+      {
+        "name": "C original history switching.py",
+        "pass": true
+      },
+      {
+        "name": "C original history upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "C original history reproduction.py",
+        "pass": true
+      },
+      {
+        "name": "C original history result.json",
+        "pass": true
+      },
+      {
+        "name": "C original history astra-physics-review.md",
+        "pass": true
+      },
+      {
+        "name": "D original history switching.py",
+        "pass": true
+      },
+      {
+        "name": "D original history upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "D original history reproduction.py",
+        "pass": true
+      },
+      {
+        "name": "D original history result.json",
+        "pass": true
+      },
+      {
+        "name": "D original history astra-physics-review.md",
+        "pass": true
+      },
+      {
+        "name": "original third-party license included",
+        "pass": true
+      },
+      {
+        "name": "HTML prompt equals fenced Markdown prompt",
+        "pass": true
+      },
+      {
+        "name": "standalone template equals prompt template",
+        "pass": true
+      },
+      {
+        "name": "template target/snapshot",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: START.md",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/handoff.md",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: D/state.json",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: USE.md",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: submission-template.json",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/inputs/switching.py",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/inputs/upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/assessment-88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/assessment-8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/a868ff6471e8f68c2887289797e89b8ce8e57852fe1acacb1fea452eeb61d7af",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: A/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: B/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/attempt-3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/attempt-4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/assessment-88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/assessment-8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/attempt-3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/96e6c41693fce24aba408931b3462a12f85becaab730669557497d52fbcc7633",
+        "pass": true
+      },
+      {
+        "name": "Markdown link START.md: C/history/attempt-4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link START.md",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/handoff.md",
+        "pass": true
+      },
+      {
+        "name": "HTML link D/state.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link USE.md",
+        "pass": true
+      },
+      {
+        "name": "HTML link submission-template.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/inputs/switching.py",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/inputs/upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/assessment-88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/assessment-8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/a868ff6471e8f68c2887289797e89b8ce8e57852fe1acacb1fea452eeb61d7af",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48",
+        "pass": true
+      },
+      {
+        "name": "HTML link USE.md",
+        "pass": true
+      },
+      {
+        "name": "HTML link submission-template.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link A/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link B/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/attempt-3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/attempt-4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/assessment-88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/assessment-8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/attempt-3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/96e6c41693fce24aba408931b3462a12f85becaab730669557497d52fbcc7633",
+        "pass": true
+      },
+      {
+        "name": "HTML link C/history/attempt-4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory index.html",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless index.html",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory manifest.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless manifest.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory START.md",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless START.md",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory submission-template.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless submission-template.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory USE.md",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless USE.md",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory A/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless A/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory A/manifest.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless A/manifest.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory A/target.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless A/target.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/manifest.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/manifest.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/target.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/target.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/handoff.md",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/handoff.md",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/manifest.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/manifest.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/target.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/target.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/assignment.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/manifest.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/manifest.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/state.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/state.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/target.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/target.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory toolkit/fixture_checker.py",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless toolkit/fixture_checker.py",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory toolkit/handoff.py",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless toolkit/handoff.py",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory A/inputs/switching.py",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless A/inputs/switching.py",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory A/inputs/upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless A/inputs/upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/history/96e6c41693fce24aba408931b3462a12f85becaab730669557497d52fbcc7633",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/history/96e6c41693fce24aba408931b3462a12f85becaab730669557497d52fbcc7633",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/history/a868ff6471e8f68c2887289797e89b8ce8e57852fe1acacb1fea452eeb61d7af",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/history/a868ff6471e8f68c2887289797e89b8ce8e57852fe1acacb1fea452eeb61d7af",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/history/ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/history/ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/history/assessment-88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/history/assessment-88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/history/assessment-8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/history/assessment-8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/history/attempt-3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/history/attempt-3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/history/attempt-4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/history/attempt-4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/history/bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/history/bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/history/f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/history/f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/inputs/switching.py",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/inputs/switching.py",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory B/inputs/upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless B/inputs/upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/history/96e6c41693fce24aba408931b3462a12f85becaab730669557497d52fbcc7633",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/history/96e6c41693fce24aba408931b3462a12f85becaab730669557497d52fbcc7633",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/history/a868ff6471e8f68c2887289797e89b8ce8e57852fe1acacb1fea452eeb61d7af",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/history/a868ff6471e8f68c2887289797e89b8ce8e57852fe1acacb1fea452eeb61d7af",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/history/ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/history/ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/history/assessment-88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/history/assessment-88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/history/assessment-8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/history/assessment-8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/history/attempt-3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/history/attempt-3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/history/attempt-4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/history/attempt-4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/history/bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/history/bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/history/f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/history/f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/inputs/switching.py",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/inputs/switching.py",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory C/inputs/upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless C/inputs/upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/history/96e6c41693fce24aba408931b3462a12f85becaab730669557497d52fbcc7633",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/history/96e6c41693fce24aba408931b3462a12f85becaab730669557497d52fbcc7633",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/history/a868ff6471e8f68c2887289797e89b8ce8e57852fe1acacb1fea452eeb61d7af",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/history/a868ff6471e8f68c2887289797e89b8ce8e57852fe1acacb1fea452eeb61d7af",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/history/ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/history/ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/history/assessment-88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/history/assessment-88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/history/assessment-8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/history/assessment-8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/history/attempt-3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/history/attempt-3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/history/attempt-4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/history/attempt-4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/history/bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/history/bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/history/f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/history/f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/inputs/switching.py",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/inputs/switching.py",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory D/inputs/upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless D/inputs/upstream-license.txt",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory store/artifacts/96e6c41693fce24aba408931b3462a12f85becaab730669557497d52fbcc7633",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless store/artifacts/96e6c41693fce24aba408931b3462a12f85becaab730669557497d52fbcc7633",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory store/artifacts/a868ff6471e8f68c2887289797e89b8ce8e57852fe1acacb1fea452eeb61d7af",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless store/artifacts/a868ff6471e8f68c2887289797e89b8ce8e57852fe1acacb1fea452eeb61d7af",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory store/artifacts/ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless store/artifacts/ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory store/artifacts/bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless store/artifacts/bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory store/artifacts/f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless store/artifacts/f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory store/assessments/88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless store/assessments/88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory store/assessments/8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless store/assessments/8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory store/attempts/3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless store/attempts/3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory store/attempts/4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless store/attempts/4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de.json",
+        "pass": true
+      },
+      {
+        "name": "privacy inventory store/targets/4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a.json",
+        "pass": true
+      },
+      {
+        "name": "privacy bytes including extensionless store/targets/4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a.json",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: REPOSITORY\\research\\release.py AUDIT_ROOT\\first",
+        "pass": true
+      },
+      {
+        "name": "CLI refusal: already exists",
+        "pass": true
+      },
+      {
+        "name": "existing output unchanged",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: REPOSITORY\\research\\release.py AUDIT_ROOT\\collision",
+        "pass": true
+      },
+      {
+        "name": "CLI refusal: already exists",
+        "pass": true
+      },
+      {
+        "name": "ZIP-only collision unchanged",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: AUDIT_ROOT\\extracted\\toolkit\\handoff.py --store",
+        "pass": true
+      },
+      {
+        "name": "extracted CLI sees fixed target",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: AUDIT_ROOT\\extracted\\toolkit\\handoff.py --store",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: AUDIT_ROOT\\extracted\\toolkit\\handoff.py --store",
+        "pass": true
+      },
+      {
+        "name": "same return retry exact digest and no mutation",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: AUDIT_ROOT\\extracted\\toolkit\\handoff.py --store",
+        "pass": true
+      },
+      {
+        "name": "CLI refusal: external checker not registered",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: AUDIT_ROOT\\extracted\\toolkit\\handoff.py --store",
+        "pass": true
+      },
+      {
+        "name": "CLI refusal: passing independent check",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: AUDIT_ROOT\\extracted\\toolkit\\handoff.py --store",
+        "pass": true
+      },
+      {
+        "name": "accountable withhold and useful false",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: AUDIT_ROOT\\extracted\\toolkit\\handoff.py --store",
+        "pass": true
+      },
+      {
+        "name": "same return retry after withhold exact digest no mutation",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: AUDIT_ROOT\\extracted\\toolkit\\handoff.py --store",
+        "pass": true
+      },
+      {
+        "name": "CLI refusal: request identifier reused",
+        "pass": true
+      },
+      {
+        "name": "CLI exit: AUDIT_ROOT\\extracted\\toolkit\\handoff.py --store",
+        "pass": true
+      },
+      {
+        "name": "CLI refusal: stale base snapshot",
+        "pass": true
+      },
+      {
+        "name": "refused returns do not mutate store",
+        "pass": true
+      }
+    ],
+    "commands": [
+      {
+        "args": [
+          "REPOSITORY\\research\\release.py",
+          "AUDIT_ROOT\\first"
+        ],
+        "exit": 0,
+        "elapsed_seconds": 0.17199999999138527,
+        "stdout": "AUDIT_ROOT\\first\nAUDIT_ROOT\\first.zip\n",
+        "stderr": "",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "REPOSITORY\\research\\release.py",
+          "AUDIT_ROOT\\second"
+        ],
+        "exit": 0,
+        "elapsed_seconds": 0.1870000000053551,
+        "stdout": "AUDIT_ROOT\\second\nAUDIT_ROOT\\second.zip\n",
+        "stderr": "",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "REPOSITORY\\research\\release.py",
+          "AUDIT_ROOT\\first"
+        ],
+        "exit": 1,
+        "elapsed_seconds": 0.062000000005355105,
+        "stdout": "",
+        "stderr": "Cannot complete: output folder already exists; refusing to overwrite\n",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "REPOSITORY\\research\\release.py",
+          "AUDIT_ROOT\\collision"
+        ],
+        "exit": 1,
+        "elapsed_seconds": 0.0779999999795109,
+        "stdout": "",
+        "stderr": "Cannot complete: zip already exists; refusing to overwrite\n",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "AUDIT_ROOT\\extracted\\toolkit\\handoff.py",
+          "--store",
+          "store",
+          "inspect",
+          "4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a"
+        ],
+        "exit": 0,
+        "elapsed_seconds": 0.0629999999946449,
+        "stdout": "{\n  \"target\": \"4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a\",\n  \"targets\": {\n    \"4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a\": {\n      \"acceptance\": {\n        \"checker\": \"external-review-pending\",\n        \"checker_sha256\": null,\n        \"criterion\": \"Review original upstream bytes and reproduce support, peak, integral chi=3 delta/4 and integral chi^2=35 delta/64 at both grids. Confirm tolerances and meaning independently before acceptance.\"\n      },\n      \"assumptions\": \"Positive half-duration delta; proper time; published switching function. Known analytic identities, not a frontier result.\",\n      \"id\": \"hawking-detector-switching\",\n      \"inputs\": {\n        \"files\": {\n          \"switching.py\": \"f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68\",\n          \"upstream-license.txt\": \"ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1\"\n        },\n        \"paper\": \"https://arxiv.org/html/2501.06609v2#S2.SS2\",\n        \"public_code\": \"https://github.com/cshallue/hawking-radiation\",\n        \"source_commit\": \"7bf91b9517cfd4f136fb13a98f0a2aee7e903ca4\",\n        \"source_sha256\": \"f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68\"\n      },\n      \"owner\": \"Seth, exploratory learning; domain reviewer not appointed\",\n      \"provenance\": \"User selected quantum mechanics and relativity; assistant located public authors and code. No research partner recruited.\",\n      \"question\": \"Can we reproduce the detector switching normalization before studying near-horizon quantum response?\",\n      \"scope\": \"Published-code prerequisite only: compact cos^4 switching, not Hawking radiation or quantum gravity.\",\n      \"stop_condition\": \"Reproduce only this prerequisite. No full mode sum, external calls or inference of FPM advantage.\"\n    }\n  },\n  \"attempts\": {\n    \"3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478\": {\n      \"base_snapshot\": \"ea6e98d6e886a1bb57f5b9cf3aa8dcbe5ee3c1bb4cacea6c3c508ed8f4907f82\",\n      \"budget\": {\n        \"compute_usd\": null,\n        \"human_minutes\": null,\n        \"measured_numerical_seconds\": 0.10544639997533523\n      },\n      \"depends_on\": [],\n      \"environment\": \"{'python': '3.12.14', 'numpy': '2.3.5', 'platform': 'Windows-11-10.0.26200-SP0'}\",\n      \"evidence\": [\n        {\n          \"locator\": \"entire file\",\n          \"path\": \"switching.py\",\n          \"role\": \"source\",\n          \"sha256\": \"f948c9be21949f84e1679ab380dde6553183782bdc46f4be8c7a8845da732a68\",\n          \"source\": \"original local run or pinned upstream source\"\n        },\n        {\n          \"locator\": \"entire file\",\n          \"path\": \"upstream-license.txt\",\n          \"role\": \"source\",\n          \"sha256\": \"ad85464110b1cfb21cc24cf94167fac6c2818279fc3d018c354e2ad4cce97ca1\",\n          \"source\": \"original local run or pinned upstream source\"\n        },\n        {\n          \"locator\": \"entire file\",\n          \"path\": \"reproduction.py\",\n          \"role\": \"source\",\n          \"sha256\": \"96e6c41693fce24aba408931b3462a12f85becaab730669557497d52fbcc7633\",\n          \"source\": \"original local run or pinned upstream source\"\n        },\n        {\n          \"locator\": \"entire file\",\n          \"path\": \"result.json\",\n          \"role\": \"result\",\n          \"sha256\": \"a868ff6471e8f68c2887289797e89b8ce8e57852fe1acacb1fea452eeb61d7af\",\n          \"source\": \"original local run or pinned upstream source\"\n        }\n      ],\n      \"inputs\": {\n        \"delta\": [\n          0.125,\n          1,\n          4\n        ],\n        \"panels\": [\n          512,\n          1024\n        ],\n        \"tau_mid\": [\n          0,\n          1.25\n        ]\n      },\n      \"interpretation\": \"This supports only the sampled switching normalization. The detector response and paper conclusions remain untested.\",\n      \"method\": \"Run published ChiFn; composite trapezoidal quadrature against separate analytic integrals.\",\n      \"observation\": \"All twelve parameter/grid checks passed. Original numerical outputs attached.\",\n      \"outcome\": \"completed\",\n      \"provenance\": {\n        \"configuration\": \"Python 3.12.14; NumPy 2.3.5; not the full upstream Conda environment\",\n        \"contributor\": \"local-python-reproduction\",\n        \"model\": \"none in numerical execution\",\n        \"shared_roots\": \"Same source and local analyst; analytic and numerical methods differ; no external human verification.\",\n        \"source_locator\": \"hawkrad/switching.py:5-20; paper equations 9-13\"\n      },\n      \"request_id\": \"switching-reproduction-1\",\n      \"retry_reason\": \"Replication is allowed; it is not a new contribution. Changed durations/units or later response calculations need their own scope.\",\n      \"scope\": \"Published-code prerequisite only: compact cos^4 switching, not Hawking radiation or quantum gravity.\",\n      \"target\": \"4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a\"\n    },\n    \"4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de\": {\n      \"base_snapshot\": \"175dd1628337a063dd067a808f71059c44222196fb718daca98fe0700844f981\",\n      \"budget\": {\n        \"compute_usd\": null,\n        \"human_minutes\": null,\n        \"model_tokens\": null,\n        \"reported_numerical_seconds\": 0.1216681000078097\n      },\n      \"depends_on\": [],\n      \"environment\": \"Separate Astra High review agent, fork_turns none; existing Python 3.12.14 and NumPy 2.3.5 reproduction. Launch configuration establishes requested model, not backend weights attestation.\",\n      \"evidence\": [\n        {\n          \"locator\": \"Entire file, including explicit limitations and original evidence locators\",\n          \"path\": \"astra-physics-review.md\",\n          \"role\": \"result\",\n          \"sha256\": \"bc3c917a571cd789cc8c2aa92016b5cf5aedd00b2dfb77d2b2f25d813f5b5b48\",\n          \"source\": \"Original report from separately launched fresh Astra High reviewer\"\n        }\n      ],\n      \"inputs\": {\n        \"condition_package\": \"research/physics/C\",\n        \"manifest_files_checked\": 11\n      },\n      \"interpretation\": \"Supports the bounded mathematical prerequisite. Agreement between these Fourier-compatible uniform grids does not establish generic quadrature convergence. No independently authenticated remote commit, human domain certification, full physics response, or causal FPM advantage was established.\",\n      \"method\": \"Fresh Astra High context reviewed the exported C handoff, native evidence, analytic identities and existing numerical runner; one read-only primary-paper check followed.\",\n      \"observation\": \"Reviewer reports all 11 manifest hashes matched, both elementary identities were correct, and the existing reproduction produced the same 12 passing rows. Full reviewer report is attached; its rerun numerical output exists only in the review task transcript.\",\n      \"outcome\": \"completed\",\n      \"provenance\": {\n        \"configuration\": \"High reasoning; fresh context with no copied conversation; review assigned by coordinator\",\n        \"contributor\": \"fresh-astra-physics-review\",\n        \"model\": \"gpt-6-astra\",\n        \"shared_roots\": \"Same model family, same published source and existing numerical runner. Coordinator preserved reviewer report. Not a blinded, equal-budget or human-independent experiment; mistaken fixture budget metadata was separately overridden by the review assignment.\",\n        \"source_locator\": \"research/evidence/astra-physics-review.md; original input research/physics/C/handoff.md\"\n      },\n      \"request_id\": \"fresh-astra-switching-review-1\",\n      \"retry_reason\": \"Independent-context review was explicitly requested to test handoff recovery. Replication is useful checking, not a new scientific contribution. Future response computation requires a new scoped target and acceptance contract.\",\n      \"scope\": \"Published-code prerequisite only: compact cos^4 switching, not Hawking radiation or quantum gravity.\",\n      \"target\": \"4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a\"\n    }\n  },\n  \"assessments\": {\n    \"88129e3fd9c36a837b1ecefd1722f860acace6197512887d50316ae14759804c\": {\n      \"attempt\": \"4b7c12710d49ab81aa443bfc51b7047e49f639cadff3fc418a9a87f3697827de\",\n      \"check\": null,\n      \"identity_limit\": \"Local actor label, not authenticated human identity.\",\n      \"limitations\": \"No registered independent physics checker or human domain review. Rerun numerical output exists in reviewer transcript only. No full response calculation, new physics or controlled FPM benefit. Uniform-grid agreement is not generic convergence evidence.\",\n      \"rationale\": \"Fresh reviewer report supports the two elementary normalization identities and identifies limits of the sampled numerical check. Report bytes are preserved as original evidence; mathematical derivation was inspected by the coordinator.\",\n      \"reviewed_at\": \"2026-09-05T22:25:10.580903+00:00\",\n      \"reviewer\": \"Astra coordinator\",\n      \"scope\": \"Published-code prerequisite only: compact cos^4 switching, not Hawking radiation or quantum gravity.\",\n      \"status\": \"withhold\",\n      \"supersedes\": null,\n      \"target\": \"4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a\",\n      \"useful\": false\n    },\n    \"8da6e5b40b29eb3be0defc97721bebcd1ee312e62f20636fc41eacbc1f3429d5\": {\n      \"attempt\": \"3a5a47d8386c742e062f71224a1009eb9637c7c12348495fbbb3ea639872b478\",\n      \"check\": null,\n      \"identity_limit\": \"Local actor label, not authenticated human identity.\",\n      \"limitations\": \"No full Hawking calculation, scientific discovery, blinded usefulness review, or FPM experiment. Model identity here is a provenance label, not backend attestation.\",\n      \"rationale\": \"Numerical prerequisite passed the recorded local checks. Formal research acceptance awaits independent domain review.\",\n      \"reviewed_at\": \"2026-09-05T22:04:00.122188+00:00\",\n      \"reviewer\": \"GPT-6 Astra task analyst (requested configuration)\",\n      \"scope\": \"Published-code prerequisite only: compact cos^4 switching, not Hawking radiation or quantum gravity.\",\n      \"status\": \"withhold\",\n      \"supersedes\": null,\n      \"target\": \"4e3cdbfef39ee58056362fd28c5e6a764be7174ba710f3c9352689c1e06d820a\",\n      \"useful\": false\n    }\n  },\n  \"re_review\": [],\n  \"coverage\": {\n    \"selected\": 2,\n    \"total_attempts_in_store\": 2,\n    \"limit\": \"Selected target history and dependency closure only. No absence or impossibility inference.\"\n  }\n}\n",
+        "stderr": "",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "AUDIT_ROOT\\extracted\\toolkit\\handoff.py",
+          "--store",
+          "store",
+          "submit",
+          "AUDIT_ROOT\\return\\submission.json"
+        ],
+        "exit": 0,
+        "elapsed_seconds": 0.062000000005355105,
+        "stdout": "\"6098d1f2d4e4c2c0414e18375941ab36f8a4d69a291988c7353a0d64dbc4ac7b\"\n",
+        "stderr": "",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "AUDIT_ROOT\\extracted\\toolkit\\handoff.py",
+          "--store",
+          "store",
+          "submit",
+          "AUDIT_ROOT\\return\\submission.json"
+        ],
+        "exit": 0,
+        "elapsed_seconds": 0.0629999999946449,
+        "stdout": "\"6098d1f2d4e4c2c0414e18375941ab36f8a4d69a291988c7353a0d64dbc4ac7b\"\n",
+        "stderr": "",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "AUDIT_ROOT\\extracted\\toolkit\\handoff.py",
+          "--store",
+          "store",
+          "check",
+          "6098d1f2d4e4c2c0414e18375941ab36f8a4d69a291988c7353a0d64dbc4ac7b"
+        ],
+        "exit": 1,
+        "elapsed_seconds": 0.062000000005355105,
+        "stdout": "",
+        "stderr": "Cannot complete: external checker not registered; preserve evidence and withhold acceptance\n",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "AUDIT_ROOT\\extracted\\toolkit\\handoff.py",
+          "--store",
+          "store",
+          "assess",
+          "6098d1f2d4e4c2c0414e18375941ab36f8a4d69a291988c7353a0d64dbc4ac7b",
+          "--reviewer",
+          "independent-release-reviewer",
+          "--status",
+          "accept",
+          "--rationale",
+          "SOFTWARE-MECHANICS refusal probe",
+          "--limitations",
+          "No physics checker"
+        ],
+        "exit": 1,
+        "elapsed_seconds": 0.0629999999946449,
+        "stdout": "",
+        "stderr": "Cannot complete: acceptance needs a passing independent check\n",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "AUDIT_ROOT\\extracted\\toolkit\\handoff.py",
+          "--store",
+          "store",
+          "assess",
+          "6098d1f2d4e4c2c0414e18375941ab36f8a4d69a291988c7353a0d64dbc4ac7b",
+          "--reviewer",
+          "independent-release-reviewer",
+          "--status",
+          "withhold",
+          "--rationale",
+          "SOFTWARE-MECHANICS import works; scientific acceptance withheld",
+          "--limitations",
+          "Local actor labels; not authenticated human identity or physics evidence"
+        ],
+        "exit": 0,
+        "elapsed_seconds": 0.062000000005355105,
+        "stdout": "\"8cc6a2ef4cf32082470d0b9c91255418db4663a2a7be5ece41aad057f3203b18\"\n",
+        "stderr": "",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "AUDIT_ROOT\\extracted\\toolkit\\handoff.py",
+          "--store",
+          "store",
+          "submit",
+          "AUDIT_ROOT\\return\\submission.json"
+        ],
+        "exit": 0,
+        "elapsed_seconds": 0.0629999999946449,
+        "stdout": "\"6098d1f2d4e4c2c0414e18375941ab36f8a4d69a291988c7353a0d64dbc4ac7b\"\n",
+        "stderr": "",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "AUDIT_ROOT\\extracted\\toolkit\\handoff.py",
+          "--store",
+          "store",
+          "submit",
+          "AUDIT_ROOT\\return\\submission.json"
+        ],
+        "exit": 1,
+        "elapsed_seconds": 0.0629999999946449,
+        "stdout": "",
+        "stderr": "Cannot complete: request identifier reused with different content\n",
+        "external_timeout_seconds": 60
+      },
+      {
+        "args": [
+          "AUDIT_ROOT\\extracted\\toolkit\\handoff.py",
+          "--store",
+          "store",
+          "submit",
+          "AUDIT_ROOT\\return\\submission.json"
+        ],
+        "exit": 1,
+        "elapsed_seconds": 0.046999999991385266,
+        "stdout": "",
+        "stderr": "Cannot complete: stale base snapshot; reconcile and use a new request id\n",
+        "external_timeout_seconds": 60
+      }
+    ],
+    "zip_sha256": "80060336db7d388bdb7035cb8337477659f81f8ba8f506469c617bfdc6e321a6",
+    "file_count": 66,
+    "manifest_entries": 65,
+    "html_link_count": 24,
+    "synthetic_attempt": "6098d1f2d4e4c2c0414e18375941ab36f8a4d69a291988c7353a0d64dbc4ac7b",
+    "synthetic_withhold": "8cc6a2ef4cf32082470d0b9c91255418db4663a2a7be5ece41aad057f3203b18",
+    "success": true
+  },
+  "independent_boundary_probes": [
+    {
+      "probe": "extra-artifacts",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "reference store is not the exact public allowlist; unexpected or missing records"
+    },
+    {
+      "probe": "extra-attempts",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "reference store is not the exact public allowlist; unexpected or missing records"
+    },
+    {
+      "probe": "extra-assessments",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "reference store is not the exact public allowlist; unexpected or missing records"
+    },
+    {
+      "probe": "extra-checks",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "reference store has unexpected records"
+    },
+    {
+      "probe": "same-target",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "reference store is not the exact public allowlist; unexpected or missing records"
+    },
+    {
+      "probe": "unrelated-target",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "reference store is not the exact public allowlist; unexpected or missing records"
+    },
+    {
+      "probe": "altered-artifact",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "artifact digest mismatch"
+    },
+    {
+      "probe": "redirected-source-ancestor",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "redirected source path: BOUNDARY_ROOT\\junction"
+    },
+    {
+      "probe": "nested-empty-directory",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "unexpected nested store entry: artifacts/empty"
+    },
+    {
+      "probe": "nested-redirected-directory",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "redirected source path: BOUNDARY_ROOT\\nested-redirect\\artifacts\\redirect"
+    },
+    {
+      "probe": "redirected-brief-ancestor",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "redirected source path: BOUNDARY_ROOT\\junction"
+    },
+    {
+      "probe": "redirected-toolkit-ancestor",
+      "rejected": true,
+      "output_absent": true,
+      "reason": "redirected source path: BOUNDARY_ROOT\\junction"
+    },
+    {
+      "probe": "linked-source-file",
+      "executed": false,
+      "reason": "Windows error 1314: file-symlink creation privilege unavailable. Actual directory-junction probes executed; file-symlink branch reviewed in source only."
+    },
+    {
+      "probe": "numbered-list-entity-and-fence-output",
+      "pass": true,
+      "rendered_browser": false
+    },
+    {
+      "success": true
+    }
+  ],
+  "preserved_prior_candidates": {
+    "candidate_1_zip": "917eb781937fe856ecb62eebc79cd6c8efdac06ec6f38b4d4591797e241be101",
+    "candidate_2_zip": "f7132ee427bc5555e7b4aad38e150a35959c582abe26e9c79e068dbd539a2ad7"
+  },
+  "limitations": [
+    "Rendered browser appearance and operating-system clipboard unverified; earlier browser policy restriction respected without a workaround.",
+    "User usability acceptance pending.",
+    "Formal scientific acceptance remains withheld; no registered independent physics checker.",
+    "No causal research/product advantage demonstrated; real-use and fair readable-Markdown comparison remain required.",
+    "Local actor labels are not authenticated identity; toolkit/store are not a hostile-owner sandbox.",
+    "Actual file-symlink creation unavailable under Windows privilege; real directory-junction rejection executed successfully.",
+    "Deterministic archive verified across independent destinations with identical source bytes and runtime.",
+    "Earlier vacuum preparatory protocol limitations and original failures remain disclosed; independent physics integration was not rerun."
+  ],
+  "evidence_policy": "Original native audit logs, helper scripts and failed candidates preserved locally. Public report replaces machine-specific paths with role labels; no source/evidence bytes in the release were sanitized."
+}
