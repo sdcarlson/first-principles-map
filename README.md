@@ -111,3 +111,9 @@ Check changes with:
 python check.py
 python -m unittest
 ```
+
+## License
+
+Copyright 2026 Seth Carlson. First Principles Map is licensed under the [Apache License, Version 2.0](LICENSE).
+
+Third-party material retains its original license and attribution. In particular, the bundled detector-switching source and its copies remain under the [BSD 3-Clause license](research/physics/original-evidence/upstream-license.txt), copyright 2024 Chris Shallue. Referenced publications and external content are not relicensed by this project.
