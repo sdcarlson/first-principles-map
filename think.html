@@ -1,15 +1,35 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Reason through a question · First Principles Map</title><link rel="stylesheet" href="style.css"><script src="think.js" defer></script></head>
-<body><header class="topbar"><a class="brand" href="index.html">← FIRST PRINCIPLES MAP</a><span class="muted">A working notebook</span></header>
-<main class="notebook"><p class="eyebrow">MAKE THE REASONING INSPECTABLE</p><h1>What would change your mind?</h1><p class="muted">Start with observations and constraints you can justify. Keep assumptions visible. A statement does not become a fact because it feels fundamental.</p>
-<details><summary>A worked example: a room cools overnight</summary><p><strong>Observation:</strong> A thermometer records a fall from 20°C to 16°C in two hours after heating stops. Check calibration and measurement location.</p><p><strong>Model:</strong> A simple heat balance: C dT/dt = P − H(T − T_out). C is effective heat capacity, P is heating power and H describes heat loss. This assumes roughly uniform indoor temperature and approximately constant conditions.</p><p><strong>Unknown:</strong> How much loss comes from air leakage versus conduction? The temperature trace alone may not separate them.</p><p><strong>Test:</strong> Compare cooling with and without a temporary draft seal, recording outdoor temperature and wind. Predict a slower cooling rate if leakage is important. A smaller change than expected would challenge that explanation.</p></details>
-<form id="notebook">
-<label for="question">1 · What exactly are you asking?</label><textarea id="question" placeholder="A specific question with a possible answer"></textarea>
-<label for="observations">2 · What was actually observed or measured?</label><textarea id="observations" placeholder="Record the measurement, its source and its uncertainty. Separate it from what you infer."></textarea>
-<label for="constraints">3 · Which constraints apply, and under what conditions?</label><textarea id="constraints" placeholder="Name a justified principle and its scope. Which assumptions does your explanation need?"></textarea>
-<label for="alternatives">4 · What competing explanations fit so far?</label><textarea id="alternatives" placeholder="Write at least two accounts. Mark guesses and unknowns explicitly."></textarea>
-<label for="prediction">5 · Where do their predictions differ?</label><textarea id="prediction" placeholder="If explanation A is right, I expect… If B is right, I expect…"></textarea>
-<label for="test">6 · What is the next useful test?</label><textarea id="test" placeholder="What will you measure or change? What outcome would make you revise your view?"></textarea>
-<div class="actions"><button type="button" id="download">Download notes</button></div><p class="muted" id="status" role="status">Notes stay on this page and are not saved automatically. Download them before leaving.</p>
-</form></main></body></html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="refresh" content="3; url=https://github.com/sdcarlson">
+<title>Project retired</title>
+<style>
+  :root { --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --link: #0969da; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0d1117; --fg: #e6edf3; --muted: #9198a1; --link: #4493f8; }
+  }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; align-items: center; justify-content: center; padding: 0 16px;
+  }
+  main { max-width: 32rem; text-align: center; }
+  h1 { font-size: 1.5rem; font-weight: 600; margin: 0 0 .5rem; }
+  p { margin: 0 0 .75rem; color: var(--muted); }
+  a { color: var(--link); }
+</style>
+</head>
+<body>
+<main>
+  <h1>This project has been retired</h1>
+  <p>First Principles Map is archived and no longer maintained.</p>
+  <p>Redirecting to <a href="https://github.com/sdcarlson">github.com/sdcarlson</a>.</p>
+</main>
+<script>setTimeout(function () { location.replace("https://github.com/sdcarlson"); }, 3000);</script>
+</body>
+</html>
